@@ -1,0 +1,358 @@
+* {
+  margin: 0px;
+  color: black;
+  text-decoration: none;
+}
+
+.appCont {
+  display: flex;
+  flex-direction: row;
+}
+.mainPage {
+  display: flex;
+  flex-direction: column;
+  width: 51%;
+  margin-left: 22%;
+  margin-right: 27%;
+}
+
+/* THIS IS FOR POSTS AND COMMENTS */
+.postsCont {
+  display: flex;
+  flex-direction: column;
+}
+.posts,
+.comments {
+  display: flex;
+  flex-direction: row;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+  padding: 20px;
+}
+.userIcon {
+  width: 85px;
+  height: 85px;
+  background-color: lightgray;
+  border-radius: 50px;
+}
+.mainPostCont,
+.commentCont {
+  width: 100%;
+  margin-left: 15px;
+}
+.postBodyCont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.postBody {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.postBody h4,
+.postBody h2,
+.postBody p {
+  overflow-wrap: anywhere;
+}
+
+/* THIS IS THE NAVBAR */
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 20%;
+  height: 95vh;
+  border-right: solid;
+  border-width: thin;
+  border-color: lightgray;
+  position: fixed;
+  padding: 20px;
+}
+.navbarBtns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.navbarBtns button {
+  width: 65%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 20px;
+  text-align: left;
+}
+
+/* THIS IS THE HOME PAGE */
+.homePage {
+  display: flex;
+  flex-direction: column;
+}
+.postFormCont {
+  display: flex;
+  flex-direction: row;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+  padding: 20px;
+}
+.postForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 15px;
+}
+.postForm input,
+.postForm textarea {
+  padding: 10px;
+  margin-bottom: 15px;
+}
+.postForm button {
+  padding: 10px;
+  font-size: 15px;
+}
+
+/* THIS IS THE RANDOM NEWS */
+.randNews {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25%;
+  height: 100vh;
+  border-left: solid;
+  border-width: thin;
+  border-color: lightgray;
+  padding: 20px;
+  position: fixed;
+  right: 0px;
+  overflow: scroll;
+}
+.randNews::-webkit-scrollbar {
+  display: none;
+}
+.newsCont {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.news {
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+.news h3,
+.news p {
+  overflow-wrap: anywhere;
+}
+
+/* LOGIN/REGISTER */
+.formCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.loginForm,
+.regForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 30%;
+  height: 400px;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 60px;
+}
+.regForm {
+  display: none;
+}
+.loginForm input,
+.regForm input {
+  padding: 10px;
+  margin-bottom: 20px;
+}
+.loginForm h1,
+.regForm h1 {
+  margin-bottom: 20px;
+}
+.loginForm button,
+.regForm button {
+  padding: 10px;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+.logToReg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* THIS IS FOR A SINGLE POST PAGE */
+.post {
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+  padding: 20px;
+}
+.postUserInfoCont {
+  display: flex;
+  margin-bottom: 20px;
+}
+.postUserInfo {
+  width: 100%;
+  margin-left: 15px;
+}
+.replyPost {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+  padding: 20px;
+}
+.replyCont {
+  display: flex;
+  width: 100%;
+  margin-left: 15px;
+}
+.replyPost textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+}
+.replyPost button {
+  padding: 10px;
+  margin-left: 15px;
+}
+
+/* THIS IS FOR PROFILE PAGE */
+.banner {
+  height: 225px;
+  background-color: lightgray;
+}
+.accountBanner {
+  height: 450px;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+}
+.account {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  right: 0px;
+  bottom: 100px;
+  margin: 20px;
+}
+.accountIcon {
+  width: 150px;
+  height: 150px;
+  border-radius: 90px;
+  background-color: lightgray;
+  border-style: solid;
+  border-width: 10px;
+  border-color: white;
+}
+.userPost {
+  display: flex;
+  flex-direction: row;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+  padding: 20px;
+}
+.userPostMain {
+  width: 100%;
+  margin-left: 15px;
+}
+.userPostMain h3,
+.userPostMain p {
+  overflow-wrap: anywhere;
+}
+
+/* THIS IS FOR EXPLORE PAGE */
+.searchPage {
+  display: flex;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+  padding: 20px;
+}
+.searchPage input {
+  width: 100%;
+  padding: 15px;
+  border-radius: 25px;
+  margin-right: 20px;
+}
+
+/* THIS IS THE SETTINGS */
+.updateFormCont {
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+}
+.updateForm {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  /* border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray; */
+}
+.userUpdate,
+.passUpdate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+.userUpdate input,
+.passUpdate input {
+  width: 250px;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+.userUpdate h3,
+.passUpdate h3 {
+  margin-bottom: 20px;
+}
+.updateBtn {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+/* @media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
