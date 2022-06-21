@@ -16,6 +16,7 @@ import Settings from "./components/Settings";
 function App() {
   const [currentUser, setCurrentUser] = useState([]);
   const [usersPosts, setUsersPosts] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   Axios.defaults.withCredentials = true;
 
@@ -69,8 +70,9 @@ function App() {
       if (response.data.loggedIn === true) {
         // console.log("HELLO THERE");
         // console.log(response);
-        setCurrentUser(response.data.user[0]);
 
+        setCurrentUser(response.data.user[0]);
+        setIsLoggedIn(true);
         Axios.get(
           `http://localhost:3001/getAllPosts/${response.data.user[0].userID}`,
           {}
@@ -89,6 +91,8 @@ function App() {
             setCurrentUser={setCurrentUser}
             currentUser={currentUser}
             setUsersPosts={setUsersPosts}
+            setIsLoggedIn={setIsLoggedIn}
+            isLoggedIn={isLoggedIn}
           />
 
           <Routes>
@@ -106,33 +110,6 @@ function App() {
                       )}
                       <ShowPost currentUser={currentUser} />
                     </div>
-                  </div>
-                </>
-              }
-            />
-
-            {/* PROFILE */}
-            <Route
-              path="/profile"
-              element={
-                <>
-                  <div className="mainPage">
-                    <Profile
-                      currentUser={currentUser}
-                      usersPosts={usersPosts}
-                    />
-                  </div>
-                </>
-              }
-            />
-
-            {/* THIS IS FOR SETTINGS */}
-            <Route
-              path="/settings"
-              element={
-                <>
-                  <div className="mainPage">
-                    <Settings currentUser={currentUser} />
                   </div>
                 </>
               }
@@ -172,7 +149,37 @@ function App() {
                       setCurrentUser={setCurrentUser}
                       currentUser={currentUser}
                       setUsersPosts={setUsersPosts}
+                      setIsLoggedIn={setIsLoggedIn}
+                      isLoggedIn={isLoggedIn}
                     />
+                  </div>
+                </>
+              }
+            />
+
+            {/* PROFILE */}
+            <Route
+              path="/profile"
+              element={
+                <>
+                  <div className="mainPage">
+                    <Profile
+                      currentUser={currentUser}
+                      usersPosts={usersPosts}
+                      isLoggedIn={isLoggedIn}
+                    />
+                  </div>
+                </>
+              }
+            />
+
+            {/* THIS IS FOR SETTINGS */}
+            <Route
+              path="/settings"
+              element={
+                <>
+                  <div className="mainPage">
+                    <Settings currentUser={currentUser} />
                   </div>
                 </>
               }

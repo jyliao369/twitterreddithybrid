@@ -3,7 +3,13 @@ import { useState } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ setCurrentUser, currentUser, setUsersPosts }) => {
+const Navbar = ({
+  setCurrentUser,
+  currentUser,
+  setUsersPosts,
+  setIsLoggedIn,
+  isLoggedIn,
+}) => {
   const [emailReg, setEmailReg] = useState("");
   const [usernameReg, setUsernameReg] = useState("");
   const [passReg, setPassReg] = useState("");
@@ -51,6 +57,7 @@ const Navbar = ({ setCurrentUser, currentUser, setUsersPosts }) => {
   };
 
   const logout = () => {
+    setIsLoggedIn(false);
     Axios.get("http://localhost:3001/logout", {}).then((response) => {
       console.log(response);
       document.getElementById("accountInfo").style.display = "none";
@@ -75,7 +82,15 @@ const Navbar = ({ setCurrentUser, currentUser, setUsersPosts }) => {
 
         <button>Messages</button>
 
-        {currentUser.userID ? (
+        {/* {currentUser.userID ? (
+          <button>
+            <Link to="/profile">Profile</Link>
+          </button>
+        ) : (
+          <></>
+        )} */}
+
+        {isLoggedIn ? (
           <button>
             <Link to="/profile">Profile</Link>
           </button>
@@ -83,7 +98,7 @@ const Navbar = ({ setCurrentUser, currentUser, setUsersPosts }) => {
           <></>
         )}
 
-        {currentUser.userID ? (
+        {isLoggedIn ? (
           <button>
             <Link to="/settings">Settings</Link>
           </button>
@@ -92,29 +107,21 @@ const Navbar = ({ setCurrentUser, currentUser, setUsersPosts }) => {
         )}
       </div>
 
-      {currentUser.userID ? (
+      {isLoggedIn ? (
         <div className="userIconCont">
           <Link to="/" onClick={logout}>
             <div className="userIcon" />
+            Log Out
           </Link>
         </div>
       ) : (
         <div className="userIconCont">
           <Link to="/loginReg">
             <div className="userIcon" />
+            Log In
           </Link>
         </div>
       )}
-
-      {/* <div onClick={logout} className="accountBtn">
-        <div className="userIconCont">
-          <div className="userIcon" />
-        </div>
-        <div className="accountInfo" id="accountInfo">
-          <p>{currentUser.username}</p>
-          <p>{currentUser.email}</p>
-        </div>
-      </div> */}
     </div>
   );
 };

@@ -1,10 +1,15 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Axios from "axios";
-
 import { Link } from "react-router-dom";
 
-const LoginReg = ({ setCurrentUser, currentUser, setUsersPosts }) => {
+const LoginReg = ({
+  setCurrentUser,
+  currentUser,
+  setUsersPosts,
+  setIsLoggedIn,
+  isLoggedIn,
+}) => {
   const [emailReg, setEmailReg] = useState("");
   const [usernameReg, setUsernameReg] = useState("");
   const [passReg, setPassReg] = useState("");
@@ -12,7 +17,12 @@ const LoginReg = ({ setCurrentUser, currentUser, setUsersPosts }) => {
   const [emailLogin, setEmailLogin] = useState("");
   const [passLogin, setPassLogin] = useState("");
 
+  const [loginStatus, setLoginStatus] = useState("");
+
   const [user, setUser] = useState([]);
+
+  console.log("Is anyone Logged In?");
+  console.log(isLoggedIn);
 
   const register = () => {
     Axios.post("http://localhost:3001/register", {
@@ -38,12 +48,14 @@ const LoginReg = ({ setCurrentUser, currentUser, setUsersPosts }) => {
     } else if (passLogin === "") {
       console.log("No password is provided");
     } else {
+      setIsLoggedIn(true);
       Axios.post("http://localhost:3001/login", {
         password: passLogin,
         email: emailLogin,
       }).then((response) => {
         setCurrentUser(response.data[0]);
         setUser(response.data[0]);
+
         Axios.get(
           `http://localhost:3001/getAllPosts/${response.data[0].userID}`,
           {}
@@ -59,6 +71,10 @@ const LoginReg = ({ setCurrentUser, currentUser, setUsersPosts }) => {
     setEmailLogin("");
     setPassLogin("");
   };
+
+  // const testLogin = () => {
+  //   setIsLoggedIn(false);
+  // };
 
   // const logout = () => {
   //   Axios.get("http://localhost:3001/logout", {}).then((response) => {
@@ -96,10 +112,10 @@ const LoginReg = ({ setCurrentUser, currentUser, setUsersPosts }) => {
             value={passLogin}
             onChange={(e) => setPassLogin(e.target.value)}
           />
-          <button onClick={login} style={{ cursor: "pointer" }}>
+
+          <Link onClick={login} to="/profile">
             Log In
-            {/* <Link to="/profile">Log In</Link> */}
-          </button>
+          </Link>
         </div>
 
         <div className="logToReg">

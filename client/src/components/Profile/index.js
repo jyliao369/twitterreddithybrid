@@ -1,23 +1,14 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import Axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
-const Profile = ({ currentUser, usersPosts }) => {
+const Profile = ({ currentUser, usersPosts, isLoggedIn }) => {
   const [postTitle, setPostTitle] = useState("");
   const [postBody, setPostBody] = useState("");
 
-  console.log("hello There");
-  console.log(currentUser);
-
-  // const deletePost = (postID) => {
-  //   // console.log(postID);
-  //   Axios.delete(`http://localhost:3001/posts/${postID}`, {}).then(
-  //     (response) => {
-  //       console.log(response);
-  //     }
-  //   );
-  // };
+  console.log("Is the user Logged In?");
+  console.log(isLoggedIn);
 
   const addPost = () => {
     Axios.post("http://localhost:3001/addPost", {
@@ -30,6 +21,12 @@ const Profile = ({ currentUser, usersPosts }) => {
     setPostTitle("");
     setPostBody("");
   };
+
+  if (!isLoggedIn) {
+    return <Navigate to="/loginReg" />;
+  } else if (isLoggedIn) {
+    <Navigate to="/profile" />;
+  }
 
   return (
     <div>
@@ -85,11 +82,11 @@ const Profile = ({ currentUser, usersPosts }) => {
             </div>
 
             {/* <button
-              value={posts.postID}
-              onClick={(e) => deletePost(e.target.value)}
-            >
-              Delete
-            </button> */}
+            value={posts.postID}
+            onClick={(e) => deletePost(e.target.value)}
+          >
+            Delete
+          </button> */}
           </div>
         ))}
       </div>
