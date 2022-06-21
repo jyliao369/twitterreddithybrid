@@ -72,11 +72,6 @@ function App() {
 
         setCurrentUser(response.data.user[0]);
         setIsLoggedIn(true);
-        // Axios.get(
-        //   `http://localhost:3001/getAllPosts/${response.data.user[0].userID}`,
-        //   {}
-        // ).then((response) => {
-        //   setUsersPosts(response.data);
       }
     });
   }, []);
@@ -87,8 +82,6 @@ function App() {
         <div className="appCont">
           <Navbar
             setCurrentUser={setCurrentUser}
-            currentUser={currentUser}
-            // setUsersPosts={setUsersPosts}
             setIsLoggedIn={setIsLoggedIn}
             isLoggedIn={isLoggedIn}
           />
@@ -146,7 +139,6 @@ function App() {
                     <LoginReg
                       setCurrentUser={setCurrentUser}
                       currentUser={currentUser}
-                      // setUsersPosts={setUsersPosts}
                       setIsLoggedIn={setIsLoggedIn}
                       isLoggedIn={isLoggedIn}
                     />
@@ -163,7 +155,6 @@ function App() {
                   <div className="mainPage">
                     <Profile
                       currentUser={currentUser}
-                      // usersPosts={usersPosts}
                       isLoggedIn={isLoggedIn}
                     />
                   </div>
