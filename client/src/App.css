@@ -283,6 +283,10 @@
 .userPostMain p {
   overflow-wrap: anywhere;
 }
+.editBtn {
+  display: flex;
+  flex-direction: column;
+}
 
 /* THIS IS FOR EXPLORE PAGE */
 .searchPage {

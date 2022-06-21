@@ -226,16 +226,14 @@ app.post("/addPost", (req, res) => {
 
 // DELETING POST
 app.delete("/posts/:deletePostID", (req, res) => {
-  db.query(
-    `DELETE FROM posts_table WHERE postID=${req.params.deletePostID}`,
-    (err, result) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send("Post deleted");
-      }
+  const postID = req.params.deletePostID;
+  db.query(`DELETE FROM posts_table WHERE postID=${postID}`, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send("Post deleted");
     }
-  );
+  });
 });
 
 // LOOKING FOR A SPECIFIC POST BY postID

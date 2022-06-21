@@ -72,10 +72,6 @@ const LoginReg = ({
     setPassLogin("");
   };
 
-  // const testLogin = () => {
-  //   setIsLoggedIn(false);
-  // };
-
   // const logout = () => {
   //   Axios.get("http://localhost:3001/logout", {}).then((response) => {
   //     console.log(response);

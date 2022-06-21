@@ -15,7 +15,6 @@ import Settings from "./components/Settings";
 
 function App() {
   const [currentUser, setCurrentUser] = useState([]);
-  const [usersPosts, setUsersPosts] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   Axios.defaults.withCredentials = true;
@@ -73,12 +72,11 @@ function App() {
 
         setCurrentUser(response.data.user[0]);
         setIsLoggedIn(true);
-        Axios.get(
-          `http://localhost:3001/getAllPosts/${response.data.user[0].userID}`,
-          {}
-        ).then((response) => {
-          setUsersPosts(response.data);
-        });
+        // Axios.get(
+        //   `http://localhost:3001/getAllPosts/${response.data.user[0].userID}`,
+        //   {}
+        // ).then((response) => {
+        //   setUsersPosts(response.data);
       }
     });
   }, []);
@@ -90,7 +88,7 @@ function App() {
           <Navbar
             setCurrentUser={setCurrentUser}
             currentUser={currentUser}
-            setUsersPosts={setUsersPosts}
+            // setUsersPosts={setUsersPosts}
             setIsLoggedIn={setIsLoggedIn}
             isLoggedIn={isLoggedIn}
           />
@@ -148,7 +146,7 @@ function App() {
                     <LoginReg
                       setCurrentUser={setCurrentUser}
                       currentUser={currentUser}
-                      setUsersPosts={setUsersPosts}
+                      // setUsersPosts={setUsersPosts}
                       setIsLoggedIn={setIsLoggedIn}
                       isLoggedIn={isLoggedIn}
                     />
@@ -165,7 +163,7 @@ function App() {
                   <div className="mainPage">
                     <Profile
                       currentUser={currentUser}
-                      usersPosts={usersPosts}
+                      // usersPosts={usersPosts}
                       isLoggedIn={isLoggedIn}
                     />
                   </div>

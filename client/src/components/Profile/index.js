@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import Axios from "axios";
 import { Link, Navigate } from "react-router-dom";
+import App from "../../App";
 
-const Profile = ({ currentUser, usersPosts, isLoggedIn }) => {
+const Profile = ({ currentUser, isLoggedIn }) => {
   const [postTitle, setPostTitle] = useState("");
   const [postBody, setPostBody] = useState("");
+  const [usersPosts, setUsersPosts] = useState([]);
 
   console.log("Is the user Logged In?");
   console.log(isLoggedIn);
@@ -21,6 +23,29 @@ const Profile = ({ currentUser, usersPosts, isLoggedIn }) => {
     setPostTitle("");
     setPostBody("");
   };
+
+  const deletePost = (postID) => {
+    console.log(postID);
+    Axios.delete(`http://localhost:3001/posts/${postID}`, {}).then((response) =>
+      console.log(response)
+    );
+  };
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/login", {}).then((response) => {
+      if (response.data.loggedIn === true) {
+        // console.log("HELLO THERE");
+        // console.log(response);
+        Axios.get(
+          `http://localhost:3001/getAllPosts/${response.data.user[0].userID}`,
+          {}
+        ).then((response) => {
+          console.log(response.data);
+          setUsersPosts(response.data);
+        });
+      }
+    });
+  });
 
   if (!isLoggedIn) {
     return <Navigate to="/loginReg" />;
@@ -71,22 +96,27 @@ const Profile = ({ currentUser, usersPosts, isLoggedIn }) => {
       </div>
 
       <div className="usersPosts">
-        {usersPosts.map((posts) => (
-          <div key={posts.postID} className="userPost">
+        {usersPosts.map((post) => (
+          <div className="userPost">
             <div className="userIconCont">
               <div className="userIcon" />
             </div>
-            <div className="userPostMain">
-              <h3>{posts.title}</h3>
-              <p>{posts.postBody}</p>
-            </div>
+            <Link key={post.postID} to={`/post/${post.postID}`}>
+              <div className="userPostMain">
+                <h3>{post.title}</h3>
+                <p>{post.postBody}</p>
+              </div>
+            </Link>
 
-            {/* <button
-            value={posts.postID}
-            onClick={(e) => deletePost(e.target.value)}
-          >
-            Delete
-          </button> */}
+            <div className="editBtn">
+              <button>update</button>
+              <button
+                value={post.postID}
+                onClick={(e) => deletePost(e.target.value)}
+              >
+                delete
+              </button>
+            </div>
           </div>
         ))}
       </div>
