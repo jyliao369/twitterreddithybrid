@@ -151,6 +151,10 @@
 }
 
 /* LOGIN/REGISTER */
+.logRegCont {
+  display: flex;
+  justify-content: center;
+}
 .loginFormCont,
 .regFormCont {
   display: flex;

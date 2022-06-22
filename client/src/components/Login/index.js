@@ -54,31 +54,30 @@ const Login = ({
   };
 
   return (
-    <div className="loginFormCont">
-      <h1>Log In</h1>
-      <div className="loginForm">
-        <input
-          placeholder="Email"
-          value={emailLogin}
-          onChange={(e) => setEmailLogin(e.target.value)}
-        />
-        <input
-          placeholder="Password"
-          type={"password"}
-          value={passLogin}
-          onChange={(e) => setPassLogin(e.target.value)}
-        />
-        {/* <Link onClick={login} style={{ cursor: "pointer" }} to="/profile">
-          Log In
-        </Link> */}
-        <button onClick={login} style={{ cursor: "pointer" }} to="/profile">
-          Log In
-        </button>
+    <div className="logRegCont">
+      <div className="loginFormCont">
+        <h1>Log In</h1>
+        <div className="loginForm">
+          <input
+            placeholder="Email"
+            value={emailLogin}
+            onChange={(e) => setEmailLogin(e.target.value)}
+          />
+          <input
+            placeholder="Password"
+            type={"password"}
+            value={passLogin}
+            onChange={(e) => setPassLogin(e.target.value)}
+          />
+          <button onClick={login} style={{ cursor: "pointer" }} to="/profile">
+            Log In
+          </button>
 
-        <br />
+          <br />
 
-        <h4>No Account?</h4>
-        <Link to={"/register"}>Register here</Link>
+          <h4>No Account?</h4>
+          <Link to={"/register"}>Register here</Link>
+        </div>
       </div>
     </div>
   );
