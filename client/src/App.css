@@ -11,7 +11,7 @@
 .mainPage {
   display: flex;
   flex-direction: column;
-  width: 51%;
+  width: 100%;
   margin-left: 22%;
   margin-right: 27%;
 }
@@ -151,39 +151,32 @@
 }
 
 /* LOGIN/REGISTER */
-.formCont {
+.loginFormCont,
+.regFormCont {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  width: 30%;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 100px;
 }
-.form {
-  display: flex;
-  flex-direction: column;
+.loginFormCont h1,
+.regFormCont h1 {
+  margin-bottom: 20px;
 }
 .loginForm,
 .regForm {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  width: 30%;
-  height: 400px;
-  border-style: solid;
-  border-width: thin;
-  border-radius: 5px;
-  padding: 20px;
-  margin-top: 60px;
-}
-.regForm {
-  display: none;
 }
 .loginForm input,
 .regForm input {
   padding: 10px;
-  margin-bottom: 20px;
-}
-.loginForm h1,
-.regForm h1 {
   margin-bottom: 20px;
 }
 .loginForm button,
@@ -191,11 +184,6 @@
   padding: 10px;
   font-size: 15px;
   margin-bottom: 20px;
-}
-.logToReg {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 /* THIS IS FOR A SINGLE POST PAGE */

@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 
 const Navbar = ({ setCurrentUser, setIsLoggedIn, isLoggedIn }) => {
   const logout = () => {
-    setIsLoggedIn(false);
     Axios.get("http://localhost:3001/logout", {}).then((response) => {
       console.log(response);
       document.getElementById("accountInfo").style.display = "none";
     });
+    setIsLoggedIn(false);
     setCurrentUser([]);
   };
 
@@ -62,7 +62,7 @@ const Navbar = ({ setCurrentUser, setIsLoggedIn, isLoggedIn }) => {
         </div>
       ) : (
         <div className="userIconCont">
-          <Link to="/loginReg">
+          <Link to="/login">
             <div className="userIcon" />
             Log In
           </Link>

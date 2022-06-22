@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Axios from "axios";
 
 const Settings = ({ currentUser }) => {
   console.log(currentUser);
 
-  const [displayUpdate, setDisplayUpdate] = useState(currentUser.username);
-  const [lastUpdate, setLastUpdate] = useState(currentUser.lastName);
-  const [firstUpdate, setFirstUpdate] = useState(currentUser.firstName);
-  const [emailUpdate, setEmailUpdate] = useState(currentUser.email);
+  const [displayUpdate, setDisplayUpdate] = useState("");
+  const [lastUpdate, setLastUpdate] = useState("");
+  const [firstUpdate, setFirstUpdate] = useState("");
+  const [emailUpdate, setEmailUpdate] = useState("");
 
   const [newPass, setNewPass] = useState("");
   const [checkNewPass, setCheckNewPass] = useState("");
@@ -44,6 +44,21 @@ const Settings = ({ currentUser }) => {
     setNewPass("");
     setCheckNewPass("");
   };
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/login", {}).then((response) => {
+      // console.log("hello");
+      // console.log(response);
+      if (response.data.loggedIn === true) {
+        // console.log("HELLO THERE");
+        // console.log(response.data.user[0]);
+        setDisplayUpdate(response.data.user[0].username);
+        setLastUpdate(response.data.user[0].lastName);
+        setFirstUpdate(response.data.user[0].firstName);
+        setEmailUpdate(response.data.user[0].email);
+      }
+    });
+  }, []);
 
   return (
     <div>

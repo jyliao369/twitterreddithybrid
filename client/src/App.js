@@ -8,7 +8,8 @@ import PostForm from "./components/PostForm";
 import ShowPost from "./components/ShowPost";
 import Profile from "./components/Profile";
 import Explore from "./components/Explore";
-import LoginReg from "./components/LoginReg";
+import Login from "./components/Login";
+import Register from "./components/Register";
 import SinglePost from "./components/SinglePost";
 import RandomNews from "./components/RandomNews";
 import Settings from "./components/Settings";
@@ -130,13 +131,30 @@ function App() {
               }
             />
 
-            {/* LOGIN/REGISTER */}
+            {/* LOGIN */}
             <Route
-              path="/loginReg"
+              path="/login"
               element={
                 <>
                   <div className="mainPage">
-                    <LoginReg
+                    <Login
+                      setCurrentUser={setCurrentUser}
+                      currentUser={currentUser}
+                      setIsLoggedIn={setIsLoggedIn}
+                      isLoggedIn={isLoggedIn}
+                    />
+                  </div>
+                </>
+              }
+            />
+
+            {/* REGISTER */}
+            <Route
+              path="/register"
+              element={
+                <>
+                  <div className="mainPage">
+                    <Register
                       setCurrentUser={setCurrentUser}
                       currentUser={currentUser}
                       setIsLoggedIn={setIsLoggedIn}
@@ -155,6 +173,7 @@ function App() {
                   <div className="mainPage">
                     <Profile
                       currentUser={currentUser}
+                      setIsLoggedIn={setIsLoggedIn}
                       isLoggedIn={isLoggedIn}
                     />
                   </div>
@@ -168,7 +187,10 @@ function App() {
               element={
                 <>
                   <div className="mainPage">
-                    <Settings currentUser={currentUser} />
+                    <Settings
+                      setCurrentUser={setCurrentUser}
+                      currentUser={currentUser}
+                    />
                   </div>
                 </>
               }

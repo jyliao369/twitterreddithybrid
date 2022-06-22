@@ -45,7 +45,24 @@ const db = mysql.createConnection({
 app.post("/register", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
   const email = req.body.email;
+  const dateTime = req.body.dateTime;
+
+  console.log(
+    username +
+      " " +
+      password +
+      " " +
+      firstName +
+      " " +
+      lastName +
+      " " +
+      email +
+      " " +
+      dateTime
+  );
 
   db.query(
     "SELECT * FROM user_table WHERE email = ?",
@@ -64,8 +81,8 @@ app.post("/register", (req, res) => {
             console.log(err);
           }
           db.query(
-            "INSERT INTO user_table (username, password, email) VALUES (?,?,?)",
-            [username, hash, email],
+            "INSERT INTO user_table (username, lastName, firstName, password, email, dateTime) VALUES (?,?,?,?,?,?)",
+            [username, lastName, firstName, hash, email, dateTime],
             (err, result) => {
               if (err) {
                 console.log(err);

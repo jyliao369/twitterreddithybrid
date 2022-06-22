@@ -4,13 +4,13 @@ import Axios from "axios";
 import { Link, Navigate } from "react-router-dom";
 import App from "../../App";
 
-const Profile = ({ currentUser, isLoggedIn }) => {
+const Profile = ({ currentUser, setIsLoggedIn, isLoggedIn }) => {
   const [postTitle, setPostTitle] = useState("");
   const [postBody, setPostBody] = useState("");
   const [usersPosts, setUsersPosts] = useState([]);
 
-  console.log("Is the user Logged In?");
-  console.log(isLoggedIn);
+  // console.log("Is the user Logged In?");
+  // console.log(isLoggedIn);
 
   const addPost = () => {
     Axios.post("http://localhost:3001/addPost", {
@@ -41,17 +41,12 @@ const Profile = ({ currentUser, isLoggedIn }) => {
           {}
         ).then((response) => {
           console.log(response.data);
-          setUsersPosts(response.data);
+          setUsersPosts(response.data.reverse());
+          setIsLoggedIn(true);
         });
       }
     });
   });
-
-  if (!isLoggedIn) {
-    return <Navigate to="/loginReg" />;
-  } else if (isLoggedIn) {
-    <Navigate to="/profile" />;
-  }
 
   return (
     <div>
