@@ -58,7 +58,6 @@ const Register = ({
           password: passReg,
           email: emailReg,
         }).then((response) => {
-          // console.log(response.data[0]);
           setCurrentUser(response.data[0]);
         });
       });

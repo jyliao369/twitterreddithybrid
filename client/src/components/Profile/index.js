@@ -4,7 +4,7 @@ import Axios from "axios";
 import { Link, Navigate } from "react-router-dom";
 import App from "../../App";
 
-const Profile = ({ currentUser, setIsLoggedIn, isLoggedIn }) => {
+const Profile = ({ currentUser }) => {
   const [postTitle, setPostTitle] = useState("");
   const [postBody, setPostBody] = useState("");
   const [usersPosts, setUsersPosts] = useState([]);
@@ -34,15 +34,11 @@ const Profile = ({ currentUser, setIsLoggedIn, isLoggedIn }) => {
   useEffect(() => {
     Axios.get("http://localhost:3001/login", {}).then((response) => {
       if (response.data.loggedIn === true) {
-        // console.log("HELLO THERE");
-        // console.log(response);
         Axios.get(
           `http://localhost:3001/getAllPosts/${response.data.user[0].userID}`,
           {}
         ).then((response) => {
-          console.log(response.data);
           setUsersPosts(response.data.reverse());
-          setIsLoggedIn(true);
         });
       }
     });
@@ -92,11 +88,11 @@ const Profile = ({ currentUser, setIsLoggedIn, isLoggedIn }) => {
 
       <div className="usersPosts">
         {usersPosts.map((post) => (
-          <div className="userPost">
+          <div key={post.postID} className="userPost">
             <div className="userIconCont">
               <div className="userIcon" />
             </div>
-            <Link key={post.postID} to={`/post/${post.postID}`}>
+            <Link to={`/post/${post.postID}`}>
               <div className="userPostMain">
                 <h3>{post.title}</h3>
                 <p>{post.postBody}</p>

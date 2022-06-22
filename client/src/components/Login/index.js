@@ -3,21 +3,11 @@ import { useState } from "react";
 import Axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = ({
-  setCurrentUser,
-  currentUser,
-  setUsersPosts,
-  setIsLoggedIn,
-  isLoggedIn,
-}) => {
+const Login = ({ setCurrentUser, currentUser, setIsLoggedIn, isLoggedIn }) => {
   const [emailLogin, setEmailLogin] = useState("");
   const [passLogin, setPassLogin] = useState("");
 
   const navToProfile = useNavigate();
-  const [user, setUser] = useState([]);
-
-  // console.log("Is anyone Logged In?");
-  // console.log(isLoggedIn);
 
   const login = () => {
     if (passLogin === "" && emailLogin === "") {
@@ -33,17 +23,6 @@ const Login = ({
         email: emailLogin,
       }).then((response) => {
         setCurrentUser(response.data[0]);
-        setUser(response.data[0]);
-
-        Axios.get(
-          `http://localhost:3001/getAllPosts/${response.data[0].userID}`,
-          {}
-        ).then((response) => {
-          console.log("hello");
-          console.log(response.data);
-          setUsersPosts(response.data);
-          document.getElementById("accountInfo").style.display = "block";
-        });
       });
 
       navToProfile("/profile");

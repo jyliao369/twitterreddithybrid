@@ -65,14 +65,8 @@ function App() {
 
   useEffect(() => {
     Axios.get("http://localhost:3001/login", {}).then((response) => {
-      // console.log("hello");
-      // console.log(response);
       if (response.data.loggedIn === true) {
-        // console.log("HELLO THERE");
-        // console.log(response);
-
         setCurrentUser(response.data.user[0]);
-        setIsLoggedIn(true);
       }
     });
   }, []);
@@ -83,6 +77,7 @@ function App() {
         <div className="appCont">
           <Navbar
             setCurrentUser={setCurrentUser}
+            currentUser={currentUser}
             setIsLoggedIn={setIsLoggedIn}
             isLoggedIn={isLoggedIn}
           />
@@ -171,11 +166,7 @@ function App() {
               element={
                 <>
                   <div className="mainPage">
-                    <Profile
-                      currentUser={currentUser}
-                      setIsLoggedIn={setIsLoggedIn}
-                      isLoggedIn={isLoggedIn}
-                    />
+                    <Profile currentUser={currentUser} />
                   </div>
                 </>
               }

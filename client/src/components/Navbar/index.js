@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useEffect } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -12,6 +12,14 @@ const Navbar = ({ setCurrentUser, setIsLoggedIn, isLoggedIn }) => {
     setIsLoggedIn(false);
     setCurrentUser([]);
   };
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/login", {}).then((response) => {
+      if (response.data.loggedIn === true) {
+        setIsLoggedIn(true);
+      }
+    });
+  }, []);
 
   return (
     <div className="navbar">
@@ -27,14 +35,6 @@ const Navbar = ({ setCurrentUser, setIsLoggedIn, isLoggedIn }) => {
         </button>
 
         <button>Messages</button>
-
-        {/* {currentUser.userID ? (
-          <button>
-            <Link to="/profile">Profile</Link>
-          </button>
-        ) : (
-          <></>
-        )} */}
 
         {isLoggedIn ? (
           <button>
