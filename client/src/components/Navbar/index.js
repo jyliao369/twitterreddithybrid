@@ -3,6 +3,15 @@ import { useEffect } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 
+import LoginIcon from "@mui/icons-material/Login";
+import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
+
 const Navbar = ({ setCurrentUser, setIsLoggedIn, isLoggedIn }) => {
   const logout = () => {
     Axios.get("http://localhost:3001/logout", {}).then((response) => {
@@ -26,28 +35,54 @@ const Navbar = ({ setCurrentUser, setIsLoggedIn, isLoggedIn }) => {
       <div className="navbarBtns">
         <button>What's On Your Mind?</button>
 
-        <button>
-          <Link to="/">Home</Link>
-        </button>
+        <Link to="/">
+          <div className="navbarChoices">
+            <HomeOutlinedIcon sx={{ fontSize: "45px", paddingRight: "10px" }} />
+            <p>Home</p>
+          </div>
+        </Link>
 
-        <button>
-          <Link to="/explore">Explore</Link>
-        </button>
+        <Link to="/explore">
+          <div className="navbarChoices">
+            <SearchOutlinedIcon
+              sx={{ fontSize: "45px", paddingRight: "5px" }}
+            />
+            <p>Explore</p>
+          </div>
+        </Link>
 
-        <button>Messages</button>
+        <div className="navbarChoices">
+          <EmailOutlinedIcon sx={{ fontSize: "45px", paddingRight: "5px" }} />
+          <p>Message</p>
+        </div>
+
+        <div className="navbarChoices">
+          <ListOutlinedIcon sx={{ fontSize: "45px", paddingRight: "5px" }} />
+          <p>List</p>
+        </div>
 
         {isLoggedIn ? (
-          <button>
-            <Link to="/profile">Profile</Link>
-          </button>
+          <Link to="/profile">
+            <div className="navbarChoices">
+              <PermIdentityOutlinedIcon
+                sx={{ fontSize: "45px", paddingRight: "5px" }}
+              />
+              <p>Log Out</p>
+            </div>
+          </Link>
         ) : (
           <></>
         )}
 
         {isLoggedIn ? (
-          <button>
-            <Link to="/settings">Settings</Link>
-          </button>
+          <Link to="/settings">
+            <div className="navbarChoices">
+              <SettingsOutlinedIcon
+                sx={{ fontSize: "45px", paddingRight: "5px" }}
+              />
+              <p>Settings</p>
+            </div>
+          </Link>
         ) : (
           <></>
         )}
@@ -56,15 +91,17 @@ const Navbar = ({ setCurrentUser, setIsLoggedIn, isLoggedIn }) => {
       {isLoggedIn ? (
         <div className="userIconCont">
           <Link to="/" onClick={logout}>
-            <div className="userIcon" />
-            Log Out
+            <div className="userIcon">
+              <LoginOutlinedIcon sx={{ fontSize: "45px" }} />
+            </div>
           </Link>
         </div>
       ) : (
         <div className="userIconCont">
           <Link to="/login">
-            <div className="userIcon" />
-            Log In
+            <div className="userIcon">
+              <LoginIcon sx={{ fontSize: "45px" }} />
+            </div>
           </Link>
         </div>
       )}

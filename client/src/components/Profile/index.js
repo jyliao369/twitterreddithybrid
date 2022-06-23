@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Axios from "axios";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import App from "../../App";
 
 const Profile = ({ currentUser, isLoggedIn }) => {
@@ -12,23 +12,48 @@ const Profile = ({ currentUser, isLoggedIn }) => {
   // console.log("Is the user Logged In?");
   // console.log(isLoggedIn);
 
+  const navToUpdate = useNavigate();
+
   const addPost = () => {
+    var todayDate = new Date();
+    var todayDates =
+      todayDate.getFullYear() +
+      "-" +
+      (todayDate.getMonth() + 1) +
+      "-" +
+      todayDate.getDate();
+
+    var todayTime =
+      todayDate.getHours() +
+      ":" +
+      todayDate.getMinutes() +
+      ":" +
+      todayDate.getSeconds();
+
+    // console.log(todayDates + " " + todayTime);
+
     Axios.post("http://localhost:3001/addPost", {
       userID: currentUser.userID,
       username: currentUser.username,
       title: postTitle,
       postBody: postBody,
+      dateTime: todayDates + " " + todayTime,
     });
 
-    setPostTitle("");
-    setPostBody("");
+    // setPostTitle("");
+    // setPostBody("");
   };
 
   const deletePost = (postID) => {
-    console.log(postID);
+    // console.log(postID);
     Axios.delete(`http://localhost:3001/posts/${postID}`, {}).then((response) =>
       console.log(response)
     );
+  };
+
+  const updatePost = (postID) => {
+    // console.log(postID);
+    navToUpdate(`/updatePost/${postID}`);
   };
 
   useEffect(() => {
@@ -104,12 +129,17 @@ const Profile = ({ currentUser, isLoggedIn }) => {
             </Link>
 
             <div className="editBtn">
-              <button>update</button>
+              <button
+                value={post.postID}
+                onClick={(e) => updatePost(e.target.value)}
+              >
+                Update
+              </button>
               <button
                 value={post.postID}
                 onClick={(e) => deletePost(e.target.value)}
               >
-                delete
+                Delete
               </button>
             </div>
           </div>

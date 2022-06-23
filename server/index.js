@@ -200,25 +200,25 @@ app.put("/updateUser/:userID", (req, res) => {
 });
 
 // UPDATE A SPECIFIC POST BASED ON postID
-// app.put("/updatePost/:postID", (req, res) => {
-//   const updateTitle = req.body.title;
-//   const updatePostBody = req.body.postBody;
-//   const updateID = req.params.postID;
-//   //   console.log(
-//   //     `UPDATE posts_table SET title = ${updateTitle}, postBody = ${updatePostBody}, WHERE postID = ${updateID}`
-//   //   );
-//   db.query(
-//     `UPDATE posts_table SET title = "${updateTitle}", postBody = "${updatePostBody}" WHERE postID = ${updateID}`,
-//     (err, result) => {
-//       if (err) {
-//         console.log(err);
-//       } else {
-//         res.send(result);
-//         console.log(result);
-//       }
-//     }
-//   );
-// });
+app.put("/updatePost/:postID", (req, res) => {
+  const updateTitle = req.body.title;
+  const updatePostBody = req.body.postBody;
+  const updateID = req.params.postID;
+  //   console.log(
+  //     `UPDATE posts_table SET title = ${updateTitle}, postBody = ${updatePostBody}, WHERE postID = ${updateID}`
+  //   );
+  db.query(
+    `UPDATE posts_table SET title = "${updateTitle}", postBody = "${updatePostBody}" WHERE postID = ${updateID}`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+        console.log(result);
+      }
+    }
+  );
+});
 
 // THESE ARE CALLS/GETS TO FETCH DATA FOR POSTS
 // ADDING POST
@@ -227,10 +227,15 @@ app.post("/addPost", (req, res) => {
   const username = req.body.username;
   const title = req.body.title;
   const postBody = req.body.postBody;
+  const dateTime = req.body.dateTime;
+
+  console.log(
+    userID + " " + username + " " + title + " " + postBody + " " + dateTime
+  );
 
   db.query(
-    "INSERT INTO posts_table (userID, username, title, postBody) VALUES (?,?,?,?)",
-    [userID, username, title, postBody],
+    "INSERT INTO posts_table (userID, username, title, postBody, dateTime) VALUES (?,?,?,?,?)",
+    [userID, username, title, postBody, dateTime],
     (err, res) => {
       if (err) {
         console.log(err);

@@ -6,13 +6,14 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import PostForm from "./components/PostForm";
 import ShowPost from "./components/ShowPost";
-import Profile from "./components/Profile";
 import Explore from "./components/Explore";
+import SinglePost from "./components/SinglePost";
+import UpdatePost from "./components/UpdatePost";
+import Profile from "./components/Profile";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import SinglePost from "./components/SinglePost";
-import RandomNews from "./components/RandomNews";
 import Settings from "./components/Settings";
+import RandomNews from "./components/RandomNews";
 
 function App() {
   const [currentUser, setCurrentUser] = useState([]);
@@ -54,13 +55,6 @@ function App() {
   //       setUpdateID(response.data[0].postID);
   //     }
   //   );
-  // };
-
-  // const updatePost = () => {
-  //   Axios.put(`http://localhost:3001/updatePost/${updateID}`, {
-  //     title: updateTitle,
-  //     postBody: udpatePostBody,
-  //   });
   // };
 
   useEffect(() => {
@@ -109,6 +103,18 @@ function App() {
                 <>
                   <div className="mainPage">
                     <Explore />
+                  </div>
+                </>
+              }
+            />
+
+            {/* THIS IS TO UPDATE THE POST */}
+            <Route
+              path="/updatePost/:postID"
+              element={
+                <>
+                  <div className="mainPage">
+                    <UpdatePost />
                   </div>
                 </>
               }

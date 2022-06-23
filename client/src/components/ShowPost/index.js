@@ -8,17 +8,6 @@ const ShowPost = ({ currentUser }) => {
 
   const [comment, setComment] = useState("");
 
-  // const addComment = (postID) => {
-  //   if (
-  //     document.getElementById(`${postID}`).style.display === "" ||
-  //     document.getElementById(`${postID}`).style.display === "none"
-  //   ) {
-  //     document.getElementById(`${postID}`).style.display = "flex";
-  //   } else {
-  //     document.getElementById(`${postID}`).style.display = "none";
-  //   }
-  // };
-
   useEffect(() => {
     Axios.get("http://localhost:3001/getAllPosts", {}).then((response) => {
       //   console.log(response.data);
