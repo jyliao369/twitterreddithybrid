@@ -4,7 +4,7 @@ import Axios from "axios";
 import { Link, Navigate } from "react-router-dom";
 import App from "../../App";
 
-const Profile = ({ currentUser }) => {
+const Profile = ({ currentUser, isLoggedIn }) => {
   const [postTitle, setPostTitle] = useState("");
   const [postBody, setPostBody] = useState("");
   const [usersPosts, setUsersPosts] = useState([]);
@@ -43,6 +43,10 @@ const Profile = ({ currentUser }) => {
       }
     });
   });
+
+  if (!isLoggedIn) {
+    <Navigate to={"/login"} />;
+  }
 
   return (
     <div>

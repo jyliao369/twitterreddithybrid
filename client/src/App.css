@@ -161,7 +161,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 30%;
   border-style: solid;
   border-width: thin;
   border-radius: 5px;
@@ -172,8 +171,7 @@
 .regFormCont h1 {
   margin-bottom: 20px;
 }
-.loginForm,
-.regForm {
+.loginForm {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -181,13 +179,21 @@
 .loginForm input,
 .regForm input {
   padding: 10px;
-  margin-bottom: 20px;
+  margin: 20px;
 }
 .loginForm button,
 .regForm button {
   padding: 10px;
   font-size: 15px;
   margin-bottom: 20px;
+}
+.regForm {
+  display: flex;
+  flex-direction: row;
+}
+.regFormOne {
+  display: flex;
+  flex-direction: column;
 }
 
 /* THIS IS FOR A SINGLE POST PAGE */

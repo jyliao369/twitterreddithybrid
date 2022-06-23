@@ -166,7 +166,10 @@ function App() {
               element={
                 <>
                   <div className="mainPage">
-                    <Profile currentUser={currentUser} />
+                    <Profile
+                      currentUser={currentUser}
+                      isLoggedIn={isLoggedIn}
+                    />
                   </div>
                 </>
               }

@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 
@@ -15,6 +15,7 @@ const Register = ({
   const [lastNameReg, setLastNameReg] = useState("");
   const [passReg, setPassReg] = useState("");
   const [retypePassReg, setRetypePassReg] = useState("");
+  const [status, setStatus] = useState("");
 
   const navToProfile = useNavigate();
 
@@ -29,7 +30,8 @@ const Register = ({
       passReg === "" ||
       retypePassReg === ""
     ) {
-      console.log("Missing important info");
+      setStatus("Alert: Missing info");
+      console.log("Alert: Missing info");
     } else if (passReg === retypePassReg) {
       var todayDate = new Date();
       var todayDates =
@@ -64,7 +66,8 @@ const Register = ({
 
       navToProfile("/profile");
     } else {
-      console.log("passwords do not match");
+      setStatus("Alert: Passwords do not match!");
+      console.log("Alert: Passwords do not match!");
     }
   };
 
@@ -72,52 +75,55 @@ const Register = ({
     <div className="logRegCont">
       <div className="regFormCont">
         <h1>Register</h1>
+        <br />
+        <h5>{status}</h5>
+        <br />
         <div className="regForm">
-          <input
-            placeholder="Username"
-            onChange={(e) => setUsernameReg(e.target.value)}
-            value={usernameReg}
-          />
-          <input
-            placeholder="Last Name"
-            onChange={(e) => setLastNameReg(e.target.value)}
-            value={lastNameReg}
-          />
-          <input
-            placeholder="First Name"
-            onChange={(e) => setFirstNameReg(e.target.value)}
-            value={firstNameReg}
-          />
-          <input
-            placeholder="Email"
-            onChange={(e) => setEmailReg(e.target.value)}
-            value={emailReg}
-          />
-          <input
-            placeholder="Password"
-            type={"password"}
-            onChange={(e) => setPassReg(e.target.value)}
-            value={passReg}
-          />
-          <input
-            placeholder="Re-Type Password"
-            type={"password"}
-            onChange={(e) => setRetypePassReg(e.target.value)}
-            value={retypePassReg}
-          />
-          <button
-            onClick={register}
-            style={{ cursor: "pointer" }}
-            to="/profile"
-          >
-            Register
-          </button>
-
-          <br />
-
-          <h4>Have an Account?</h4>
-          <Link to={"/login"}>Log in here</Link>
+          <div className="regFormOne">
+            <input
+              placeholder="Username"
+              onChange={(e) => setUsernameReg(e.target.value)}
+              value={usernameReg}
+            />
+            <input
+              placeholder="Last Name"
+              onChange={(e) => setLastNameReg(e.target.value)}
+              value={lastNameReg}
+            />
+            <input
+              placeholder="First Name"
+              onChange={(e) => setFirstNameReg(e.target.value)}
+              value={firstNameReg}
+            />
+          </div>
+          <div className="regFormOne">
+            <input
+              placeholder="Email"
+              onChange={(e) => setEmailReg(e.target.value)}
+              value={emailReg}
+            />
+            <input
+              placeholder="Password"
+              type={"password"}
+              onChange={(e) => setPassReg(e.target.value)}
+              value={passReg}
+            />
+            <input
+              placeholder="Re-Type Password"
+              type={"password"}
+              onChange={(e) => setRetypePassReg(e.target.value)}
+              value={retypePassReg}
+            />
+          </div>
         </div>
+        <button onClick={register} style={{ cursor: "pointer" }} to="/profile">
+          Register
+        </button>
+
+        <br />
+
+        <h4>Have an Account?</h4>
+        <Link to={"/login"}>Log in here</Link>
       </div>
     </div>
   );
