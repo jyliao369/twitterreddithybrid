@@ -14,6 +14,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Settings from "./components/Settings";
 import RandomNews from "./components/RandomNews";
+import SubThread from "./components/SubThreads";
+import SubthreadPage from "./components/SubthreadPage";
 
 function App() {
   const [currentUser, setCurrentUser] = useState([]);
@@ -191,6 +193,30 @@ function App() {
                       setCurrentUser={setCurrentUser}
                       currentUser={currentUser}
                     />
+                  </div>
+                </>
+              }
+            />
+
+            {/* THIS IS FOR SUB-THREADS */}
+            <Route
+              path="/subthreads"
+              element={
+                <>
+                  <div className="mainPage">
+                    <SubThread currentUser={currentUser} />
+                  </div>
+                </>
+              }
+            />
+
+            {/* THIS IS FOR EACH THREAD MAINPAGE */}
+            <Route
+              path="/subthread/:subthreadID"
+              element={
+                <>
+                  <div className="mainPage">
+                    <SubthreadPage />
                   </div>
                 </>
               }

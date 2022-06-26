@@ -30,13 +30,16 @@
   border-color: lightgray;
   padding: 20px;
 }
+.posts:hover {
+  background: lightgray;
+}
 .userIcon {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 85px;
   height: 85px;
-  background-color: lightgray;
+  background-color: lightsteelblue;
   border-radius: 50px;
 }
 .mainPostCont,
@@ -94,8 +97,8 @@
   margin-bottom: 10px;
   font-size: 25px;
 }
-.Icon {
-  font-size: 1000px;
+.navbarChoices:hover {
+  background: lightgray;
 }
 
 /* THIS IS THE HOME PAGE */
@@ -161,6 +164,9 @@
 .news h3,
 .news p {
   overflow-wrap: anywhere;
+}
+.news:hover {
+  background: lightgray;
 }
 
 /* LOGIN/REGISTER */
@@ -254,7 +260,7 @@
   background-color: lightgray;
 }
 .accountBanner {
-  height: 450px;
+  height: 400px;
   border-bottom: solid;
   border-width: thin;
   border-color: lightgray;
@@ -285,6 +291,9 @@
   border-width: thin;
   border-color: lightgray;
   padding: 20px;
+}
+.userPost:hover {
+  background: lightgray;
 }
 .userPostMain {
   width: 100%;
@@ -351,6 +360,64 @@
   display: flex;
   justify-content: flex-end;
   padding: 20px;
+}
+
+/* THIS IS TO CREATE A THREAD PAGE/THREAD PAGE */
+.createThread {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+}
+.createThread input,
+.createThread textarea {
+  padding: 10px;
+  margin-bottom: 15px;
+}
+.createThread button {
+  padding: 10px;
+  font-size: 15px;
+}
+.threadCont {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+}
+.threadCont div {
+  border-style: solid;
+  border-width: thin;
+  border-color: lightgray;
+  border-radius: 20px;
+  padding: 3px 15px 5px 15px;
+  margin-right: 10px;
+  font-size: 17px;
+}
+
+/* THIS IS FOR SPECIFIC THREAD PAGES */
+.threadPage {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  right: 0px;
+  bottom: 100px;
+  margin: 20px;
+  align-items: center;
+}
+.accountIconCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.accountIconCont p {
+  font-size: 25px;
+}
+.threadDesc {
+  width: 75%;
+  position: relative;
+  margin-left: 40px;
+  margin-top: 30px;
 }
 
 /* @media (prefers-reduced-motion: no-preference) {

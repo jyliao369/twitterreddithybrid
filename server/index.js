@@ -364,6 +364,60 @@ app.post("/addComment", (req, res) => {
   );
 });
 
+// THIS IS FOR THE SUB-THREAD SECTION
+// THIS CREATES THREAD
+app.post("/addThread", (req, res) => {
+  const userID = req.body.userID;
+  const username = req.body.username;
+  const threadName = req.body.threadName;
+  const threadDesc = req.body.threadDesc;
+  const dateTime = req.body.dateTime;
+
+  db.query(
+    `INSERT INTO subthreads_table (userID, username, threadName, threadDesc, dateTime) VALUE (?,?,?,?,?)`,
+    [userID, username, threadName, threadDesc, dateTime],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+        console.log(result);
+      }
+    }
+  );
+});
+
+// THIS GETS ALL THREADS CREATED
+app.get("/allThread", (req, res) => {
+  db.query(`SELECT * FROM subthreads_table`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+      console.log(result);
+    }
+  });
+});
+
+// THIS GRABS A SPECIFIC THREAD BASED ON THREADID
+// POTENTIALLY THIS WILL GRAB POSTS ASSOCIATED WITH THE THREAD
+app.get("/subthread/:subthreadID", (req, res) => {
+  const subthreadID = req.params.subthreadID;
+  // console.log(subthreadID);
+
+  db.query(
+    `SELECT * FROM subthreads_table WHERE subthreadID = ${subthreadID}`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+        console.log(result);
+      }
+    }
+  );
+});
+
 app.listen(3001, () => {
   console.log("Server is running smoothly");
 });

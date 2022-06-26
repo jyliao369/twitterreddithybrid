@@ -33,6 +33,7 @@ const Navbar = ({ setCurrentUser, setIsLoggedIn, isLoggedIn }) => {
   return (
     <div className="navbar">
       <div className="navbarBtns">
+        <h1>Threado!</h1>
         <button>What's On Your Mind?</button>
 
         <Link to="/">
@@ -56,10 +57,12 @@ const Navbar = ({ setCurrentUser, setIsLoggedIn, isLoggedIn }) => {
           <p>Message</p>
         </div>
 
-        <div className="navbarChoices">
-          <ListOutlinedIcon sx={{ fontSize: "45px", paddingRight: "5px" }} />
-          <p>List</p>
-        </div>
+        <Link to={"/subthreads"}>
+          <div className="navbarChoices">
+            <ListOutlinedIcon sx={{ fontSize: "45px", paddingRight: "5px" }} />
+            <p>List</p>
+          </div>
+        </Link>
 
         {isLoggedIn ? (
           <Link to="/profile">
@@ -67,7 +70,7 @@ const Navbar = ({ setCurrentUser, setIsLoggedIn, isLoggedIn }) => {
               <PermIdentityOutlinedIcon
                 sx={{ fontSize: "45px", paddingRight: "5px" }}
               />
-              <p>Log Out</p>
+              <p>Profile</p>
             </div>
           </Link>
         ) : (
