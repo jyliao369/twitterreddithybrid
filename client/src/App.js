@@ -216,7 +216,7 @@ function App() {
               element={
                 <>
                   <div className="mainPage">
-                    <SubthreadPage />
+                    <SubthreadPage currentUser={currentUser} />
                   </div>
                 </>
               }

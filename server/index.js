@@ -227,15 +227,26 @@ app.post("/addPost", (req, res) => {
   const username = req.body.username;
   const title = req.body.title;
   const postBody = req.body.postBody;
+  const subthreadID = req.body.subthreadID;
   const dateTime = req.body.dateTime;
 
   console.log(
-    userID + " " + username + " " + title + " " + postBody + " " + dateTime
+    userID +
+      " " +
+      username +
+      " " +
+      title +
+      " " +
+      postBody +
+      " " +
+      subthreadID +
+      " " +
+      dateTime
   );
 
   db.query(
-    "INSERT INTO posts_table (userID, username, title, postBody, dateTime) VALUES (?,?,?,?,?)",
-    [userID, username, title, postBody, dateTime],
+    "INSERT INTO posts_table (userID, username, title, postBody, subthreadID, dateTime) VALUES (?,?,?,?,?,?)",
+    [userID, username, title, postBody, subthreadID, dateTime],
     (err, res) => {
       if (err) {
         console.log(err);
@@ -405,8 +416,24 @@ app.get("/subthread/:subthreadID", (req, res) => {
   const subthreadID = req.params.subthreadID;
   // console.log(subthreadID);
 
+  // db.query(
+  //   `SELECT * FROM subthreads_table WHERE subthreadID = ${subthreadID}`,
+  //   (err, result) => {
+  //     if (err) {
+  //       console.log(err);
+  //     } else {
+  //       res.send(result);
+  //       console.log(result);
+  //     }
+  //   }
+  // );
+
   db.query(
-    `SELECT * FROM subthreads_table WHERE subthreadID = ${subthreadID}`,
+    `SELECT posts_table.postID, posts_table.userID, posts_table.username, posts_table.title, posts_table.postBody, subthreads_table.userID, subthreads_table.username, subthreads_table.threadName, subthreads_table.threadDesc, subthreads_table.dateTime, subthreads_table.subthreadID
+    FROM posts_table
+    INNER JOIN subthreads_table
+    ON posts_table.subthreadID=subthreads_table.subthreadID
+    WHERE posts_table.subthreadID=${subthreadID};`,
     (err, result) => {
       if (err) {
         console.log(err);
