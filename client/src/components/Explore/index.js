@@ -46,6 +46,7 @@ const Explore = () => {
         <button onClick={searchPosts}>search</button>
         <button onClick={() => setShowedPosts(allPosts)}>reset</button>
       </div>
+
       <div className="postsCont">
         {showedPosts.map((post) => (
           <Link to={`/post/${post.postID}`} key={post.postID}>

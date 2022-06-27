@@ -398,6 +398,23 @@ app.post("/addThread", (req, res) => {
   );
 });
 
+app.put("/updateSubthread/:subthreadID", (req, res) => {
+  const subthreadID = req.params.subthreadID;
+  const upThreadName = req.body.upThreadName;
+  const upThreadDesc = req.body.upThreadDesc;
+
+  db.query(
+    `UPDATE subthreads_table SET threadName = "${upThreadName}", threadDesc = "${upThreadDesc}" WHERE subthreadID = ${subthreadID}`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 // THIS GETS ALL THREADS CREATED
 app.get("/allThread", (req, res) => {
   db.query(`SELECT * FROM subthreads_table`, (err, result) => {
@@ -414,19 +431,6 @@ app.get("/allThread", (req, res) => {
 // POTENTIALLY THIS WILL GRAB POSTS ASSOCIATED WITH THE THREAD
 app.get("/subthread/:subthreadID", (req, res) => {
   const subthreadID = req.params.subthreadID;
-  // console.log(subthreadID);
-
-  // db.query(
-  //   `SELECT * FROM subthreads_table WHERE subthreadID = ${subthreadID}`,
-  //   (err, result) => {
-  //     if (err) {
-  //       console.log(err);
-  //     } else {
-  //       res.send(result);
-  //       console.log(result);
-  //     }
-  //   }
-  // );
 
   db.query(
     `SELECT posts_table.postID, posts_table.userID, posts_table.username, posts_table.title, posts_table.postBody, subthreads_table.userID, subthreads_table.username, subthreads_table.threadName, subthreads_table.threadDesc, subthreads_table.dateTime, subthreads_table.subthreadID

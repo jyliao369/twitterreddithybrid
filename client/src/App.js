@@ -16,6 +16,7 @@ import Settings from "./components/Settings";
 import RandomNews from "./components/RandomNews";
 import SubThread from "./components/SubThreads";
 import SubthreadPage from "./components/SubthreadPage";
+import UpdateThread from "./components/UpdateThread";
 
 function App() {
   const [currentUser, setCurrentUser] = useState([]);
@@ -204,7 +205,10 @@ function App() {
               element={
                 <>
                   <div className="mainPage">
-                    <SubThread currentUser={currentUser} />
+                    <SubThread
+                      currentUser={currentUser}
+                      isLoggedIn={isLoggedIn}
+                    />
                   </div>
                 </>
               }
@@ -216,7 +220,22 @@ function App() {
               element={
                 <>
                   <div className="mainPage">
-                    <SubthreadPage currentUser={currentUser} />
+                    <SubthreadPage
+                      currentUser={currentUser}
+                      isLoggedIn={isLoggedIn}
+                    />
+                  </div>
+                </>
+              }
+            />
+
+            {/* THIS WILL IS FOR UPDATING THE THREAD (NAME/DESC) */}
+            <Route
+              path="/updateSubThread/:subthreadID"
+              element={
+                <>
+                  <div className="mainPage">
+                    <UpdateThread />
                   </div>
                 </>
               }

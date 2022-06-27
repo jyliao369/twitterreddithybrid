@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 
-const SubthreadPage = ({ currentUser }) => {
+const SubthreadPage = ({ currentUser, isLoggedIn }) => {
   const { subthreadID } = useParams();
 
   const [threadTitle, setThreadTitle] = useState("");
@@ -13,8 +13,6 @@ const SubthreadPage = ({ currentUser }) => {
   const [postBody, setPostBody] = useState("");
 
   const [threadPost, setThreadPost] = useState([]);
-
-  console.log(subthreadID);
 
   const addPost = () => {
     var todayDate = new Date();
@@ -32,13 +30,6 @@ const SubthreadPage = ({ currentUser }) => {
       ":" +
       todayDate.getSeconds();
 
-    // console.log("hello there");
-    // console.log(currentUser.userID);
-    // console.log(currentUser.username);
-    // console.log(postTitle);
-    // console.log(postBody);
-    // console.log(subthreadID);
-    // console.log(todayDates + " " + todayTime);
     Axios.post(`http://localhost:3001/addPost`, {
       userID: currentUser.userID,
       username: currentUser.username,
@@ -52,12 +43,22 @@ const SubthreadPage = ({ currentUser }) => {
   };
 
   useEffect(() => {
+    Axios.get("http://localhost:3001/allThread", {}).then((response) => {
+      //   console.log("hello there");
+      //   console.log(response.data[subthreadID - 1]);
+      setThreadTitle("/" + response.data[subthreadID - 1].threadName);
+      setThreadDesc(response.data[subthreadID - 1].threadDesc);
+    });
+
     Axios.get(`http://localhost:3001/subthread/${subthreadID}`, {}).then(
       (response) => {
-        console.log(response.data);
-        setThreadTitle("/" + response.data[0].threadName);
-        setThreadDesc(response.data[0].threadDesc);
-        setThreadPost(response.data);
+        // console.log("hello there");
+        // console.log(response.data);
+        if (response.data.length > 0) {
+          setThreadPost(response.data);
+        } else {
+          setThreadPost([]);
+        }
       }
     );
   }, []);
@@ -75,28 +76,32 @@ const SubthreadPage = ({ currentUser }) => {
         </div>
       </div>
 
-      <div className="postFormCont">
-        <div className="userIconCont">
-          <div className="userIcon" />
-        </div>
+      {isLoggedIn ? (
+        <div className="postFormCont">
+          <div className="userIconCont">
+            <div className="userIcon" />
+          </div>
 
-        <div className="postForm">
-          <input
-            placeholder="title"
-            value={postTitle}
-            onChange={(e) => setPostTitle(e.target.value)}
-          />
-          <textarea
-            placeholder="What are you thinking?"
-            rows="6"
-            value={postBody}
-            onChange={(e) => setPostBody(e.target.value)}
-          />
-          <button onClick={addPost} style={{ cursor: "pointer" }}>
-            Post
-          </button>
+          <div className="postForm">
+            <input
+              placeholder="title"
+              value={postTitle}
+              onChange={(e) => setPostTitle(e.target.value)}
+            />
+            <textarea
+              placeholder="What are you thinking?"
+              rows="6"
+              value={postBody}
+              onChange={(e) => setPostBody(e.target.value)}
+            />
+            <button onClick={addPost} style={{ cursor: "pointer" }}>
+              Post
+            </button>
+          </div>
         </div>
-      </div>
+      ) : (
+        <></>
+      )}
 
       <div>
         {threadPost.map((post) => (

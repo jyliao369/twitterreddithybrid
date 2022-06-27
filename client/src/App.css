@@ -311,6 +311,7 @@
 /* THIS IS FOR EXPLORE PAGE */
 .searchPage {
   display: flex;
+  align-items: center;
   border-bottom: solid;
   border-width: thin;
   border-color: lightgray;
@@ -321,6 +322,13 @@
   padding: 15px;
   border-radius: 25px;
   margin-right: 20px;
+}
+.searchPage div {
+  border-style: solid;
+  border-width: thin;
+  border-color: lightgray;
+  padding: 10px;
+  margin: 0px 0px 0px 15px;
 }
 
 /* THIS IS THE SETTINGS */
@@ -383,6 +391,9 @@
 .threadCont {
   display: flex;
   flex-direction: row;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
   padding: 20px;
 }
 .threadCont div {
@@ -393,6 +404,28 @@
   padding: 3px 15px 5px 15px;
   margin-right: 10px;
   font-size: 17px;
+}
+.subthreadsCont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+  padding: 20px;
+}
+.subthreadInfoCont {
+  display: flex;
+}
+.subthreadInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: 0px 15px 0px 15px;
+}
+.editBtn {
+  display: flex;
+  flex-direction: column;
 }
 
 /* THIS IS FOR SPECIFIC THREAD PAGES */
@@ -417,7 +450,7 @@
   width: 75%;
   position: relative;
   margin-left: 40px;
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 /* @media (prefers-reduced-motion: no-preference) {
