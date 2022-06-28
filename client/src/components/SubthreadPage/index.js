@@ -61,7 +61,7 @@ const SubthreadPage = ({ currentUser, isLoggedIn }) => {
         }
       }
     );
-  }, []);
+  }, [threadPost]);
 
   return (
     <div>
@@ -77,26 +77,28 @@ const SubthreadPage = ({ currentUser, isLoggedIn }) => {
       </div>
 
       {isLoggedIn ? (
-        <div className="postFormCont">
-          <div className="userIconCont">
-            <div className="userIcon" />
-          </div>
+        <div>
+          <div className="postFormCont">
+            <div className="userIconCont">
+              <div className="userIcon" />
+            </div>
 
-          <div className="postForm">
-            <input
-              placeholder="title"
-              value={postTitle}
-              onChange={(e) => setPostTitle(e.target.value)}
-            />
-            <textarea
-              placeholder="What are you thinking?"
-              rows="6"
-              value={postBody}
-              onChange={(e) => setPostBody(e.target.value)}
-            />
-            <button onClick={addPost} style={{ cursor: "pointer" }}>
-              Post
-            </button>
+            <div className="postForm">
+              <input
+                placeholder="title"
+                value={postTitle}
+                onChange={(e) => setPostTitle(e.target.value)}
+              />
+              <textarea
+                placeholder="What are you thinking?"
+                rows="6"
+                value={postBody}
+                onChange={(e) => setPostBody(e.target.value)}
+              />
+              <button onClick={addPost} style={{ cursor: "pointer" }}>
+                Post
+              </button>
+            </div>
           </div>
         </div>
       ) : (

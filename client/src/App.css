@@ -370,23 +370,65 @@
   padding: 20px;
 }
 
-/* THIS IS TO CREATE A THREAD PAGE/THREAD PAGE */
-.createThread {
+/* THIS IS TO CREATE A THREAD PAGE/THREADs PAGE */
+.createThreadCont {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  align-items: center;
   border-bottom: solid;
   border-width: thin;
   border-color: lightgray;
+}
+
+.createThreadBtn {
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  border-radius: 30px;
+  padding: 10px 30px 10px 30px;
+  margin: 20px;
+  cursor: pointer;
+}
+#createThreadBtn {
+  display: flex;
+}
+.createThreadBtn:hover {
+  background: lightgray;
+}
+.createThread {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+  padding: 20px;
+  box-sizing: border-box;
+}
+#createThread {
+  display: none;
 }
 .createThread input,
 .createThread textarea {
   padding: 10px;
   margin-bottom: 15px;
 }
-.createThread button {
-  padding: 10px;
-  font-size: 15px;
+.createBtnCont {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.createBtnCont div {
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  border-radius: 20px;
+  padding: 5px 25px 5px 25px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.createBtnCont div:hover {
+  background: lightgray;
 }
 .threadCont {
   display: flex;
@@ -413,6 +455,9 @@
   border-width: thin;
   border-color: lightgray;
   padding: 20px;
+}
+.subthreadsCont:hover {
+  background: lightgray;
 }
 .subthreadInfoCont {
   display: flex;

@@ -6,10 +6,28 @@ import { Link } from "react-router-dom";
 const SubThread = ({ currentUser, isLoggedIn }) => {
   const [threadName, setThreadName] = useState("");
   const [threadDesc, setThreadDesc] = useState("");
+  const [status, setStatus] = useState("");
 
   const [threadList, setThreadList] = useState([]);
 
   const [searchThread, setSearchThread] = useState("");
+
+  const openThreadForm = () => {
+    console.log("opening threadform");
+    if (
+      document.getElementById("createThread").style.display === "" ||
+      document.getElementById("createThread").style.display === "none"
+    ) {
+      console.log(true);
+      document.getElementById("createThread").style.display = "flex";
+      document.getElementById("createThreadBtn").style.display = "none";
+    } else if (
+      document.getElementById("createThread").style.display === "flex"
+    ) {
+      document.getElementById("createThread").style.display = "none";
+      document.getElementById("createThreadBtn").style.display = "flex";
+    }
+  };
 
   const createThread = () => {
     var todayDate = new Date();
@@ -61,19 +79,32 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
       </div>
 
       {isLoggedIn ? (
-        <div className="createThread">
-          <input
-            value={threadName}
-            onChange={(e) => setThreadName(e.target.value)}
-            placeholder="Name of Sub-Thread"
-          />
-          <textarea
-            value={threadDesc}
-            onChange={(e) => setThreadDesc(e.target.value)}
-            rows={"5"}
-            placeholder="Description of Thread"
-          />
-          <button onClick={createThread}>Create Thread</button>
+        <div className="createThreadCont">
+          <div
+            className="createThreadBtn"
+            id="createThreadBtn"
+            onClick={openThreadForm}
+          >
+            <h2>Create a Thread</h2>
+          </div>
+          <div className="createThread" id="createThread">
+            <input
+              value={threadName}
+              onChange={(e) => setThreadName(e.target.value)}
+              placeholder="Name of Sub-Thread"
+            />
+            <textarea
+              value={threadDesc}
+              onChange={(e) => setThreadDesc(e.target.value)}
+              rows={"5"}
+              placeholder="Description of Thread"
+            />
+            <div className="createBtnCont">
+              <div onClick={createThread}>Create Thread</div>
+              <>{status}</>
+              <div onClick={openThreadForm}>Cancel</div>
+            </div>
+          </div>
         </div>
       ) : (
         <></>
