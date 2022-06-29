@@ -11,6 +11,8 @@ import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
+import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
+import BookmarksOutlinedIcon from "@mui/icons-material/BookmarksOutlined";
 
 const Navbar = ({ setCurrentUser, setIsLoggedIn, isLoggedIn }) => {
   const logout = () => {
@@ -34,7 +36,6 @@ const Navbar = ({ setCurrentUser, setIsLoggedIn, isLoggedIn }) => {
     <div className="navbar">
       <div className="navbarBtns">
         <h1>Threado!</h1>
-        <button>What's On Your Mind?</button>
 
         <Link to="/">
           <div className="navbarChoices">
@@ -52,11 +53,6 @@ const Navbar = ({ setCurrentUser, setIsLoggedIn, isLoggedIn }) => {
           </div>
         </Link>
 
-        <div className="navbarChoices">
-          <EmailOutlinedIcon sx={{ fontSize: "45px", paddingRight: "5px" }} />
-          <p>Message</p>
-        </div>
-
         <Link to={"/subthreads"}>
           <div className="navbarChoices">
             <ListOutlinedIcon sx={{ fontSize: "45px", paddingRight: "5px" }} />
@@ -71,6 +67,45 @@ const Navbar = ({ setCurrentUser, setIsLoggedIn, isLoggedIn }) => {
                 sx={{ fontSize: "45px", paddingRight: "5px" }}
               />
               <p>Profile</p>
+            </div>
+          </Link>
+        ) : (
+          <></>
+        )}
+
+        {isLoggedIn ? (
+          <Link to="/profile">
+            <div className="navbarChoices">
+              <EmailOutlinedIcon
+                sx={{ fontSize: "45px", paddingRight: "5px" }}
+              />
+              <p>Message</p>
+            </div>
+          </Link>
+        ) : (
+          <></>
+        )}
+
+        {isLoggedIn ? (
+          <Link to="/profile">
+            <div className="navbarChoices">
+              <ListAltOutlinedIcon
+                sx={{ fontSize: "45px", paddingRight: "5px" }}
+              />
+              <p>My Lists</p>
+            </div>
+          </Link>
+        ) : (
+          <></>
+        )}
+
+        {isLoggedIn ? (
+          <Link to="/profile">
+            <div className="navbarChoices">
+              <BookmarksOutlinedIcon
+                sx={{ fontSize: "45px", paddingRight: "5px" }}
+              />
+              <p>Bookmark</p>
             </div>
           </Link>
         ) : (
