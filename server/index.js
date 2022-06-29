@@ -336,7 +336,7 @@ app.get("/post/:postID", (req, res) => {
   // console.log(postID);
 
   db.query(
-    `SELECT posts_table.postID, posts_table.userID, posts_table.username, posts_table.title, posts_table.postBody, comments_table.username, comments_table.userID, comments_table.commentBody, comments_table.dateTime
+    `SELECT posts_table.postID, posts_table.userID, posts_table.username, posts_table.title, posts_table.postBody, comments_table.commentID, comments_table.postID, comments_table.userID, comments_table.username, comments_table.commentBody, comments_table.dateTime
     FROM posts_table
     INNER JOIN comments_table
     ON posts_table.postID=comments_table.postID

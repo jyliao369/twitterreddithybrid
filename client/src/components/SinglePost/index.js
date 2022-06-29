@@ -47,8 +47,7 @@ const SinglePost = ({ currentUser }) => {
 
   useEffect(() => {
     Axios.get(`http://localhost:3001/post/${postID}`, {}).then((response) => {
-      // console.log(response);
-
+      console.log(response.data);
       setComments(response.data);
     });
 
@@ -104,7 +103,7 @@ const SinglePost = ({ currentUser }) => {
       )}
 
       {comments.map((comment) => (
-        <div className="comments">
+        <div key={comment.commentID} className="comments">
           <div className="userIconCont">
             <div className="userIcon" />
           </div>
@@ -113,6 +112,7 @@ const SinglePost = ({ currentUser }) => {
               <h3>
                 Comment OP {comment.username} Comment OP ID {comment.userID}
               </h3>
+              <h4>{comment.commentID}</h4>
 
               <p>{comment.commentBody}</p>
             </div>

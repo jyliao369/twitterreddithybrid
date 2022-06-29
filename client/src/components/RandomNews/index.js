@@ -6,37 +6,82 @@ import { Link } from "react-router-dom";
 const RandomNews = () => {
   const [randposts, setRandposts] = useState([]);
   const [showNews, setShowNews] = useState([]);
-  let pageNum = 0;
+
+  let [min, setMin] = useState(0);
+  let [max, setMax] = useState(10);
+  let [pageIndex, setPageIndex] = useState(0);
+  let [maxPage, setMaxPage] = useState(0);
 
   useEffect(() => {
     Axios.get(`http://localhost:3001/getAllPosts`, {}).then((response) => {
-      console.log(response.data);
       setRandposts(response.data);
-      setShowNews(randposts.slice(0, 10));
+      setShowNews(response.data.slice(0, 10));
+      setMaxPage(Math.ceil(response.data.length / 10));
     });
   }, []);
 
   // console.log(Math.ceil(randposts.length / 10));
-
   // console.log(randposts.splice(0, 10));
 
   const nextBack = (nextBack) => {
     if (nextBack === "next") {
-      pageNum += 1;
-      // console.log("page #: " + (pageNum + 1));
-      console.log(randposts.slice(10 * pageNum, 10 + 10 * pageNum));
-      // setShowNews(randposts.slice(10 * pageNum, 10 + 10 * pageNum));
+      min += 10;
+      max += 10;
+      pageIndex++;
+      // console.log(randposts.slice(min, max));
+      setShowNews(randposts.slice(min, max));
+      setMin(min);
+      setMax(max);
+      setPageIndex(pageIndex);
+      console.log("page " + (pageIndex + 1));
     } else if (nextBack === "back") {
-      pageNum -= 1;
-      // console.log("page #: " + (pageNum + 1));
-      console.log(randposts.slice(10 * pageNum, 10 + 10 * pageNum));
-      // setShowNews(randposts.slice(10 * pageNum, 10 + 10 * pageNum));
+      min -= 10;
+      max -= 10;
+      pageIndex--;
+      // console.log(randposts.slice(min, max));
+      setShowNews(randposts.slice(min, max));
+      setMin(min);
+      setMax(max);
+      setPageIndex(pageIndex);
+      console.log("page " + (pageIndex + 1));
     }
   };
 
   return (
     <div className="randNews">
       <h2>What's Happening</h2>
+
+      <div className="nextBackBtn">
+        {pageIndex > 0 ? (
+          // <button
+          //   style={{ cursor: "pointer" }}
+          //   onClick={() => nextBack("back")}
+          // >
+          //   back
+          // </button>
+          <div onClick={() => nextBack("back")}>Back</div>
+        ) : (
+          // <button disabled={true} onClick={() => nextBack("back")}>
+          //   back
+          // </button>
+          <div>Stop</div>
+        )}
+
+        {pageIndex === maxPage - 1 ? (
+          // <button disabled={true} onClick={() => nextBack("next")}>
+          //   next
+          // </button>
+          <div>Stop</div>
+        ) : (
+          // <button
+          //   style={{ cursor: "pointer" }}
+          //   onClick={() => nextBack("next")}
+          // >
+          //   next
+          // </button>
+          <div onClick={() => nextBack("next")}>Next</div>
+        )}
+      </div>
 
       <div className="newsCont">
         {showNews.map((post) => (
@@ -50,11 +95,6 @@ const RandomNews = () => {
             </div>
           </Link>
         ))}
-      </div>
-
-      <div className="nextBackBtn">
-        <button onClick={() => nextBack("back")}>back</button>
-        <button onClick={() => nextBack("next")}>next</button>
       </div>
 
       <br />

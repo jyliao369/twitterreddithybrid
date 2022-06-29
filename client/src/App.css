@@ -148,6 +148,23 @@
 .randNews::-webkit-scrollbar {
   display: none;
 }
+.randNews h2 {
+  margin-bottom: 15px;
+}
+.nextBackBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.nextBackBtn button {
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  border-radius: 20px;
+  padding: 5px 15px 5px 15px;
+}
 .newsCont {
   width: 100%;
   display: flex;
