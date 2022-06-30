@@ -17,6 +17,8 @@ import RandomNews from "./components/RandomNews";
 import SubThread from "./components/SubThreads";
 import SubthreadPage from "./components/SubthreadPage";
 import UpdateThread from "./components/UpdateThread";
+import MyThreads from "./components/MyThreads";
+import Bookmark from "./components/Bookmark";
 
 function App() {
   const [currentUser, setCurrentUser] = useState([]);
@@ -199,6 +201,18 @@ function App() {
               }
             />
 
+            {/* THIS IS FOR SAVED THREADS */}
+            <Route
+              path="/mythreads/:userID"
+              element={
+                <>
+                  <div className="mainPage">
+                    <MyThreads />
+                  </div>
+                </>
+              }
+            />
+
             {/* THIS IS FOR SUB-THREADS */}
             <Route
               path="/subthreads"
@@ -236,6 +250,18 @@ function App() {
                 <>
                   <div className="mainPage">
                     <UpdateThread />
+                  </div>
+                </>
+              }
+            />
+
+            {/* THIS IS THE BOOKMARK FOR SPECIFIC POSTS */}
+            <Route
+              path={`/bookmark/:userID`}
+              element={
+                <>
+                  <div className="mainPage">
+                    <Bookmark />
                   </div>
                 </>
               }

@@ -28,22 +28,18 @@ const RandomNews = () => {
       min += 10;
       max += 10;
       pageIndex++;
-      // console.log(randposts.slice(min, max));
       setShowNews(randposts.slice(min, max));
       setMin(min);
       setMax(max);
       setPageIndex(pageIndex);
-      console.log("page " + (pageIndex + 1));
     } else if (nextBack === "back") {
       min -= 10;
       max -= 10;
       pageIndex--;
-      // console.log(randposts.slice(min, max));
       setShowNews(randposts.slice(min, max));
       setMin(min);
       setMax(max);
       setPageIndex(pageIndex);
-      console.log("page " + (pageIndex + 1));
     }
   };
 
@@ -53,33 +49,27 @@ const RandomNews = () => {
 
       <div className="nextBackBtn">
         {pageIndex > 0 ? (
-          // <button
-          //   style={{ cursor: "pointer" }}
-          //   onClick={() => nextBack("back")}
-          // >
-          //   back
-          // </button>
-          <div onClick={() => nextBack("back")}>Back</div>
+          <button
+            style={{ cursor: "pointer" }}
+            onClick={() => nextBack("back")}
+          >
+            Back
+          </button>
         ) : (
-          // <button disabled={true} onClick={() => nextBack("back")}>
-          //   back
-          // </button>
-          <div>Stop</div>
+          <button>Back</button>
         )}
 
+        <h3>{pageIndex + 1}</h3>
+
         {pageIndex === maxPage - 1 ? (
-          // <button disabled={true} onClick={() => nextBack("next")}>
-          //   next
-          // </button>
-          <div>Stop</div>
+          <button>Next</button>
         ) : (
-          // <button
-          //   style={{ cursor: "pointer" }}
-          //   onClick={() => nextBack("next")}
-          // >
-          //   next
-          // </button>
-          <div onClick={() => nextBack("next")}>Next</div>
+          <button
+            style={{ cursor: "pointer" }}
+            onClick={() => nextBack("next")}
+          >
+            Next
+          </button>
         )}
       </div>
 
@@ -97,7 +87,6 @@ const RandomNews = () => {
         ))}
       </div>
 
-      <br />
       <br />
     </div>
   );

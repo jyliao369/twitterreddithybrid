@@ -14,7 +14,7 @@ import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import BookmarksOutlinedIcon from "@mui/icons-material/BookmarksOutlined";
 
-const Navbar = ({ setCurrentUser, setIsLoggedIn, isLoggedIn }) => {
+const Navbar = ({ setCurrentUser, currentUser, setIsLoggedIn, isLoggedIn }) => {
   const logout = () => {
     Axios.get("http://localhost:3001/logout", {}).then((response) => {
       console.log(response);
@@ -87,7 +87,7 @@ const Navbar = ({ setCurrentUser, setIsLoggedIn, isLoggedIn }) => {
         )}
 
         {isLoggedIn ? (
-          <Link to="/profile">
+          <Link to={`/mythreads/${currentUser.userID}`}>
             <div className="navbarChoices">
               <ListAltOutlinedIcon
                 sx={{ fontSize: "45px", paddingRight: "5px" }}
@@ -100,7 +100,7 @@ const Navbar = ({ setCurrentUser, setIsLoggedIn, isLoggedIn }) => {
         )}
 
         {isLoggedIn ? (
-          <Link to="/profile">
+          <Link to={`/bookmark/${currentUser.userID}`}>
             <div className="navbarChoices">
               <BookmarksOutlinedIcon
                 sx={{ fontSize: "45px", paddingRight: "5px" }}
