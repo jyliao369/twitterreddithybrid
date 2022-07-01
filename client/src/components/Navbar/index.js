@@ -56,7 +56,7 @@ const Navbar = ({ setCurrentUser, currentUser, setIsLoggedIn, isLoggedIn }) => {
         <Link to={"/subthreads"}>
           <div className="navbarChoices">
             <ListOutlinedIcon sx={{ fontSize: "45px", paddingRight: "5px" }} />
-            <p>List</p>
+            <p>Threads</p>
           </div>
         </Link>
 
@@ -92,7 +92,7 @@ const Navbar = ({ setCurrentUser, currentUser, setIsLoggedIn, isLoggedIn }) => {
               <ListAltOutlinedIcon
                 sx={{ fontSize: "45px", paddingRight: "5px" }}
               />
-              <p>My Lists</p>
+              <p>My Threads</p>
             </div>
           </Link>
         ) : (

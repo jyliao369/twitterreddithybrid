@@ -54,6 +54,20 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
     });
   };
 
+  const joinThread = (thread) => {
+    // console.log("current userID " + currentUser.userID);
+    // console.log("thread ID " + thread.split(",")[0]);
+    // console.log("thread name " + thread.split(",")[1]);
+    // console.log("thread desc " + thread.split(",")[2]);
+
+    Axios.post(`http://localhost:3001/jointhread`, {
+      userID: currentUser.userID,
+      subthreadID: thread.split(",")[0],
+      threadName: thread.split(",")[1],
+      threadDesc: thread.split(",")[2],
+    }).then((response) => console.log(response));
+  };
+
   const search = () => {
     console.log(searchThread);
   };
@@ -110,17 +124,6 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
         <></>
       )}
 
-      {/* <div className="threadCont">
-        {threadList.map((thread) => (
-          <Link
-            key={thread.subthreadID}
-            to={`/subthread/${thread.subthreadID}`}
-          >
-            <div>/{thread.threadName}</div>
-          </Link>
-        ))}
-      </div> */}
-
       <div>
         {threadList.map((thread) => (
           <div key={thread.subthreadID} className="subthreadsCont">
@@ -131,7 +134,6 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
                 </div>
                 <div className="subthreadInfo">
                   <h3>/{thread.threadName}</h3>
-
                   <p>{thread.threadDesc}</p>
                 </div>
               </div>
@@ -143,6 +145,16 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
                 </Link>
               </button>
               <button>delete</button>
+              <button
+                value={[
+                  thread.subthreadID,
+                  thread.threadName,
+                  thread.threadDesc,
+                ]}
+                onClick={(e) => joinThread(e.target.value)}
+              >
+                Join
+              </button>
             </div>
           </div>
         ))}

@@ -422,7 +422,7 @@ app.get("/allThread", (req, res) => {
       console.log(err);
     } else {
       res.send(result);
-      console.log(result);
+      // console.log(result);
     }
   });
 });
@@ -431,6 +431,7 @@ app.get("/allThread", (req, res) => {
 // POTENTIALLY THIS WILL GRAB POSTS ASSOCIATED WITH THE THREAD
 app.get("/subthread/:subthreadID", (req, res) => {
   const subthreadID = req.params.subthreadID;
+  console.log(subthreadID);
 
   db.query(
     `SELECT posts_table.postID, posts_table.userID, posts_table.username, posts_table.title, posts_table.postBody, subthreads_table.userID, subthreads_table.username, subthreads_table.threadName, subthreads_table.threadDesc, subthreads_table.dateTime, subthreads_table.subthreadID
@@ -447,6 +448,50 @@ app.get("/subthread/:subthreadID", (req, res) => {
       }
     }
   );
+});
+
+// THIS ALLOWS USER TO JOIN A SPECIFIC THREAD
+app.post("/jointhread", (req, res) => {
+  const userID = req.body.userID;
+  const subthreadID = req.body.subthreadID;
+  const threadName = req.body.threadName;
+  const threadDesc = req.body.threadDesc;
+
+  // console.log(userID + " " + subthreadID + " " + threadName + " " + threadDesc);
+
+  db.query(
+    `INSERT INTO mythreads_table (userID, subthreadID, threadName, threadDesc) VALUES (?,?,?,?)`,
+    [userID, subthreadID, threadName, threadDesc],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Thread joined");
+      }
+    }
+  );
+});
+
+// GET ALL THREADS A USER JOINED SPECIFIED BY USERID
+app.get("/mythreads/:userID", (req, res) => {
+  const userID = req.params.userID;
+  db.query(
+    `SELECT * FROM mythreads_table WHERE userID = ${userID}`,
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+app.delete("/unfollow/:mythreadsID", (req, res) => {
+  const mythreadsID = req.params.mythreadsID;
+
+  console.log(mythreadsID);
 });
 
 app.listen(3001, () => {

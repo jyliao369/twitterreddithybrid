@@ -95,7 +95,7 @@
   padding-left: 20px;
   padding-right: 20px;
   margin-bottom: 10px;
-  font-size: 25px;
+  font-size: 20px;
 }
 .navbarChoices:hover {
   background: lightgray;
@@ -513,6 +513,48 @@
   position: relative;
   margin-left: 40px;
   margin-top: 40px;
+}
+
+/* THIS IS FOR THE USERS JOINED THREADS PAGE */
+.joinedThreadsCont {
+  display: flex;
+  flex-direction: row;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+  padding: 20px;
+}
+.joinedThreads {
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  border-radius: 50px;
+  padding: 6px 10px 6px 10px;
+  margin: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.joinedThreads:hover {
+  background: lightgray;
+}
+#mythreads {
+  display: none;
+}
+.followBtnCont {
+  display: flex;
+  flex-direction: column;
+}
+.followBtnCont button {
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  border-radius: 50px;
+  padding: 6px 10px 6px 10px;
+  background: white;
+  cursor: pointer;
+}
+.followBtnCont button:hover {
+  background: lightgray;
 }
 
 /* @media (prefers-reduced-motion: no-preference) {
