@@ -18,7 +18,6 @@ const Navbar = ({ setCurrentUser, currentUser, setIsLoggedIn, isLoggedIn }) => {
   const logout = () => {
     Axios.get("http://localhost:3001/logout", {}).then((response) => {
       console.log(response);
-      document.getElementById("accountInfo").style.display = "none";
     });
     setIsLoggedIn(false);
     setCurrentUser([]);

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 
-const SinglePost = ({ currentUser }) => {
+const SinglePost = ({ currentUser, isLoggedIn }) => {
   const { postID } = useParams();
 
   const [postOP, setPostOP] = useState("");
@@ -11,6 +11,8 @@ const SinglePost = ({ currentUser }) => {
   const [postEmail, setPostEmail] = useState("");
   const [postTitle, setPostTitle] = useState("");
   const [postBody, setPostBody] = useState("");
+  const [postSubthreadID, setPostSubthreadID] = useState(0);
+  const [postDateTime, setPostDateTime] = useState("");
 
   const [comments, setComments] = useState([]);
 
@@ -45,19 +47,35 @@ const SinglePost = ({ currentUser }) => {
     setComment("");
   };
 
+  const bookkmarkPost = () => {
+    Axios.post("http://localhost:3001/bookmark", {
+      userID: currentUser.userID,
+      postID: postID,
+      username: postOP,
+      title: postTitle,
+      postBody: postBody,
+      subthreadID: postSubthreadID,
+      dateTime: postDateTime.slice(0, 10) + " " + postDateTime.slice(11, 19),
+    }).then((response) => {
+      console.log(response);
+    });
+  };
+
   useEffect(() => {
     Axios.get(`http://localhost:3001/post/${postID}`, {}).then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       setComments(response.data);
     });
 
     Axios.get(`http://localhost:3001/posts/${postID}`, {}).then((response) => {
       // console.log(response);
       setPostOP(response.data[0].username);
-      setPostOPID(response.data[0].postID);
+      setPostOPID(response.data[0].userID);
       setPostEmail(response.data[0].email);
       setPostBody(response.data[0].postBody);
       setPostTitle(response.data[0].title);
+      setPostSubthreadID(response.data[0].subthreadID);
+      setPostDateTime(response.data[0].dateTime);
     });
   }, [comments]);
 
@@ -73,6 +91,14 @@ const SinglePost = ({ currentUser }) => {
             <h4>UserID: {postOPID}</h4>
             <h4>Email: {postEmail}</h4>
           </div>
+
+          {isLoggedIn ? (
+            <div className="bookmarkBtn">
+              <button onClick={bookkmarkPost}>Bookmark</button>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
 
         <div className="postMainCont">

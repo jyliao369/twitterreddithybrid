@@ -346,7 +346,7 @@ app.get("/post/:postID", (req, res) => {
         console.log(err);
       } else {
         res.send(result);
-        console.log(result);
+        // console.log(result);
       }
     }
   );
@@ -490,8 +490,77 @@ app.get("/mythreads/:userID", (req, res) => {
 
 app.delete("/unfollow/:mythreadsID", (req, res) => {
   const mythreadsID = req.params.mythreadsID;
-
   console.log(mythreadsID);
+
+  db.query(
+    `DELETE FROM mythreads_table WHERE mythreadsID = ${mythreadsID}`,
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Thread Unfollowed");
+      }
+    }
+  );
+});
+
+// ALL OF THESE FETCHES ARE FOR BOOKMARK PAGE
+// THIS BOOKMARKS POSTS BASED ON ID TO A USER BASED ON ID
+app.post("/bookmark", (req, res) => {
+  const userID = req.body.userID;
+  const postID = req.body.postID;
+  const username = req.body.username;
+  const title = req.body.title;
+  const postBody = req.body.postBody;
+  const subthreadID = req.body.subthreadID;
+  const dateTime = req.body.dateTime;
+
+  db.query(
+    `INSERT INTO bookmarks_table (userID, postID, username, title, postBody, subthreadID, datetime) VALUES (?,?,?,?,?,?,?)`,
+    [userID, postID, username, title, postBody, subthreadID, dateTime],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("bookmarked");
+      }
+    }
+  );
+});
+
+// THIS GETS ALL BOOKMARKED POST BASED ON USERID
+app.get("/getBookmarks/:userID", (req, res) => {
+  const userID = req.params.userID;
+
+  db.query(
+    `SELECT * FROM bookmarks_table WHERE userID = ${userID}`,
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+// THIS WILL DELETE BOOKMARKS BASED ON BOOKMARKED ID
+app.delete("/deleteBookmark/:bookmarkID", (req, res) => {
+  const bookmarkID = req.params.bookmarkID;
+
+  db.query(
+    `DELETE FROM bookmarks_table WHERE bookmarkID = ${bookmarkID}`,
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("bookmark removed");
+      }
+    }
+  );
 });
 
 app.listen(3001, () => {

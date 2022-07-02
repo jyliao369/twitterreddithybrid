@@ -131,7 +131,10 @@ function App() {
               element={
                 <>
                   <div className="mainPage">
-                    <SinglePost currentUser={currentUser} />
+                    <SinglePost
+                      currentUser={currentUser}
+                      isLoggedIn={isLoggedIn}
+                    />
                   </div>
                 </>
               }

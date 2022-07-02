@@ -40,7 +40,7 @@ const MyThreads = () => {
       }
     );
 
-    // document.getElementById("mythreads").style.display = "none";
+    document.getElementById("mythreads").style.display = "none";
   };
 
   useEffect(() => {

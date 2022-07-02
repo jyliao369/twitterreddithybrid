@@ -145,16 +145,21 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
                 </Link>
               </button>
               <button>delete</button>
-              <button
-                value={[
-                  thread.subthreadID,
-                  thread.threadName,
-                  thread.threadDesc,
-                ]}
-                onClick={(e) => joinThread(e.target.value)}
-              >
-                Join
-              </button>
+
+              {isLoggedIn ? (
+                <button
+                  value={[
+                    thread.subthreadID,
+                    thread.threadName,
+                    thread.threadDesc,
+                  ]}
+                  onClick={(e) => joinThread(e.target.value)}
+                >
+                  Join
+                </button>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         ))}

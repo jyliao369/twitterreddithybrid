@@ -557,6 +557,17 @@
   background: lightgray;
 }
 
+/* THIS IS THE BOOKMARK PAGE */
+.unBookmarkBtn button {
+  border-radius: 50px;
+  padding: 6px 10px 6px 10px;
+  cursor: pointer;
+}
+
+.unBookmarkBtn button:hover {
+  background: lightgray;
+}
+
 /* @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

@@ -19,7 +19,7 @@ const ShowPost = ({ currentUser }) => {
     <div className="postsCont">
       {allPosts.map((post) => (
         <Link to={`/post/${post.postID}`} key={post.postID}>
-          <div key={post.postID} className="posts">
+          <div className="posts">
             <div className="userIconCont">
               <div className="userIcon" />
             </div>
