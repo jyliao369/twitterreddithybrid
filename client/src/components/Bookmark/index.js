@@ -30,6 +30,10 @@ const Bookmark = () => {
 
   return (
     <div>
+      <div className="titleBanner">
+        <div>My Bookmarks</div>
+      </div>
+
       <div>
         {userBookmarks.map((post) => (
           <div key={post.bookmarkID} className="posts">

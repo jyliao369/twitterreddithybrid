@@ -80,6 +80,10 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
 
   return (
     <div>
+      <div className="titleBanner">
+        <div>All Threads</div>
+      </div>
+
       <div className="searchPage">
         <input
           value={searchThread}

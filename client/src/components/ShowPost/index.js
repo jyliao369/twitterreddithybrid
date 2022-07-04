@@ -16,29 +16,35 @@ const ShowPost = ({ currentUser }) => {
   });
 
   return (
-    <div className="postsCont">
-      {allPosts.map((post) => (
-        <Link to={`/post/${post.postID}`} key={post.postID}>
-          <div className="posts">
-            <div className="userIconCont">
-              <div className="userIcon" />
-            </div>
+    <div>
+      <div className="titleBanner">
+        <div>Home</div>
+      </div>
 
-            <div className="mainPostCont">
-              <div className="postBodyCont">
-                <div className="postBody">
-                  <h4>
-                    Username: {post.username}, UserID: {post.userID}, postID:{" "}
-                    {post.postID}
-                  </h4>
-                  <h2>{post.title}</h2>
-                  <p>{post.postBody}</p>
+      <div className="postsCont">
+        {allPosts.map((post) => (
+          <Link to={`/post/${post.postID}`} key={post.postID}>
+            <div className="posts">
+              <div className="userIconCont">
+                <div className="userIcon" />
+              </div>
+
+              <div className="mainPostCont">
+                <div className="postBodyCont">
+                  <div className="postBody">
+                    <h4>
+                      Username: {post.username}, UserID: {post.userID}, postID:{" "}
+                      {post.postID}
+                    </h4>
+                    <h2>{post.title}</h2>
+                    <p>{post.postBody}</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </Link>
-      ))}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };

@@ -42,6 +42,16 @@ const SubthreadPage = ({ currentUser, isLoggedIn }) => {
     });
   };
 
+  const openPostForm = () => {
+    document.getElementById("postFormCont").style.display = "flex";
+    document.getElementById("createThreadBtn").style.display = "none";
+  };
+
+  const closePostForm = () => {
+    document.getElementById("postFormCont").style.display = "none";
+    document.getElementById("createThreadBtn").style.display = "flex";
+  };
+
   useEffect(() => {
     Axios.get("http://localhost:3001/allThread", {}).then((response) => {
       //   console.log("hello there");
@@ -77,8 +87,16 @@ const SubthreadPage = ({ currentUser, isLoggedIn }) => {
       </div>
 
       {isLoggedIn ? (
-        <div>
-          <div className="postFormCont">
+        <div className="formCont">
+          <div
+            className="createThreadBtn"
+            id="createThreadBtn"
+            onClick={openPostForm}
+          >
+            <h2>Create a Post</h2>
+          </div>
+
+          <div className="postFormCont" id="postFormCont">
             <div className="userIconCont">
               <div className="userIcon" />
             </div>
@@ -95,9 +113,15 @@ const SubthreadPage = ({ currentUser, isLoggedIn }) => {
                 value={postBody}
                 onChange={(e) => setPostBody(e.target.value)}
               />
-              <button onClick={addPost} style={{ cursor: "pointer" }}>
-                Post
-              </button>
+
+              <div className="postFormBtnCont">
+                <button onClick={addPost} style={{ cursor: "pointer" }}>
+                  Post
+                </button>
+                <button onClick={closePostForm} style={{ cursor: "pointer" }}>
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         </div>

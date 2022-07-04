@@ -37,6 +37,10 @@ const Explore = () => {
 
   return (
     <div>
+      <div className="titleBanner">
+        <div>Explore</div>
+      </div>
+
       <div className="searchPage">
         <input
           value={search}

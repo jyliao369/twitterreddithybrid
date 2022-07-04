@@ -16,6 +16,14 @@
   margin-right: 27%;
 }
 
+/* THIS IS A SIMPLE HEADER/BANNER */
+.titleBanner {
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+  padding: 20px;
+}
+
 /* THIS IS FOR POSTS AND COMMENTS */
 .postsCont {
   display: flex;
@@ -109,10 +117,12 @@
 .postFormCont {
   display: flex;
   flex-direction: row;
-  border-bottom: solid;
-  border-width: thin;
-  border-color: lightgray;
+  width: 100%;
   padding: 20px;
+  box-sizing: border-box;
+}
+#postFormCont {
+  display: none;
 }
 .postForm {
   display: flex;
@@ -128,6 +138,11 @@
 .postForm button {
   padding: 10px;
   font-size: 15px;
+}
+.postFormBtnCont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 /* THIS IS THE RANDOM NEWS */
@@ -514,6 +529,14 @@
   margin-left: 40px;
   margin-top: 40px;
 }
+.formCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+}
 
 /* THIS IS FOR THE USERS JOINED THREADS PAGE */
 .joinedThreadsCont {
@@ -555,6 +578,10 @@
 }
 .followBtnCont button:hover {
   background: lightgray;
+}
+#allMyThreadsPost {
+  display: flex;
+  flex-direction: column;
 }
 
 /* THIS IS THE BOOKMARK PAGE */

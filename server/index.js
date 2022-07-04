@@ -457,8 +457,6 @@ app.post("/jointhread", (req, res) => {
   const threadName = req.body.threadName;
   const threadDesc = req.body.threadDesc;
 
-  // console.log(userID + " " + subthreadID + " " + threadName + " " + threadDesc);
-
   db.query(
     `INSERT INTO mythreads_table (userID, subthreadID, threadName, threadDesc) VALUES (?,?,?,?)`,
     [userID, subthreadID, threadName, threadDesc],
@@ -488,6 +486,7 @@ app.get("/mythreads/:userID", (req, res) => {
   );
 });
 
+// THIS UNFOLLOWS SPECIFIC TRHEADS BASED ON ID
 app.delete("/unfollow/:mythreadsID", (req, res) => {
   const mythreadsID = req.params.mythreadsID;
   console.log(mythreadsID);
@@ -500,6 +499,29 @@ app.delete("/unfollow/:mythreadsID", (req, res) => {
         console.log(err);
       } else {
         console.log("Thread Unfollowed");
+      }
+    }
+  );
+});
+
+// THIS GETS ALL OF THE POSTS IN THE THREAD THE USER HAS FOLLOWED
+app.get("/mythreadsPost/:userID", (req, res) => {
+  const userID = req.params.userID;
+  // console.log("hello " + userID);
+
+  db.query(
+    `SELECT mythreads_table.userID, mythreads_table.subthreadID, mythreads_table.threadName, posts_table.postID, posts_table.userID, posts_table.username, posts_table.title, posts_table.postBody, posts_table.subthreadID, posts_table.dateTime
+  FROM posts_table
+  INNER JOIN mythreads_table
+  ON posts_table.subthreadID=mythreads_table.subthreadID
+  WHERE mythreads_table.userID = ${userID}
+  ORDER BY posts_table.dateTime DESC;`,
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
       }
     }
   );

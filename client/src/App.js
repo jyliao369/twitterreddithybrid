@@ -89,11 +89,6 @@ function App() {
                 <>
                   <div className="mainPage">
                     <div className="homePage" id="homePage">
-                      {currentUser.userID ? (
-                        <PostForm currentUser={currentUser} />
-                      ) : (
-                        <></>
-                      )}
                       <ShowPost currentUser={currentUser} />
                     </div>
                   </div>

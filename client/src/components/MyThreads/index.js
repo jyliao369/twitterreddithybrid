@@ -13,6 +13,8 @@ const MyThreads = () => {
 
   const [threadPosts, setThreadPosts] = useState([]);
 
+  const [myThreadsPost, setMyThreadsPost] = useState([]);
+
   const showCurThreads = (currentThread) => {
     // console.log("hello there");
     // console.log(currentThread.split(","));
@@ -29,6 +31,12 @@ const MyThreads = () => {
     });
 
     document.getElementById("mythreads").style.display = "flex";
+    document.getElementById("allMyThreadsPost").style.display = "none";
+  };
+
+  const showAllPostsThreads = () => {
+    document.getElementById("mythreads").style.display = "none";
+    document.getElementById("allMyThreadsPost").style.display = "flex";
   };
 
   const unfollowThread = (threadID) => {
@@ -50,13 +58,28 @@ const MyThreads = () => {
         setMyThreads(response.data);
       }
     );
-  });
+
+    Axios.get(`http://localhost:3001/mythreadsPost/${userID}`, {
+      userID: userID,
+    }).then((response) => {
+      // console.log(response.data);
+      setMyThreadsPost(response.data);
+    });
+  }, []);
 
   return (
     <div>
+      <div className="titleBanner">
+        <div>My Threads</div>
+      </div>
+
       <div className="joinedThreadsCont">
+        <button className="joinedThreads" onClick={showAllPostsThreads}>
+          Show All
+        </button>
         {myThreads.map((thread) => (
           <button
+            className="joinedThreads"
             key={thread.mythreadsID}
             onClick={(e) => showCurThreads(e.target.value)}
             value={[
@@ -65,7 +88,6 @@ const MyThreads = () => {
               thread.threadName,
               thread.threadDesc,
             ]}
-            className="joinedThreads"
           >
             /{thread.threadName}
           </button>
@@ -107,6 +129,31 @@ const MyThreads = () => {
                   </h4>
                   <h2>{post.title}</h2>
                   <p>{post.postBody}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div id="allMyThreadsPost">
+        {myThreadsPost.map((threadPost) => (
+          <div key={threadPost.postID}>
+            <div className="posts">
+              <div className="userIconCont">
+                <div className="userIcon" />
+              </div>
+
+              <div className="mainPostCont">
+                <div className="postBodyCont">
+                  <div className="postBody">
+                    <h4>
+                      Username: {threadPost.username}, UserID:{" "}
+                      {threadPost.userID}, postID: {threadPost.postID}
+                    </h4>
+                    <h2>{threadPost.title}</h2>
+                    <p>{threadPost.postBody}</p>
+                  </div>
                 </div>
               </div>
             </div>
