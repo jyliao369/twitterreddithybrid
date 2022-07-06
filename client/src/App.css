@@ -18,10 +18,16 @@
 
 /* THIS IS A SIMPLE HEADER/BANNER */
 .titleBanner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   border-bottom: solid;
   border-width: thin;
   border-color: lightgray;
   padding: 20px;
+}
+.titleBanner div {
+  font-size: 35px;
 }
 
 /* THIS IS FOR POSTS AND COMMENTS */
@@ -316,6 +322,33 @@
   border-width: 10px;
   border-color: white;
 }
+.categoriesCont {
+  display: flex;
+  flex-direction: row;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+  padding: 20px;
+}
+.categoriesCont div {
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  padding: 10px;
+  border-radius: 50px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.categoriesCont div:hover {
+  background-color: lightgray;
+}
+.usersPosts {
+  display: flex;
+  flex-direction: column;
+}
+#usersPosts {
+  display: flex;
+}
 .userPost {
   display: flex;
   flex-direction: row;
@@ -336,6 +369,10 @@
   overflow-wrap: anywhere;
 }
 .editBtn {
+  display: flex;
+  flex-direction: column;
+}
+.usersThread {
   display: flex;
   flex-direction: column;
 }

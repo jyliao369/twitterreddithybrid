@@ -2,47 +2,12 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import Axios from "axios";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import App from "../../App";
 
 const Profile = ({ currentUser, isLoggedIn }) => {
-  const [postTitle, setPostTitle] = useState("");
-  const [postBody, setPostBody] = useState("");
   const [usersPosts, setUsersPosts] = useState([]);
-
-  // console.log("Is the user Logged In?");
-  // console.log(isLoggedIn);
+  const [usersThread, setUsersThread] = useState([]);
 
   const navToUpdate = useNavigate();
-
-  const addPost = () => {
-    var todayDate = new Date();
-    var todayDates =
-      todayDate.getFullYear() +
-      "-" +
-      (todayDate.getMonth() + 1) +
-      "-" +
-      todayDate.getDate();
-
-    var todayTime =
-      todayDate.getHours() +
-      ":" +
-      todayDate.getMinutes() +
-      ":" +
-      todayDate.getSeconds();
-
-    // console.log(todayDates + " " + todayTime);
-
-    Axios.post("http://localhost:3001/addPost", {
-      userID: currentUser.userID,
-      username: currentUser.username,
-      title: postTitle,
-      postBody: postBody,
-      dateTime: todayDates + " " + todayTime,
-    });
-
-    // setPostTitle("");
-    // setPostBody("");
-  };
 
   const deletePost = (postID) => {
     // console.log(postID);
@@ -54,6 +19,23 @@ const Profile = ({ currentUser, isLoggedIn }) => {
   const updatePost = (postID) => {
     // console.log(postID);
     navToUpdate(`/updatePost/${postID}`);
+  };
+
+  const showUsersPost = () => {
+    document.getElementById(`usersPosts`).style.display = "flex";
+    document.getElementById(`usersThreads`).style.display = "none";
+  };
+
+  const showUsersThread = () => {
+    console.log("My threads");
+    Axios.get(`http://localhost:3001/threads/${currentUser.userID}`, {}).then(
+      (response) => {
+        console.log(response);
+        setUsersThread(response.data);
+      }
+    );
+    document.getElementById(`usersPosts`).style.display = "none";
+    document.getElementById(`usersThread`).style.display = "flex";
   };
 
   useEffect(() => {
@@ -91,31 +73,12 @@ const Profile = ({ currentUser, isLoggedIn }) => {
         </div>
       </div>
 
-      {/* THE SAME FORM FOUND ON THE POSTFORM COMPONENT */}
-      <div className="postFormCont">
-        <div className="userIconCont">
-          <div className="userIcon" />
-        </div>
-
-        <div className="postForm">
-          <input
-            placeholder="title"
-            value={postTitle}
-            onChange={(e) => setPostTitle(e.target.value)}
-          />
-          <textarea
-            placeholder="What are you thinking?"
-            rows="6"
-            value={postBody}
-            onChange={(e) => setPostBody(e.target.value)}
-          />
-          <button onClick={addPost} style={{ cursor: "pointer" }}>
-            Post
-          </button>
-        </div>
+      <div className="categoriesCont">
+        <div onClick={showUsersPost}>My Posts</div>
+        <div onClick={showUsersThread}>My Threads</div>
       </div>
 
-      <div className="usersPosts">
+      <div className="usersPosts" id="usersPosts">
         {usersPosts.map((post) => (
           <div key={post.postID} className="userPost">
             <div className="userIconCont">
@@ -142,6 +105,28 @@ const Profile = ({ currentUser, isLoggedIn }) => {
                 Delete
               </button>
             </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="usersThread">
+        {usersThread.map((thread) => (
+          <div
+            key={thread.subthreadID}
+            className="subthreadsCont"
+            id="usersThread"
+          >
+            <Link to={`/subthread/${thread.subthreadID}`}>
+              <div className="subthreadInfoCont">
+                <div className="userIconCont">
+                  <div className="userIcon" />
+                </div>
+                <div className="subthreadInfo">
+                  <h3>/{thread.threadName}</h3>
+                  <p>{thread.threadDesc}</p>
+                </div>
+              </div>
+            </Link>
           </div>
         ))}
       </div>

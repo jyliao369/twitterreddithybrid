@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+
 const ShowPost = ({ currentUser }) => {
   const [allPosts, setAllPosts] = useState([]);
 
@@ -18,6 +20,7 @@ const ShowPost = ({ currentUser }) => {
   return (
     <div>
       <div className="titleBanner">
+        <HomeOutlinedIcon sx={{ fontSize: "45px", padding: "10px" }} />
         <div>Home</div>
       </div>
 

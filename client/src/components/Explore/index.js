@@ -3,6 +3,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+
 const Explore = () => {
   const [allPosts, setAllPosts] = useState([]);
   const [showedPosts, setShowedPosts] = useState([]);
@@ -38,6 +40,7 @@ const Explore = () => {
   return (
     <div>
       <div className="titleBanner">
+        <SearchOutlinedIcon sx={{ fontSize: "45px", padding: "10px" }} />
         <div>Explore</div>
       </div>
 

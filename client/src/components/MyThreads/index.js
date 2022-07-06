@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 
+import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
+
 const MyThreads = () => {
   const { userID } = useParams();
   const [myThreads, setMyThreads] = useState([]);
@@ -70,6 +72,7 @@ const MyThreads = () => {
   return (
     <div>
       <div className="titleBanner">
+        <ListAltOutlinedIcon sx={{ fontSize: "45px", padding: "10px" }} />
         <div>My Threads</div>
       </div>
 

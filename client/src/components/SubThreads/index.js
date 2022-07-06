@@ -3,6 +3,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBulletedOutlined";
+
 const SubThread = ({ currentUser, isLoggedIn }) => {
   const [threadName, setThreadName] = useState("");
   const [threadDesc, setThreadDesc] = useState("");
@@ -55,11 +57,6 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
   };
 
   const joinThread = (thread) => {
-    // console.log("current userID " + currentUser.userID);
-    // console.log("thread ID " + thread.split(",")[0]);
-    // console.log("thread name " + thread.split(",")[1]);
-    // console.log("thread desc " + thread.split(",")[2]);
-
     Axios.post(`http://localhost:3001/jointhread`, {
       userID: currentUser.userID,
       subthreadID: thread.split(",")[0],
@@ -70,17 +67,25 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
 
   const search = () => {
     console.log(searchThread);
+    console.log(threadList);
+    // console.log(string.includes(word));
+    for (let a = 0; a < threadList.length; a++) {
+      console.log(threadList[a].threadName);
+    }
   };
 
   useEffect(() => {
     Axios.get("http://localhost:3001/allThread", {}).then((response) => {
-      setThreadList(response.data);
+      setThreadList(response.data.reverse());
     });
   }, [threadList]);
 
   return (
     <div>
       <div className="titleBanner">
+        <FormatListBulletedOutlinedIcon
+          sx={{ fontSize: "45px", padding: "10px" }}
+        />
         <div>All Threads</div>
       </div>
 

@@ -65,7 +65,7 @@ const SubthreadPage = ({ currentUser, isLoggedIn }) => {
         // console.log("hello there");
         // console.log(response.data);
         if (response.data.length > 0) {
-          setThreadPost(response.data);
+          setThreadPost(response.data.reverse());
         } else {
           setThreadPost([]);
         }
@@ -115,9 +115,16 @@ const SubthreadPage = ({ currentUser, isLoggedIn }) => {
               />
 
               <div className="postFormBtnCont">
-                <button onClick={addPost} style={{ cursor: "pointer" }}>
-                  Post
-                </button>
+                {postTitle !== "" && postBody !== "" ? (
+                  <button onClick={addPost} style={{ cursor: "pointer" }}>
+                    Post
+                  </button>
+                ) : (
+                  <button disabled={true} style={{ cursor: "pointer" }}>
+                    Post
+                  </button>
+                )}
+
                 <button onClick={closePostForm} style={{ cursor: "pointer" }}>
                   Cancel
                 </button>

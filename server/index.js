@@ -427,11 +427,29 @@ app.get("/allThread", (req, res) => {
   });
 });
 
+// THIS WILL GRAB THREADS CREATED BY USER BASED ON USERID
+app.get(`/threads/:userID`, (req, res) => {
+  const userID = req.params.userID;
+  console.log(userID);
+
+  db.query(
+    `SELECT * FROM subthreads_table WHERE userID = ${userID}`,
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+        console.log(result);
+      }
+    }
+  );
+});
+
 // THIS GRABS A SPECIFIC THREAD BASED ON THREADID
 // POTENTIALLY THIS WILL GRAB POSTS ASSOCIATED WITH THE THREAD
 app.get("/subthread/:subthreadID", (req, res) => {
   const subthreadID = req.params.subthreadID;
-  console.log(subthreadID);
 
   db.query(
     `SELECT posts_table.postID, posts_table.userID, posts_table.username, posts_table.title, posts_table.postBody, subthreads_table.userID, subthreads_table.username, subthreads_table.threadName, subthreads_table.threadDesc, subthreads_table.dateTime, subthreads_table.subthreadID
@@ -444,7 +462,7 @@ app.get("/subthread/:subthreadID", (req, res) => {
         console.log(err);
       } else {
         res.send(result);
-        console.log(result);
+        // console.log(result);
       }
     }
   );

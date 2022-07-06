@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 
+import BookmarksOutlinedIcon from "@mui/icons-material/BookmarksOutlined";
+
 const Bookmark = () => {
   const { userID } = useParams();
 
@@ -31,6 +33,7 @@ const Bookmark = () => {
   return (
     <div>
       <div className="titleBanner">
+        <BookmarksOutlinedIcon sx={{ fontSize: "45px", padding: "10px" }} />
         <div>My Bookmarks</div>
       </div>
 
