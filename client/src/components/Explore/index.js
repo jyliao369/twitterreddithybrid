@@ -14,15 +14,15 @@ const Explore = () => {
     const filteredPosts = [];
 
     for (let a = 0; a < allPosts.length; a++) {
-      console.log(allPosts[a].title.split(" "));
-      for (let b = 0; b < allPosts[a].title.split(" ").length; b++) {
-        if (allPosts[a].title.split(" ")[b] === search) {
-          console.log("true");
-          filteredPosts.push(allPosts[a]);
-          break;
-        } else {
-          console.log("false");
-        }
+      console.log(a);
+      if (allPosts[a].title.toLowerCase().includes(search)) {
+        console.log(true);
+        filteredPosts.push(allPosts[a]);
+      } else if (allPosts[a].postBody.toLowerCase().includes(search)) {
+        console.log(true);
+        filteredPosts.push(allPosts[a]);
+      } else {
+        console.log(false);
       }
     }
 

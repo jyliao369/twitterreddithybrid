@@ -35,7 +35,7 @@ const Profile = ({ currentUser, isLoggedIn }) => {
       }
     );
     document.getElementById(`usersPosts`).style.display = "none";
-    document.getElementById(`usersThread`).style.display = "flex";
+    document.getElementById(`usersThreads`).style.display = "flex";
   };
 
   useEffect(() => {
@@ -75,6 +75,7 @@ const Profile = ({ currentUser, isLoggedIn }) => {
 
       <div className="categoriesCont">
         <div onClick={showUsersPost}>My Posts</div>
+        <div onClick={showUsersThread}>My Comments</div>
         <div onClick={showUsersThread}>My Threads</div>
       </div>
 
@@ -109,13 +110,9 @@ const Profile = ({ currentUser, isLoggedIn }) => {
         ))}
       </div>
 
-      <div className="usersThread">
+      <div className="usersThread" id="usersThreads">
         {usersThread.map((thread) => (
-          <div
-            key={thread.subthreadID}
-            className="subthreadsCont"
-            id="usersThread"
-          >
+          <div key={thread.subthreadID} className="subthreadsCont">
             <Link to={`/subthread/${thread.subthreadID}`}>
               <div className="subthreadInfoCont">
                 <div className="userIconCont">
@@ -127,6 +124,29 @@ const Profile = ({ currentUser, isLoggedIn }) => {
                 </div>
               </div>
             </Link>
+            <div className="editBtn">
+              <button>
+                <Link to={`/updateSubThread/${thread.subthreadID}`}>
+                  update
+                </Link>
+              </button>
+              <button>delete</button>
+
+              {/* {isLoggedIn ? (
+                <button
+                  value={[
+                    thread.subthreadID,
+                    thread.threadName,
+                    thread.threadDesc,
+                  ]}
+                  onClick={(e) => joinThread(e.target.value)}
+                >
+                  Join
+                </button>
+              ) : (
+                <></>
+              )} */}
+            </div>
           </div>
         ))}
       </div>

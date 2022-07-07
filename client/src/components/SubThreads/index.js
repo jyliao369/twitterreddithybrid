@@ -56,14 +56,14 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
     });
   };
 
-  const joinThread = (thread) => {
-    Axios.post(`http://localhost:3001/jointhread`, {
-      userID: currentUser.userID,
-      subthreadID: thread.split(",")[0],
-      threadName: thread.split(",")[1],
-      threadDesc: thread.split(",")[2],
-    }).then((response) => console.log(response));
-  };
+  // const joinThread = (thread) => {
+  //   Axios.post(`http://localhost:3001/jointhread`, {
+  //     userID: currentUser.userID,
+  //     subthreadID: thread.split(",")[0],
+  //     threadName: thread.split(",")[1],
+  //     threadDesc: thread.split(",")[2],
+  //   }).then((response) => console.log(response));
+  // };
 
   const search = () => {
     console.log(searchThread);
@@ -147,29 +147,6 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
                 </div>
               </div>
             </Link>
-            <div className="editBtn">
-              <button>
-                <Link to={`/updateSubThread/${thread.subthreadID}`}>
-                  update
-                </Link>
-              </button>
-              <button>delete</button>
-
-              {isLoggedIn ? (
-                <button
-                  value={[
-                    thread.subthreadID,
-                    thread.threadName,
-                    thread.threadDesc,
-                  ]}
-                  onClick={(e) => joinThread(e.target.value)}
-                >
-                  Join
-                </button>
-              ) : (
-                <></>
-              )}
-            </div>
           </div>
         ))}
       </div>

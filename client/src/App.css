@@ -35,14 +35,23 @@
   display: flex;
   flex-direction: column;
 }
-.posts,
-.comments {
+.posts {
   display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   flex-direction: row;
   border-bottom: solid;
   border-width: thin;
   border-color: lightgray;
   padding: 20px;
+}
+.comments {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+  padding: 20px;
+  padding-bottom: 35px;
 }
 .posts:hover {
   background: lightgray;
@@ -627,9 +636,46 @@
   padding: 6px 10px 6px 10px;
   cursor: pointer;
 }
-
 .unBookmarkBtn button:hover {
   background: lightgray;
+}
+
+.testShapeOne {
+  display: flex;
+  align-items: center;
+
+  background: black;
+  padding: 10px;
+  clip-path: polygon(0% 0%, 95% 5%, 100% 100%, 5% 100%);
+}
+.testShape {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 750px;
+
+  overflow-wrap: break-word;
+  background: white;
+  clip-path: polygon(0% 0%, 95% 5%, 100% 100%, 5% 100%);
+}
+.testShape p {
+  font-size: 20px;
+  width: 85%;
+}
+
+.testShapeTwo {
+  background: black;
+  padding: 10px;
+  clip-path: polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%);
+}
+.testShapes {
+  height: 100px;
+  width: 100px;
+
+  overflow-wrap: break-word;
+  background: white;
+  clip-path: polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%);
 }
 
 /* @media (prefers-reduced-motion: no-preference) {

@@ -88,6 +88,26 @@ const RandomNews = () => {
       </div>
 
       <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+
+      {/* <div>
+        <div className="testShapeOne">
+          <div className="testShape">
+            <p>
+              textfdsfhskdhfshdkfhsdjkhfksdhfkshdlkfhsdhfkjsdhflkshdkfhsdlkfhksdhfkjsdhflkshdlkfh
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <br />
+      <br />
+      <br />
+      <br /> */}
     </div>
   );
 };
