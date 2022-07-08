@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 
@@ -119,48 +120,52 @@ const MyThreads = () => {
 
       <div>
         {threadPosts.map((post) => (
-          <div key={post.postID} className="posts">
-            <div className="userIconCont">
-              <div className="userIcon" />
-            </div>
-            <div className="mainPostCont">
-              <div className="postBodyCont">
-                <div className="postBody">
-                  <h4>
-                    Username: {post.username}, UserID: {post.userID}, postID:{" "}
-                    {post.postID}
-                  </h4>
-                  <h2>{post.title}</h2>
-                  <p>{post.postBody}</p>
+          <Link to={`/post/${post.postID}`}>
+            <div key={post.postID} className="posts">
+              <div className="userIconCont">
+                <div className="userIcon" />
+              </div>
+              <div className="mainPostCont">
+                <div className="postBodyCont">
+                  <div className="postBody">
+                    <h4>
+                      Username: {post.username}, UserID: {post.userID}, postID:{" "}
+                      {post.postID}
+                    </h4>
+                    <h2>{post.title}</h2>
+                    <p>{post.postBody}</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 
       <div id="allMyThreadsPost">
         {myThreadsPost.map((threadPost) => (
-          <div key={threadPost.postID}>
-            <div className="posts">
-              <div className="userIconCont">
-                <div className="userIcon" />
-              </div>
+          <Link to={`/post/${threadPost.postID}`}>
+            <div key={threadPost.postID}>
+              <div className="posts">
+                <div className="userIconCont">
+                  <div className="userIcon" />
+                </div>
 
-              <div className="mainPostCont">
-                <div className="postBodyCont">
-                  <div className="postBody">
-                    <h4>
-                      Username: {threadPost.username}, UserID:{" "}
-                      {threadPost.userID}, postID: {threadPost.postID}
-                    </h4>
-                    <h2>{threadPost.title}</h2>
-                    <p>{threadPost.postBody}</p>
+                <div className="mainPostCont">
+                  <div className="postBodyCont">
+                    <div className="postBody">
+                      <h4>
+                        Username: {threadPost.username}, UserID:{" "}
+                        {threadPost.userID}, postID: {threadPost.postID}
+                      </h4>
+                      <h2>{threadPost.title}</h2>
+                      <p>{threadPost.postBody}</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

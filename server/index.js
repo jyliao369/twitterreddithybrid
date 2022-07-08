@@ -375,6 +375,24 @@ app.post("/addComment", (req, res) => {
   );
 });
 
+app.get("/getComments/:userID", (req, res) => {
+  const userID = req.params.userID;
+  console.log(userID);
+
+  db.query(
+    `SELECT * FROM comments_table WHERE userID = ${userID}`,
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+        console.log(result);
+      }
+    }
+  );
+});
+
 // THIS IS FOR THE SUB-THREAD SECTION
 // THIS CREATES THREAD
 app.post("/addThread", (req, res) => {

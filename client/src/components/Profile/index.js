@@ -6,6 +6,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 const Profile = ({ currentUser, isLoggedIn }) => {
   const [usersPosts, setUsersPosts] = useState([]);
   const [usersThread, setUsersThread] = useState([]);
+  const [usersComment, setUsersComment] = useState([]);
 
   const navToUpdate = useNavigate();
 
@@ -22,6 +23,7 @@ const Profile = ({ currentUser, isLoggedIn }) => {
   };
 
   const showUsersPost = () => {
+    document.getElementById(`usersComments`).style.display = "none";
     document.getElementById(`usersPosts`).style.display = "flex";
     document.getElementById(`usersThreads`).style.display = "none";
   };
@@ -34,8 +36,24 @@ const Profile = ({ currentUser, isLoggedIn }) => {
         setUsersThread(response.data);
       }
     );
+
+    document.getElementById(`usersComments`).style.display = "none";
     document.getElementById(`usersPosts`).style.display = "none";
     document.getElementById(`usersThreads`).style.display = "flex";
+  };
+
+  const showUsersComment = () => {
+    Axios.get(
+      `http://localhost:3001/getComments/${currentUser.userID}`,
+      {}
+    ).then((response) => {
+      console.log(response.data);
+      setUsersComment(response.data.reverse());
+    });
+
+    document.getElementById(`usersComments`).style.display = "flex";
+    document.getElementById(`usersPosts`).style.display = "none";
+    document.getElementById(`usersThreads`).style.display = "none";
   };
 
   useEffect(() => {
@@ -65,17 +83,17 @@ const Profile = ({ currentUser, isLoggedIn }) => {
             <h2>@{currentUser.username}</h2>
             <h3>{currentUser.email}</h3>
           </div>
-          <div>
+          {/* <div>
             <button>
               <Link to="/settings">Settings</Link>
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
 
       <div className="categoriesCont">
         <div onClick={showUsersPost}>My Posts</div>
-        <div onClick={showUsersThread}>My Comments</div>
+        <div onClick={showUsersComment}>My Comments</div>
         <div onClick={showUsersThread}>My Threads</div>
       </div>
 
@@ -94,18 +112,49 @@ const Profile = ({ currentUser, isLoggedIn }) => {
 
             <div className="editBtn">
               <button
-                value={post.postID}
+                // value={post.postID}
                 onClick={(e) => updatePost(e.target.value)}
               >
                 Update
               </button>
               <button
-                value={post.postID}
+                // value={post.postID}
                 onClick={(e) => deletePost(e.target.value)}
               >
                 Delete
               </button>
             </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="usersPosts" id="usersComments">
+        {usersComment.map((comment) => (
+          <div key={comment.commentID} className="userPost">
+            <Link to={`/post/${comment.postID}`}>
+              <div className="userCommentCont">
+                <div className="userIconCont">
+                  <div className="userIcon" />
+                </div>
+                <div className="userPostMain">
+                  <p>{comment.commentBody}</p>
+                </div>
+              </div>
+            </Link>
+            {/* <div className="editBtn">
+              <button
+                value={comment.postID}
+                onClick={(e) => updatePost(e.target.value)}
+              >
+                Update
+              </button>
+              <button
+                value={comment.postID}
+                onClick={(e) => deletePost(e.target.value)}
+              >
+                Delete
+              </button>
+            </div> */}
           </div>
         ))}
       </div>

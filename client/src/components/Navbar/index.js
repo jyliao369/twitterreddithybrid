@@ -72,7 +72,7 @@ const Navbar = ({ setCurrentUser, currentUser, setIsLoggedIn, isLoggedIn }) => {
           <></>
         )}
 
-        {isLoggedIn ? (
+        {/* {isLoggedIn ? (
           <Link to="/profile">
             <div className="navbarChoices">
               <EmailOutlinedIcon
@@ -83,7 +83,7 @@ const Navbar = ({ setCurrentUser, currentUser, setIsLoggedIn, isLoggedIn }) => {
           </Link>
         ) : (
           <></>
-        )}
+        )} */}
 
         {isLoggedIn ? (
           <Link to={`/mythreads/${currentUser.userID}`}>
