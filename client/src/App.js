@@ -89,7 +89,10 @@ function App() {
                 <>
                   <div className="mainPage">
                     <div className="homePage" id="homePage">
-                      <ShowPost currentUser={currentUser} />
+                      <ShowPost
+                        currentUser={currentUser}
+                        isLoggedIn={isLoggedIn}
+                      />
                     </div>
                   </div>
                 </>
