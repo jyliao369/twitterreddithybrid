@@ -50,31 +50,12 @@ app.post("/register", (req, res) => {
   const email = req.body.email;
   const dateTime = req.body.dateTime;
 
-  console.log(
-    username +
-      " " +
-      password +
-      " " +
-      firstName +
-      " " +
-      lastName +
-      " " +
-      email +
-      " " +
-      dateTime
-  );
-
   db.query(
     "SELECT * FROM user_table WHERE email = ?",
     [email],
     (err, result) => {
-      if (err) {
-        console.log(err);
-      }
       if (result.length > 0) {
-        res.send([
-          { message: "There is an account associated with this email." },
-        ]);
+        res.send({ message: "An account exits for this email." });
       } else {
         bcrypt.hash(password, saltRounds, (err, hash) => {
           if (err) {
@@ -104,29 +85,24 @@ app.post("/login", (req, res) => {
   const password = req.body.password;
 
   db.query("SELECT * FROM user_table WHERE email = ?", email, (err, result) => {
-    if (err) {
-      console.log({ err: err });
+    console.log(result.length > 0);
+    if (result.length <= 0) {
+      res.send({ message: "There is no account associated with this email." });
     }
 
     if (result.length > 0) {
       bcrypt.compare(password, result[0].password, (err, response) => {
         if (response) {
           req.session.user = result;
-          console.log(req.session.user);
+          // console.log(req.session.user);
           res.send(result);
         } else {
-          res.send([
-            { message: "Combination of user and password not found." },
-          ]);
-          //   console.log(result[0].password);
-          //   console.log(password === result[0].password);
-          console.log(response);
+          res.send({
+            message: "Incorrect password. Try again.",
+          });
+          // console.log(response);
         }
       });
-    } else {
-      res.send([
-        { message: "There is no account associated with this email." },
-      ]);
     }
   });
 });

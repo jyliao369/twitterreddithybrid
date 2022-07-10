@@ -38,39 +38,52 @@ const Bookmark = () => {
         <div>My Bookmarks</div>
       </div>
 
-      <div>
-        {userBookmarks.map((post) => (
-          <Link to={`/post/${post.postID}`}>
-            <div key={post.bookmarkID} className="posts">
-              <div className="userIconCont">
-                <div className="userIcon" />
-              </div>
+      {userBookmarks.length > 0 ? (
+        <>
+          <div>
+            {userBookmarks.map((post) => (
+              <Link to={`/post/${post.postID}`}>
+                <div key={post.bookmarkID} className="posts">
+                  <div className="userIconCont">
+                    <div className="userIcon" />
+                  </div>
 
-              <div className="mainPostCont">
-                <div className="postBodyCont">
-                  <div className="postBody">
-                    <h4>
-                      Username: {post.username}, UserID: {post.userID}, postID:{" "}
-                      {post.postID}
-                    </h4>
-                    <h2>{post.title}</h2>
-                    <p>{post.postBody}</p>
+                  <div className="mainPostCont">
+                    <div className="postBodyCont">
+                      <div className="postBody">
+                        <h4>
+                          Username: {post.username}, UserID: {post.userID},
+                          postID: {post.postID}
+                        </h4>
+                        <h2>{post.title}</h2>
+                        <p>{post.postBody}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="unBookmarkBtn">
+                    <button
+                      value={post.bookmarkID}
+                      onClick={(e) => remove(e.target.value)}
+                    >
+                      Remove
+                    </button>
                   </div>
                 </div>
-              </div>
-
-              <div className="unBookmarkBtn">
-                <button
-                  value={post.bookmarkID}
-                  onClick={(e) => remove(e.target.value)}
-                >
-                  Remove
-                </button>
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
+              </Link>
+            ))}
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="notification">
+            <p>
+              You have no bookmarked posts. Check out any related threads and
+              save posts for later.
+            </p>
+          </div>
+        </>
+      )}
     </div>
   );
 };

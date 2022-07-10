@@ -128,23 +128,33 @@ const SinglePost = ({ currentUser, isLoggedIn }) => {
         <></>
       )}
 
-      {comments.map((comment) => (
-        <div key={comment.commentID} className="comments">
-          <div className="userIconCont">
-            <div className="userIcon" />
-          </div>
-          <div className="commentCont">
-            <div className="commentBody">
-              <h3>
-                Comment OP {comment.username} Comment OP ID {comment.userID}
-              </h3>
-              <h4>{comment.commentID}</h4>
+      {comments.length > 0 ? (
+        <>
+          {comments.map((comment) => (
+            <div key={comment.commentID} className="comments">
+              <div className="userIconCont">
+                <div className="userIcon" />
+              </div>
+              <div className="commentCont">
+                <div className="commentBody">
+                  <h3>
+                    Comment OP {comment.username} Comment OP ID {comment.userID}
+                  </h3>
+                  <h4>{comment.commentID}</h4>
 
-              <p>{comment.commentBody}</p>
+                  <p>{comment.commentBody}</p>
+                </div>
+              </div>
             </div>
+          ))}
+        </>
+      ) : (
+        <>
+          <div className="notification">
+            <p>Nobody has said anything. Why don't you say something?</p>
           </div>
-        </div>
-      ))}
+        </>
+      )}
 
       {/* {comments.map((comment) => (
         <div key={comment.commentID} className="comments">

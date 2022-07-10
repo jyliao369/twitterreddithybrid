@@ -98,76 +98,89 @@ const MyThreads = () => {
         ))}
       </div>
 
-      <div className="subthreadsCont" id="mythreads">
-        <div className="subthreadInfoCont">
-          <div className="userIconCont">
-            <div className="userIcon" />
-          </div>
-          <div className="subthreadInfo">
-            <h3>/{curThreadName}</h3>
-            <p>{curThreadDesc}</p>
-          </div>
-          <div className="followBtnCont">
-            <button
-              value={curThreadID}
-              onClick={(e) => unfollowThread(e.target.value)}
-            >
-              Unfollow
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        {threadPosts.map((post) => (
-          <Link to={`/post/${post.postID}`}>
-            <div key={post.postID} className="posts">
+      {myThreads.length > 0 ? (
+        <>
+          <div className="subthreadsCont" id="mythreads">
+            <div className="subthreadInfoCont">
               <div className="userIconCont">
                 <div className="userIcon" />
               </div>
-              <div className="mainPostCont">
-                <div className="postBodyCont">
-                  <div className="postBody">
-                    <h4>
-                      Username: {post.username}, UserID: {post.userID}, postID:{" "}
-                      {post.postID}
-                    </h4>
-                    <h2>{post.title}</h2>
-                    <p>{post.postBody}</p>
-                  </div>
-                </div>
+              <div className="subthreadInfo">
+                <h3>/{curThreadName}</h3>
+                <p>{curThreadDesc}</p>
+              </div>
+              <div className="followBtnCont">
+                <button
+                  value={curThreadID}
+                  onClick={(e) => unfollowThread(e.target.value)}
+                >
+                  Unfollow
+                </button>
               </div>
             </div>
-          </Link>
-        ))}
-      </div>
+          </div>
 
-      <div id="allMyThreadsPost">
-        {myThreadsPost.map((threadPost) => (
-          <Link to={`/post/${threadPost.postID}`}>
-            <div key={threadPost.postID}>
-              <div className="posts">
-                <div className="userIconCont">
-                  <div className="userIcon" />
-                </div>
-
-                <div className="mainPostCont">
-                  <div className="postBodyCont">
-                    <div className="postBody">
-                      <h4>
-                        Username: {threadPost.username}, UserID:{" "}
-                        {threadPost.userID}, postID: {threadPost.postID}
-                      </h4>
-                      <h2>{threadPost.title}</h2>
-                      <p>{threadPost.postBody}</p>
+          <div>
+            {threadPosts.map((post) => (
+              <Link to={`/post/${post.postID}`}>
+                <div key={post.postID} className="posts">
+                  <div className="userIconCont">
+                    <div className="userIcon" />
+                  </div>
+                  <div className="mainPostCont">
+                    <div className="postBodyCont">
+                      <div className="postBody">
+                        <h4>
+                          Username: {post.username}, UserID: {post.userID},
+                          postID: {post.postID}
+                        </h4>
+                        <h2>{post.title}</h2>
+                        <p>{post.postBody}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
+              </Link>
+            ))}
+          </div>
+
+          <div id="allMyThreadsPost">
+            {myThreadsPost.map((threadPost) => (
+              <Link to={`/post/${threadPost.postID}`}>
+                <div key={threadPost.postID}>
+                  <div className="posts">
+                    <div className="userIconCont">
+                      <div className="userIcon" />
+                    </div>
+
+                    <div className="mainPostCont">
+                      <div className="postBodyCont">
+                        <div className="postBody">
+                          <h4>
+                            Username: {threadPost.username}, UserID:{" "}
+                            {threadPost.userID}, postID: {threadPost.postID}
+                          </h4>
+                          <h2>{threadPost.title}</h2>
+                          <p>{threadPost.postBody}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="notification">
+            <p>
+              You haven't joined any threads. Check out the threads page join
+              any threads you find interesting!!
+            </p>
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -15,7 +15,8 @@ const Register = ({
   const [lastNameReg, setLastNameReg] = useState("");
   const [passReg, setPassReg] = useState("");
   const [retypePassReg, setRetypePassReg] = useState("");
-  const [status, setStatus] = useState("");
+
+  const [regStatus, setRegStatus] = useState("");
 
   const navToProfile = useNavigate();
 
@@ -30,9 +31,12 @@ const Register = ({
       passReg === "" ||
       retypePassReg === ""
     ) {
-      setStatus("Alert: Missing info");
+      setRegStatus("Alert: Missing info");
       console.log("Alert: Missing info");
-    } else if (passReg === retypePassReg) {
+    } else if (passReg !== retypePassReg) {
+      console.log("Alert: Passwords do not match!");
+      setRegStatus("Alert: Passwords do not match!");
+    } else {
       var todayDate = new Date();
       var todayDates =
         todayDate.getFullYear() +
@@ -46,7 +50,7 @@ const Register = ({
         todayDate.getMinutes() +
         ":" +
         todayDate.getSeconds();
-      console.log(todayDates + " " + todayTime);
+
       Axios.post("http://localhost:3001/register", {
         username: usernameReg,
         firstName: firstNameReg,
@@ -54,20 +58,29 @@ const Register = ({
         email: emailReg,
         password: passReg,
         dateTime: todayDates + " " + todayTime,
-      }).then(() => {
-        setIsLoggedIn(true);
-        Axios.post("http://localhost:3001/login", {
-          password: passReg,
-          email: emailReg,
-        }).then((response) => {
-          setCurrentUser(response.data[0]);
-        });
-      });
+      }).then((response) => {
+        console.log(response);
+        if (response.data.message) {
+          setRegStatus(response.data.message);
+        } else {
+          Axios.post("http://localhost:3001/login", {
+            password: passReg,
+            email: emailReg,
+          }).then((response) => {
+            setRegStatus("");
+            setCurrentUser(response.data[0]);
+            setIsLoggedIn(true);
 
-      navToProfile("/profile");
-    } else {
-      setStatus("Alert: Passwords do not match!");
-      console.log("Alert: Passwords do not match!");
+            setEmailReg("");
+            setUsernameReg("");
+            setFirstNameReg("");
+            setLastNameReg("");
+            setPassReg("");
+            setRetypePassReg("");
+            navToProfile("/profile");
+          });
+        }
+      });
     }
   };
 
@@ -75,9 +88,11 @@ const Register = ({
     <div className="logRegCont">
       <div className="regFormCont">
         <h1>Register</h1>
-        <br />
-        <h5>{status}</h5>
-        <br />
+
+        <div className="status">
+          <p>{regStatus}</p>
+        </div>
+
         <div className="regForm">
           <div className="regFormOne">
             <input

@@ -230,6 +230,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  width: 450px;
   border-style: solid;
   border-width: thin;
   border-radius: 5px;
@@ -239,6 +240,12 @@
 .loginFormCont h1,
 .regFormCont h1 {
   margin-bottom: 20px;
+}
+.status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
 }
 .loginForm {
   display: flex;
@@ -391,9 +398,12 @@
   display: flex;
   flex-direction: column;
 }
-.usersThread {
+.usersThreads {
   display: flex;
   flex-direction: column;
+}
+#usersThreads {
+  display: none;
 }
 
 /* THIS IS FOR EXPLORE PAGE */
@@ -825,6 +835,11 @@
   border-style: solid;
   border-radius: 50px;
   padding: 10px;
+}
+
+.notification {
+  display: flex;
+  justify-content: center;
 }
 
 /* @media (prefers-reduced-motion: no-preference) {

@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Axios from "axios";
+import { Link } from "react-router-dom";
 
 const SubthreadPage = ({ currentUser, isLoggedIn }) => {
   const { subthreadID } = useParams();
@@ -136,27 +137,37 @@ const SubthreadPage = ({ currentUser, isLoggedIn }) => {
         <></>
       )}
 
-      <div>
-        {threadPost.map((post) => (
-          <div key={post.postID} className="posts">
-            <div className="userIconCont">
-              <div className="userIcon" />
-            </div>
-            <div className="mainPostCont">
-              <div className="postBodyCont">
-                <div className="postBody">
-                  <h4>
-                    Username: {post.username}, UserID: {post.userID}, postID:{" "}
-                    {post.postID}
-                  </h4>
-                  <h2>{post.title}</h2>
-                  <p>{post.postBody}</p>
+      {threadPost.length > 0 ? (
+        <>
+          {threadPost.map((post) => (
+            <Link to={`/post/${post.postID}`}>
+              <div key={post.postID} className="posts">
+                <div className="userIconCont">
+                  <div className="userIcon" />
+                </div>
+                <div className="mainPostCont">
+                  <div className="postBodyCont">
+                    <div className="postBody">
+                      <h4>
+                        Username: {post.username}, UserID: {post.userID},
+                        postID: {post.postID}
+                      </h4>
+                      <h2>{post.title}</h2>
+                      <p>{post.postBody}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
+          ))}
+        </>
+      ) : (
+        <>
+          <div className="notification">
+            <p>There are no posts here. Be the first and say soemthing.</p>
           </div>
-        ))}
-      </div>
+        </>
+      )}
     </div>
   );
 };

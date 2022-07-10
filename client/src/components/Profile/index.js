@@ -83,11 +83,6 @@ const Profile = ({ currentUser, isLoggedIn }) => {
             <h2>@{currentUser.username}</h2>
             <h3>{currentUser.email}</h3>
           </div>
-          {/* <div>
-            <button>
-              <Link to="/settings">Settings</Link>
-            </button>
-          </div> */}
         </div>
       </div>
 
@@ -97,51 +92,68 @@ const Profile = ({ currentUser, isLoggedIn }) => {
         <div onClick={showUsersThread}>My Threads</div>
       </div>
 
-      <div className="usersPosts" id="usersPosts">
-        {usersPosts.map((post) => (
-          <div key={post.postID} className="userPost">
-            <div className="userIconCont">
-              <div className="userIcon" />
-            </div>
-            <Link to={`/post/${post.postID}`}>
-              <div className="userPostMain">
-                <h3>{post.title}</h3>
-                <p>{post.postBody}</p>
-              </div>
-            </Link>
-
-            <div className="editBtn">
-              <button
-                // value={post.postID}
-                onClick={(e) => updatePost(e.target.value)}
-              >
-                Update
-              </button>
-              <button
-                // value={post.postID}
-                onClick={(e) => deletePost(e.target.value)}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="usersPosts" id="usersComments">
-        {usersComment.map((comment) => (
-          <div key={comment.commentID} className="userPost">
-            <Link to={`/post/${comment.postID}`}>
-              <div className="userCommentCont">
+      {usersPosts.length > 0 ? (
+        <>
+          <div className="usersPosts" id="usersPosts">
+            {usersPosts.map((post) => (
+              <div key={post.postID} className="userPost">
                 <div className="userIconCont">
                   <div className="userIcon" />
                 </div>
-                <div className="userPostMain">
-                  <p>{comment.commentBody}</p>
+                <Link to={`/post/${post.postID}`}>
+                  <div className="userPostMain">
+                    <h3>{post.title}</h3>
+                    <p>{post.postBody}</p>
+                  </div>
+                </Link>
+
+                <div className="editBtn">
+                  <button
+                    // value={post.postID}
+                    onClick={(e) => updatePost(e.target.value)}
+                  >
+                    Update
+                  </button>
+                  <button
+                    // value={post.postID}
+                    onClick={(e) => deletePost(e.target.value)}
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
-            </Link>
-            {/* <div className="editBtn">
+            ))}
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="usersPosts" id="usersPosts">
+            <div className="notification">
+              <p>
+                You have no posts. Have something you want to share? Check out
+                the different threads and share your thoughts.
+              </p>
+            </div>
+          </div>
+        </>
+      )}
+
+      {usersComment.length > 0 ? (
+        <>
+          <div className="usersPosts" id="usersComments">
+            {usersComment.map((comment) => (
+              <div key={comment.commentID} className="userPost">
+                <Link to={`/post/${comment.postID}`}>
+                  <div className="userCommentCont">
+                    <div className="userIconCont">
+                      <div className="userIcon" />
+                    </div>
+                    <div className="userPostMain">
+                      <p>{comment.commentBody}</p>
+                    </div>
+                  </div>
+                </Link>
+                {/* <div className="editBtn">
               <button
                 value={comment.postID}
                 onClick={(e) => updatePost(e.target.value)}
@@ -155,33 +167,48 @@ const Profile = ({ currentUser, isLoggedIn }) => {
                 Delete
               </button>
             </div> */}
-          </div>
-        ))}
-      </div>
-
-      <div className="usersThread" id="usersThreads">
-        {usersThread.map((thread) => (
-          <div key={thread.subthreadID} className="subthreadsCont">
-            <Link to={`/subthread/${thread.subthreadID}`}>
-              <div className="subthreadInfoCont">
-                <div className="userIconCont">
-                  <div className="userIcon" />
-                </div>
-                <div className="subthreadInfo">
-                  <h3>/{thread.threadName}</h3>
-                  <p>{thread.threadDesc}</p>
-                </div>
               </div>
-            </Link>
-            <div className="editBtn">
-              <button>
-                <Link to={`/updateSubThread/${thread.subthreadID}`}>
-                  update
-                </Link>
-              </button>
-              <button>delete</button>
+            ))}
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="usersPosts" id="usersComments">
+            <div className="notification">
+              <p>
+                You have no comments. Share your thoughts and ideas on what
+                other people have said.
+              </p>
+            </div>
+          </div>
+        </>
+      )}
 
-              {/* {isLoggedIn ? (
+      {usersThread.length > 0 ? (
+        <>
+          <div className="usersThread" id="usersThreads">
+            {usersThread.map((thread) => (
+              <div key={thread.subthreadID} className="subthreadsCont">
+                <Link to={`/subthread/${thread.subthreadID}`}>
+                  <div className="subthreadInfoCont">
+                    <div className="userIconCont">
+                      <div className="userIcon" />
+                    </div>
+                    <div className="subthreadInfo">
+                      <h3>/{thread.threadName}</h3>
+                      <p>{thread.threadDesc}</p>
+                    </div>
+                  </div>
+                </Link>
+                <div className="editBtn">
+                  <button>
+                    <Link to={`/updateSubThread/${thread.subthreadID}`}>
+                      update
+                    </Link>
+                  </button>
+                  <button>delete</button>
+
+                  {/* {isLoggedIn ? (
                 <button
                   value={[
                     thread.subthreadID,
@@ -195,10 +222,24 @@ const Profile = ({ currentUser, isLoggedIn }) => {
               ) : (
                 <></>
               )} */}
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="usersThreads" id="usersThreads">
+            <div className="notification">
+              <p>
+                You have no threads. Create a thread and find like-minded
+                individuals. Check out the threads section first before you
+                create a new thread as there may be one already created.
+              </p>
             </div>
           </div>
-        ))}
-      </div>
+        </>
+      )}
     </div>
   );
 };

@@ -13,16 +13,12 @@ const ShowPost = ({ currentUser, isLoggedIn }) => {
 
   useEffect(() => {
     Axios.get("http://localhost:3001/getAllPosts", {}).then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       setAllPosts(response.data);
     });
 
     setIsLoading(false);
   }, []);
-
-  // console.log(typeof currentUser.userID);
-  // console.log(typeof parseInt(allPosts[0].userID));
-  // console.log(currentUser.userID === parseInt(allPosts[0].userID));
 
   return (
     <div>
