@@ -36,9 +36,88 @@ const Navbar = ({ setCurrentUser, currentUser, setIsLoggedIn, isLoggedIn }) => {
       <div className="navbarBtns">
         <h1>Threado!</h1>
 
+        {/* <div>
+          <div className="starTestOut">
+            <div className="starTestIn">
+              <HomeOutlinedIcon sx={{ fontSize: "30px", paddingTop: "5px" }} />
+            </div>
+          </div>
+        </div> */}
+
+        {/* <br />
+        <br />
+        <br />
+
+        <div className="navBarCont">
+          <div className="hexaIconOut">
+            <div className="hexaIconIn">
+              <HomeOutlinedIcon sx={{ fontSize: "40px" }} />
+            </div>
+          </div>
+          <p>Home</p>
+        </div>
+
+        <div className="navBarCont">
+          <div className="hexaIconOut">
+            <div className="hexaIconIn">
+              <SearchOutlinedIcon sx={{ fontSize: "40px" }} />
+            </div>
+          </div>
+          <p>Explore</p>
+        </div>
+
+        <div className="navBarCont">
+          <div className="hexaIconOut">
+            <div className="hexaIconIn">
+              <ListOutlinedIcon sx={{ fontSize: "40px" }} />
+            </div>
+          </div>
+          <p>Threads</p>
+        </div>
+
+        <div className="navBarCont">
+          <div className="hexaIconOut">
+            <div className="hexaIconIn">
+              <PermIdentityOutlinedIcon sx={{ fontSize: "40px" }} />
+            </div>
+          </div>
+          <p>Profile</p>
+        </div>
+
+        <div className="navBarCont">
+          <div className="hexaIconOut">
+            <div className="hexaIconIn">
+              <ListAltOutlinedIcon sx={{ fontSize: "40px" }} />
+            </div>
+          </div>
+          <p>My Threads</p>
+        </div>
+
+        <div className="navBarCont">
+          <div className="hexaIconOut">
+            <div className="hexaIconIn">
+              <BookmarksOutlinedIcon sx={{ fontSize: "40px" }} />
+            </div>
+          </div>
+          <p>Bookmark</p>
+        </div>
+
+        <div className="navBarCont">
+          <div className="hexaIconOut">
+            <div className="hexaIconIn">
+              <SettingsOutlinedIcon sx={{ fontSize: "40px" }} />
+            </div>
+          </div>
+          <p>Settings</p>
+        </div>
+
+        <br />
+        <br />
+        <br /> */}
+
         <Link to="/">
           <div className="navbarChoices">
-            <HomeOutlinedIcon sx={{ fontSize: "45px", paddingRight: "10px" }} />
+            <HomeOutlinedIcon sx={{ fontSize: "40px", paddingRight: "10px" }} />
             <p>Home</p>
           </div>
         </Link>
@@ -46,7 +125,7 @@ const Navbar = ({ setCurrentUser, currentUser, setIsLoggedIn, isLoggedIn }) => {
         <Link to="/explore">
           <div className="navbarChoices">
             <SearchOutlinedIcon
-              sx={{ fontSize: "45px", paddingRight: "5px" }}
+              sx={{ fontSize: "40px", paddingRight: "5px" }}
             />
             <p>Explore</p>
           </div>
@@ -54,7 +133,7 @@ const Navbar = ({ setCurrentUser, currentUser, setIsLoggedIn, isLoggedIn }) => {
 
         <Link to={"/subthreads"}>
           <div className="navbarChoices">
-            <ListOutlinedIcon sx={{ fontSize: "45px", paddingRight: "5px" }} />
+            <ListOutlinedIcon sx={{ fontSize: "40px", paddingRight: "5px" }} />
             <p>Threads</p>
           </div>
         </Link>
@@ -63,7 +142,7 @@ const Navbar = ({ setCurrentUser, currentUser, setIsLoggedIn, isLoggedIn }) => {
           <Link to="/profile">
             <div className="navbarChoices">
               <PermIdentityOutlinedIcon
-                sx={{ fontSize: "45px", paddingRight: "5px" }}
+                sx={{ fontSize: "40px", paddingRight: "5px" }}
               />
               <p>Profile</p>
             </div>
@@ -76,7 +155,7 @@ const Navbar = ({ setCurrentUser, currentUser, setIsLoggedIn, isLoggedIn }) => {
           <Link to="/profile">
             <div className="navbarChoices">
               <EmailOutlinedIcon
-                sx={{ fontSize: "45px", paddingRight: "5px" }}
+                sx={{ fontSize: "40px", paddingRight: "5px" }}
               />
               <p>Message</p>
             </div>
@@ -89,7 +168,7 @@ const Navbar = ({ setCurrentUser, currentUser, setIsLoggedIn, isLoggedIn }) => {
           <Link to={`/mythreads/${currentUser.userID}`}>
             <div className="navbarChoices">
               <ListAltOutlinedIcon
-                sx={{ fontSize: "45px", paddingRight: "5px" }}
+                sx={{ fontSize: "40px", paddingRight: "5px" }}
               />
               <p>My Threads</p>
             </div>
@@ -102,7 +181,7 @@ const Navbar = ({ setCurrentUser, currentUser, setIsLoggedIn, isLoggedIn }) => {
           <Link to={`/bookmark/${currentUser.userID}`}>
             <div className="navbarChoices">
               <BookmarksOutlinedIcon
-                sx={{ fontSize: "45px", paddingRight: "5px" }}
+                sx={{ fontSize: "40px", paddingRight: "5px" }}
               />
               <p>Bookmark</p>
             </div>
@@ -115,7 +194,7 @@ const Navbar = ({ setCurrentUser, currentUser, setIsLoggedIn, isLoggedIn }) => {
           <Link to="/settings">
             <div className="navbarChoices">
               <SettingsOutlinedIcon
-                sx={{ fontSize: "45px", paddingRight: "5px" }}
+                sx={{ fontSize: "40px", paddingRight: "5px" }}
               />
               <p>Settings</p>
             </div>
@@ -129,7 +208,7 @@ const Navbar = ({ setCurrentUser, currentUser, setIsLoggedIn, isLoggedIn }) => {
         <div className="userIconCont">
           <Link to="/" onClick={logout}>
             <div className="userIcon">
-              <LoginOutlinedIcon sx={{ fontSize: "45px" }} />
+              <LoginOutlinedIcon sx={{ fontSize: "40px" }} />
             </div>
           </Link>
         </div>
@@ -137,7 +216,7 @@ const Navbar = ({ setCurrentUser, currentUser, setIsLoggedIn, isLoggedIn }) => {
         <div className="userIconCont">
           <Link to="/login">
             <div className="userIcon">
-              <LoginIcon sx={{ fontSize: "45px" }} />
+              <LoginIcon sx={{ fontSize: "40px" }} />
             </div>
           </Link>
         </div>
