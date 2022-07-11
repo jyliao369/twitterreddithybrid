@@ -13,7 +13,7 @@ const ShowPost = ({ currentUser, isLoggedIn }) => {
 
   useEffect(() => {
     Axios.get("http://localhost:3001/getAllPosts", {}).then((response) => {
-      // console.log(response.data);
+      console.log(response.data);
       setAllPosts(response.data);
     });
 
@@ -27,7 +27,7 @@ const ShowPost = ({ currentUser, isLoggedIn }) => {
         <div>Home</div>
       </div>
 
-      <div className="postsCont">
+      {/* <div className="postsCont">
         {allPosts.map((post) => (
           <Link to={`/post/${post.postID}`} key={post.postID}>
             <div className="posts">
@@ -50,10 +50,10 @@ const ShowPost = ({ currentUser, isLoggedIn }) => {
             </div>
           </Link>
         ))}
-      </div>
+      </div> */}
 
       {/* THIS IS A MORE STYLIZED RENDITION */}
-      {/* {isLoading === false ? (
+      {isLoading === false ? (
         <div>
           {isLoggedIn ? (
             <div>
@@ -78,15 +78,31 @@ const ShowPost = ({ currentUser, isLoggedIn }) => {
                 ) : (
                   <>
                     <div key={post.userID} className="comments">
-                      <div>
-                        <div className="testShapeTwo">
-                          <div className="testShapes"></div>
-                        </div>
+                      <div className="testShapeTwo">
+                        <div className="testShapes"></div>
                       </div>
                       <div>
+                        <div className="addInfoOut">
+                          <div className="addInfoIn">
+                            <h4>Title: {post.title}</h4>
+                          </div>
+                        </div>
+
+                        <div className="addInfoThreeOut">
+                          <div className="addInfoThreeIn">
+                            <h4>subthread: {post.subthreadID}</h4>
+                          </div>
+                        </div>
+
                         <div className="testShapeOne">
                           <div className="testShape">
                             <p>{post.postBody}</p>
+                          </div>
+                        </div>
+
+                        <div className="addInfoTwoOut">
+                          <div className="addInfoTwoIn">
+                            <p>Posted: {post.dateTime}</p>
                           </div>
                         </div>
                       </div>
@@ -100,15 +116,31 @@ const ShowPost = ({ currentUser, isLoggedIn }) => {
               {allPosts.map((post) => (
                 <>
                   <div key={post.userID} className="comments">
-                    <div>
-                      <div className="testShapeTwo">
-                        <div className="testShapes"></div>
-                      </div>
+                    <div className="testShapeTwo">
+                      <div className="testShapes"></div>
                     </div>
                     <div>
+                      <div className="addInfoOut">
+                        <div className="addInfoIn">
+                          <h4>Title: {post.title}</h4>
+                        </div>
+                      </div>
+
+                      <div className="addInfoThreeOut">
+                        <div className="addInfoThreeIn">
+                          <h4>subthread: {post.subthreadID}</h4>
+                        </div>
+                      </div>
+
                       <div className="testShapeOne">
                         <div className="testShape">
                           <p>{post.postBody}</p>
+                        </div>
+                      </div>
+
+                      <div className="addInfoTwoOut">
+                        <div className="addInfoTwoIn">
+                          <p>Posted: {post.dateTime}</p>
                         </div>
                       </div>
                     </div>
@@ -120,7 +152,7 @@ const ShowPost = ({ currentUser, isLoggedIn }) => {
         </div>
       ) : (
         <></>
-      )} */}
+      )}
     </div>
   );
 };

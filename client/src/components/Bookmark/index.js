@@ -42,35 +42,68 @@ const Bookmark = () => {
         <>
           <div>
             {userBookmarks.map((post) => (
-              <Link to={`/post/${post.postID}`}>
-                <div key={post.bookmarkID} className="posts">
-                  <div className="userIconCont">
-                    <div className="userIcon" />
-                  </div>
-
-                  <div className="mainPostCont">
-                    <div className="postBodyCont">
-                      <div className="postBody">
-                        <h4>
-                          Username: {post.username}, UserID: {post.userID},
-                          postID: {post.postID}
-                        </h4>
-                        <h2>{post.title}</h2>
-                        <p>{post.postBody}</p>
-                      </div>
+              <div key={post.userID} className="comments">
+                <div className="testShapeTwo">
+                  <div className="testShapes"></div>
+                </div>
+                <div>
+                  <div className="addInfoOut">
+                    <div className="addInfoIn">
+                      <h4>Title: {post.title}</h4>
                     </div>
                   </div>
 
-                  <div className="unBookmarkBtn">
-                    <button
-                      value={post.bookmarkID}
-                      onClick={(e) => remove(e.target.value)}
-                    >
-                      Remove
-                    </button>
+                  <div className="addInfoThreeOut">
+                    <div className="addInfoThreeIn">
+                      <h4>subthread: {post.subthreadID}</h4>
+                    </div>
+                  </div>
+
+                  <Link to={`/post/${post.postID}`} key={post.postID}>
+                    <div className="testShapeOne">
+                      <div className="testShape">
+                        <p>{post.postBody}</p>
+                      </div>
+                    </div>
+                  </Link>
+
+                  <div className="addInfoTwoOut">
+                    <div className="addInfoTwoIn">
+                      <p>Posted: {post.dateTime}</p>
+                    </div>
                   </div>
                 </div>
-              </Link>
+              </div>
+
+              // <Link to={`/post/${post.postID}`}>
+              //   <div key={post.bookmarkID} className="posts">
+              //     <div className="userIconCont">
+              //       <div className="userIcon" />
+              //     </div>
+
+              //     <div className="mainPostCont">
+              //       <div className="postBodyCont">
+              //         <div className="postBody">
+              //           <h4>
+              //             Username: {post.username}, UserID: {post.userID},
+              //             postID: {post.postID}
+              //           </h4>
+              //           <h2>{post.title}</h2>
+              //           <p>{post.postBody}</p>
+              //         </div>
+              //       </div>
+              //     </div>
+
+              //     <div className="unBookmarkBtn">
+              //       <button
+              //         value={post.bookmarkID}
+              //         onClick={(e) => remove(e.target.value)}
+              //       >
+              //         Remove
+              //       </button>
+              //     </div>
+              //   </div>
+              // </Link>
             ))}
           </div>
         </>

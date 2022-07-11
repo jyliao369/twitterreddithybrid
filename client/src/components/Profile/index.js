@@ -96,32 +96,65 @@ const Profile = ({ currentUser, isLoggedIn }) => {
         <>
           <div className="usersPosts" id="usersPosts">
             {usersPosts.map((post) => (
-              <div key={post.postID} className="userPost">
-                <div className="userIconCont">
-                  <div className="userIcon" />
+              <div key={post.userID} className="comments">
+                <div className="testShapeTwo">
+                  <div className="testShapes"></div>
                 </div>
-                <Link to={`/post/${post.postID}`}>
-                  <div className="userPostMain">
-                    <h3>{post.title}</h3>
-                    <p>{post.postBody}</p>
+                <div>
+                  <div className="addInfoOut">
+                    <div className="addInfoIn">
+                      <h4>Title: {post.title}</h4>
+                    </div>
                   </div>
-                </Link>
 
-                <div className="editBtn">
-                  <button
-                    // value={post.postID}
-                    onClick={(e) => updatePost(e.target.value)}
-                  >
-                    Update
-                  </button>
-                  <button
-                    // value={post.postID}
-                    onClick={(e) => deletePost(e.target.value)}
-                  >
-                    Delete
-                  </button>
+                  <div className="addInfoThreeOut">
+                    <div className="addInfoThreeIn">
+                      <h4>subthread: {post.subthreadID}</h4>
+                    </div>
+                  </div>
+
+                  <Link to={`/post/${post.postID}`} key={post.postID}>
+                    <div className="testShapeOne">
+                      <div className="testShape">
+                        <p>{post.postBody}</p>
+                      </div>
+                    </div>
+                  </Link>
+
+                  <div className="addInfoTwoOut">
+                    <div className="addInfoTwoIn">
+                      <p>Posted: {post.dateTime}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
+
+              // <div key={post.postID} className="userPost">
+              //   <div className="userIconCont">
+              //     <div className="userIcon" />
+              //   </div>
+              //   <Link to={`/post/${post.postID}`}>
+              //     <div className="userPostMain">
+              //       <h3>{post.title}</h3>
+              //       <p>{post.postBody}</p>
+              //     </div>
+              //   </Link>
+
+              //   <div className="editBtn">
+              //     <button
+              //       // value={post.postID}
+              //       onClick={(e) => updatePost(e.target.value)}
+              //     >
+              //       Update
+              //     </button>
+              //     <button
+              //       // value={post.postID}
+              //       onClick={(e) => deletePost(e.target.value)}
+              //     >
+              //       Delete
+              //     </button>
+              //   </div>
+              // </div>
             ))}
           </div>
         </>
@@ -154,19 +187,19 @@ const Profile = ({ currentUser, isLoggedIn }) => {
                   </div>
                 </Link>
                 {/* <div className="editBtn">
-              <button
-                value={comment.postID}
-                onClick={(e) => updatePost(e.target.value)}
-              >
-                Update
-              </button>
-              <button
-                value={comment.postID}
-                onClick={(e) => deletePost(e.target.value)}
-              >
-                Delete
-              </button>
-            </div> */}
+                  <button
+                    value={comment.postID}
+                    onClick={(e) => updatePost(e.target.value)}
+                  >
+                    Update
+                  </button>
+                  <button
+                    value={comment.postID}
+                    onClick={(e) => deletePost(e.target.value)}
+                  >
+                    Delete
+                  </button>
+                </div> */}
               </div>
             ))}
           </div>
@@ -188,42 +221,46 @@ const Profile = ({ currentUser, isLoggedIn }) => {
         <>
           <div className="usersThread" id="usersThreads">
             {usersThread.map((thread) => (
-              <div key={thread.subthreadID} className="subthreadsCont">
+              <div className="eachThreadTheme">
+                <div className="threadBannerTitleOut">
+                  <div className="threadBannerTitleIn">
+                    <h3>/{thread.threadName}</h3>
+                  </div>
+                </div>
                 <Link to={`/subthread/${thread.subthreadID}`}>
-                  <div className="subthreadInfoCont">
-                    <div className="userIconCont">
-                      <div className="userIcon" />
-                    </div>
-                    <div className="subthreadInfo">
-                      <h3>/{thread.threadName}</h3>
+                  <div className="threadBannerOut">
+                    <div className="threadBannerIn">
                       <p>{thread.threadDesc}</p>
                     </div>
                   </div>
                 </Link>
-                <div className="editBtn">
-                  <button>
-                    <Link to={`/updateSubThread/${thread.subthreadID}`}>
-                      update
-                    </Link>
-                  </button>
-                  <button>delete</button>
-
-                  {/* {isLoggedIn ? (
-                <button
-                  value={[
-                    thread.subthreadID,
-                    thread.threadName,
-                    thread.threadDesc,
-                  ]}
-                  onClick={(e) => joinThread(e.target.value)}
-                >
-                  Join
-                </button>
-              ) : (
-                <></>
-              )} */}
-                </div>
               </div>
+
+              // <div key={thread.subthreadID} className="subthreadsCont">
+              //   <div className="editBtn">
+              //     <button>
+              //       <Link to={`/updateSubThread/${thread.subthreadID}`}>
+              //         update
+              //       </Link>
+              //     </button>
+              //     <button>delete</button>
+
+              //     {isLoggedIn ? (
+              //       <button
+              //         value={[
+              //           thread.subthreadID,
+              //           thread.threadName,
+              //           thread.threadDesc,
+              //         ]}
+              //         onClick={(e) => joinThread(e.target.value)}
+              //       >
+              //         Join
+              //       </button>
+              //     ) : (
+              //       <></>
+              //     )}
+              //   </div>
+              // </div>
             ))}
           </div>
         </>

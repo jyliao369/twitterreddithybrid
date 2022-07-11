@@ -133,7 +133,7 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
         <></>
       )}
 
-      <div>
+      {/* <div>
         {threadList.map((thread) => (
           <div key={thread.subthreadID} className="subthreadsCont">
             <Link to={`/subthread/${thread.subthreadID}`}>
@@ -149,9 +149,9 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
             </Link>
           </div>
         ))}
-      </div>
+      </div> */}
 
-      {/* <div className="threadThemeCont">
+      <div className="threadThemeCont">
         {threadList.map((thread) => (
           <div className="eachThreadTheme">
             <div className="threadBannerTitleOut">
@@ -168,7 +168,7 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
             </Link>
           </div>
         ))}
-      </div> */}
+      </div>
     </div>
   );
 };
