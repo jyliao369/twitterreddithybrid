@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-import PostForm from "./components/PostForm";
 import ShowPost from "./components/ShowPost";
 import Explore from "./components/Explore";
 import SinglePost from "./components/SinglePost";

@@ -50,10 +50,10 @@
 }
 .comments {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   align-items: center;
   flex-direction: row;
-  padding: 50px 0px 35px 0px;
+  padding: 50px 15px 35px 0px;
 }
 .posts:hover {
   background: lightgray;
@@ -894,6 +894,26 @@
 }
 .addInfoThreeIn h4 {
   padding: 7px 10px 7px 10px;
+}
+
+.commentThemeOut {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 475px;
+  padding: 10px;
+  background: black;
+  clip-path: polygon(-4% 0%, 91% 4%, 104% 97%, 10% 101%);
+}
+.commentThemeIn {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: white;
+  clip-path: polygon(-2% 0%, 92% 9%, 102% 95%, 9% 99%);
+}
+.commentThemeIn p {
+  padding: 20px 40px 20px 50px;
 }
 
 /* @media (prefers-reduced-motion: no-preference) {

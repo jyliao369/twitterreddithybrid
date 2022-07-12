@@ -156,23 +156,19 @@ const SinglePost = ({ currentUser, isLoggedIn }) => {
         </>
       )}
 
-      {/* {comments.map((comment) => (
+      {comments.map((comment) => (
         <div key={comment.commentID} className="comments">
-          <div>
-            <div className="testShapeOne">
-              <div className="testShape">
-                <p>{comment.commentBody}</p>
-              </div>
+          <div className="commentThemeOut">
+            <div className="commentThemeIn">
+              <p>{comment.commentBody}</p>
             </div>
           </div>
 
-          <div>
-            <div className="testShapeTwo">
-              <div className="testShapes"></div>
-            </div>
+          <div className="testShapeTwo">
+            <div className="testShapes"></div>
           </div>
         </div>
-      ))} */}
+      ))}
     </div>
   );
 };

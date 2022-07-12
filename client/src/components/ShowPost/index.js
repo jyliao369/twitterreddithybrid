@@ -9,8 +9,6 @@ const ShowPost = ({ currentUser, isLoggedIn }) => {
   const [allPosts, setAllPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [comment, setComment] = useState("");
-
   useEffect(() => {
     Axios.get("http://localhost:3001/getAllPosts", {}).then((response) => {
       console.log(response.data);
@@ -59,8 +57,8 @@ const ShowPost = ({ currentUser, isLoggedIn }) => {
             <div>
               {allPosts.map((post) =>
                 parseInt(post.userID) === currentUser.userID ? (
-                  <>
-                    <div key={post.userID} className="comments">
+                  <div key={post.userID} className="comments">
+                    <Link to={`/post/${post.postID}`} key={post.postID}>
                       <div>
                         <div className="testShapeOne">
                           <div className="testShape">
@@ -68,57 +66,20 @@ const ShowPost = ({ currentUser, isLoggedIn }) => {
                           </div>
                         </div>
                       </div>
-                      <div>
-                        <div className="testShapeTwo">
-                          <div className="testShapes"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div key={post.userID} className="comments">
+                    </Link>
+
+                    <div>
                       <div className="testShapeTwo">
                         <div className="testShapes"></div>
                       </div>
-                      <div>
-                        <div className="addInfoOut">
-                          <div className="addInfoIn">
-                            <h4>Title: {post.title}</h4>
-                          </div>
-                        </div>
-
-                        <div className="addInfoThreeOut">
-                          <div className="addInfoThreeIn">
-                            <h4>subthread: {post.subthreadID}</h4>
-                          </div>
-                        </div>
-
-                        <div className="testShapeOne">
-                          <div className="testShape">
-                            <p>{post.postBody}</p>
-                          </div>
-                        </div>
-
-                        <div className="addInfoTwoOut">
-                          <div className="addInfoTwoIn">
-                            <p>Posted: {post.dateTime}</p>
-                          </div>
-                        </div>
-                      </div>
                     </div>
-                  </>
-                )
-              )}
-            </div>
-          ) : (
-            <div>
-              {allPosts.map((post) => (
-                <>
+                  </div>
+                ) : (
                   <div key={post.userID} className="comments">
                     <div className="testShapeTwo">
                       <div className="testShapes"></div>
                     </div>
+
                     <div>
                       <div className="addInfoOut">
                         <div className="addInfoIn">
@@ -132,11 +93,13 @@ const ShowPost = ({ currentUser, isLoggedIn }) => {
                         </div>
                       </div>
 
-                      <div className="testShapeOne">
-                        <div className="testShape">
-                          <p>{post.postBody}</p>
+                      <Link to={`/post/${post.postID}`} key={post.postID}>
+                        <div className="testShapeOne">
+                          <div className="testShape">
+                            <p>{post.postBody}</p>
+                          </div>
                         </div>
-                      </div>
+                      </Link>
 
                       <div className="addInfoTwoOut">
                         <div className="addInfoTwoIn">
@@ -145,7 +108,44 @@ const ShowPost = ({ currentUser, isLoggedIn }) => {
                       </div>
                     </div>
                   </div>
-                </>
+                )
+              )}
+            </div>
+          ) : (
+            <div>
+              {allPosts.map((post) => (
+                <div key={post.userID} className="comments">
+                  <div className="testShapeTwo">
+                    <div className="testShapes"></div>
+                  </div>
+
+                  <div>
+                    <div className="addInfoOut">
+                      <div className="addInfoIn">
+                        <h4>Title: {post.title}</h4>
+                      </div>
+                    </div>
+
+                    <div className="addInfoThreeOut">
+                      <div className="addInfoThreeIn">
+                        <h4>subthread: {post.subthreadID}</h4>
+                      </div>
+                    </div>
+                    <Link to={`/post/${post.postID}`} key={post.postID}>
+                      <div className="testShapeOne">
+                        <div className="testShape">
+                          <p>{post.postBody}</p>
+                        </div>
+                      </div>
+                    </Link>
+
+                    <div className="addInfoTwoOut">
+                      <div className="addInfoTwoIn">
+                        <p>Posted: {post.dateTime}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           )}
