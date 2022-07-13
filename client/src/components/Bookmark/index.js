@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import BookmarksOutlinedIcon from "@mui/icons-material/BookmarksOutlined";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 
 const Bookmark = () => {
   const { userID } = useParams();
@@ -42,68 +44,55 @@ const Bookmark = () => {
         <>
           <div>
             {userBookmarks.map((post) => (
-              <div key={post.userID} className="comments">
-                <div className="testShapeTwo">
-                  <div className="testShapes"></div>
+              <div className="postAllCont">
+                <div className="profileAllCont">
+                  <div className="profileIconOut">
+                    <div className="profileIconBody"></div>
+                  </div>
+                  <div className="profileUsername">
+                    <p>{post.username}</p>
+                  </div>
                 </div>
-                <div>
-                  <div className="addInfoOut">
-                    <div className="addInfoIn">
-                      <h4>Title: {post.title}</h4>
+
+                <div className="generalPost">
+                  <div className="postTitleCont">
+                    <div className="postTitleBorder">
+                      <div className="postTitleBody">
+                        <h4>{post.title.slice(0, 60)}</h4>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="addInfoThreeOut">
-                    <div className="addInfoThreeIn">
-                      <h4>subthread: {post.subthreadID}</h4>
-                    </div>
-                  </div>
-
-                  <Link to={`/post/${post.postID}`} key={post.postID}>
-                    <div className="testShapeOne">
-                      <div className="testShape">
+                  <Link to={`/post/${post.postID}`}>
+                    <div className="generalPostBorder">
+                      <div className="generalPostBody">
                         <p>{post.postBody}</p>
                       </div>
                     </div>
                   </Link>
 
-                  <div className="addInfoTwoOut">
-                    <div className="addInfoTwoIn">
-                      <p>Posted: {post.dateTime}</p>
+                  <div className="postDateTimeCont">
+                    <div className="postDateTimeBorder">
+                      <div className="postDateTimeBody">
+                        <p>Posted on {post.dateTime}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="iconCont">
+                    <div className="iconOut">
+                      <div className="iconBody">
+                        <FavoriteBorderOutlinedIcon /> <p>num</p>
+                      </div>
+                    </div>
+                    <div className="iconOut">
+                      <div className="iconBody">
+                        <ChatBubbleOutlineOutlinedIcon /> <p>num</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-
-              // <Link to={`/post/${post.postID}`}>
-              //   <div key={post.bookmarkID} className="posts">
-              //     <div className="userIconCont">
-              //       <div className="userIcon" />
-              //     </div>
-
-              //     <div className="mainPostCont">
-              //       <div className="postBodyCont">
-              //         <div className="postBody">
-              //           <h4>
-              //             Username: {post.username}, UserID: {post.userID},
-              //             postID: {post.postID}
-              //           </h4>
-              //           <h2>{post.title}</h2>
-              //           <p>{post.postBody}</p>
-              //         </div>
-              //       </div>
-              //     </div>
-
-              //     <div className="unBookmarkBtn">
-              //       <button
-              //         value={post.bookmarkID}
-              //         onClick={(e) => remove(e.target.value)}
-              //       >
-              //         Remove
-              //       </button>
-              //     </div>
-              //   </div>
-              // </Link>
             ))}
           </div>
         </>

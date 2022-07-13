@@ -210,7 +210,10 @@ function App() {
               element={
                 <>
                   <div className="mainPage">
-                    <MyThreads />
+                    <MyThreads
+                      currentUser={currentUser}
+                      isLoggedIn={isLoggedIn}
+                    />
                   </div>
                 </>
               }

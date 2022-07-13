@@ -446,9 +446,9 @@ app.get("/subthread/:subthreadID", (req, res) => {
   const subthreadID = req.params.subthreadID;
 
   db.query(
-    `SELECT posts_table.postID, posts_table.userID, posts_table.username, posts_table.title, posts_table.postBody, subthreads_table.userID, subthreads_table.username, subthreads_table.threadName, subthreads_table.threadDesc, subthreads_table.dateTime, subthreads_table.subthreadID
-    FROM posts_table
-    INNER JOIN subthreads_table
+    `SELECT subthreads_table.subthreadID, subthreads_table.threadName, subthreads_table.threadDesc, subthreads_table.dateTime, posts_table.postID, posts_table.userID, posts_table.username, posts_table.title, posts_table.postBody
+    FROM subthreads_table
+    INNER JOIN posts_table
     ON posts_table.subthreadID=subthreads_table.subthreadID
     WHERE posts_table.subthreadID=${subthreadID};`,
     (err, result) => {

@@ -39,11 +39,13 @@ const ShowPost = ({ currentUser, isLoggedIn }) => {
                       </div>
                     </div>
 
-                    <div className="userPostBorder">
-                      <div className="userPostBody">
-                        <p>{post.postBody}</p>
+                    <Link to={`/post/${post.postID}`}>
+                      <div className="userPostBorder">
+                        <div className="userPostBody">
+                          <p>{post.postBody}</p>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
 
                     <div className="userPostDateTimeCont">
                       <div className="userPostDateTimeBorder">

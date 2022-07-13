@@ -3,6 +3,9 @@ import { useState } from "react";
 import Axios from "axios";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
+
 const Profile = ({ currentUser, isLoggedIn }) => {
   const [usersPosts, setUsersPosts] = useState([]);
   const [usersThread, setUsersThread] = useState([]);
@@ -67,7 +70,7 @@ const Profile = ({ currentUser, isLoggedIn }) => {
         });
       }
     });
-  });
+  }, []);
 
   if (!isLoggedIn) {
     <Navigate to={"/login"} />;
@@ -93,71 +96,61 @@ const Profile = ({ currentUser, isLoggedIn }) => {
       </div>
 
       {usersPosts.length > 0 ? (
-        <>
-          <div className="usersPosts" id="usersPosts">
-            {usersPosts.map((post) => (
-              <div key={post.userID} className="comments">
-                <div className="testShapeTwo">
-                  <div className="testShapes"></div>
+        <div className="usersPosts" id="usersPosts">
+          {usersPosts.map((post) => (
+            <div className="postAllCont">
+              <div className="generalPost">
+                <div className="userPostTitleCont">
+                  <div className="userPostTitleBorder">
+                    <div className="userPostTitleBody">
+                      <h4>{post.title.slice(0, 60)}</h4>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <div className="addInfoOut">
-                    <div className="addInfoIn">
-                      <h4>Title: {post.title}</h4>
+
+                <Link to={`/post/${post.postID}`}>
+                  <div className="userPostBorder">
+                    <div className="userPostBody">
+                      <p>{post.postBody}</p>
                     </div>
                   </div>
+                </Link>
 
-                  <div className="addInfoThreeOut">
-                    <div className="addInfoThreeIn">
-                      <h4>subthread: {post.subthreadID}</h4>
+                <div className="userPostDateTimeCont">
+                  <div className="userPostDateTimeBorder">
+                    <div className="userPostDateTimeBody">
+                      <p>Posted on {post.dateTime}</p>
                     </div>
                   </div>
+                </div>
 
-                  <Link to={`/post/${post.postID}`} key={post.postID}>
-                    <div className="testShapeOne">
-                      <div className="testShape">
-                        <p>{post.postBody}</p>
+                <div className="userIconAll">
+                  <div className="userIconCont">
+                    <div className="userIconOut">
+                      <div className="userIconBody">
+                        <FavoriteBorderOutlinedIcon /> <p>num</p>
                       </div>
                     </div>
-                  </Link>
-
-                  <div className="addInfoTwoOut">
-                    <div className="addInfoTwoIn">
-                      <p>Posted: {post.dateTime}</p>
+                    <div className="userIconOut">
+                      <div className="userIconBody">
+                        <ChatBubbleOutlineOutlinedIcon /> <p>num</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              // <div key={post.postID} className="userPost">
-              //   <div className="userIconCont">
-              //     <div className="userIcon" />
-              //   </div>
-              //   <Link to={`/post/${post.postID}`}>
-              //     <div className="userPostMain">
-              //       <h3>{post.title}</h3>
-              //       <p>{post.postBody}</p>
-              //     </div>
-              //   </Link>
-
-              //   <div className="editBtn">
-              //     <button
-              //       // value={post.postID}
-              //       onClick={(e) => updatePost(e.target.value)}
-              //     >
-              //       Update
-              //     </button>
-              //     <button
-              //       // value={post.postID}
-              //       onClick={(e) => deletePost(e.target.value)}
-              //     >
-              //       Delete
-              //     </button>
-              //   </div>
-              // </div>
-            ))}
-          </div>
-        </>
+              <div className="profileAllCont">
+                <div className="profileIconOut">
+                  <div className="profileIconBody"></div>
+                </div>
+                <div className="userProfileUsername">
+                  <p>{post.username}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       ) : (
         <>
           <div className="usersPosts" id="usersPosts">
@@ -236,16 +229,7 @@ const Profile = ({ currentUser, isLoggedIn }) => {
                 </Link>
               </div>
 
-              // <div key={thread.subthreadID} className="subthreadsCont">
-              //   <div className="editBtn">
-              //     <button>
-              //       <Link to={`/updateSubThread/${thread.subthreadID}`}>
-              //         update
-              //       </Link>
-              //     </button>
-              //     <button>delete</button>
-
-              //     {isLoggedIn ? (
+              // {isLoggedIn ? (
               //       <button
               //         value={[
               //           thread.subthreadID,
@@ -259,8 +243,6 @@ const Profile = ({ currentUser, isLoggedIn }) => {
               //     ) : (
               //       <></>
               //     )}
-              //   </div>
-              // </div>
             ))}
           </div>
         </>

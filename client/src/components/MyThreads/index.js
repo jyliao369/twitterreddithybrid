@@ -5,23 +5,23 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 
-const MyThreads = () => {
+const MyThreads = ({ currentUser, isLoggedIn }) => {
   const { userID } = useParams();
   const [myThreads, setMyThreads] = useState([]);
 
-  const [curThreadID, setCureThreadID] = useState(0);
+  const [curThreadID, setCurThreadID] = useState(0);
   const [curThreadName, setCurThreadName] = useState("");
   const [curThreadDesc, setCurThreadDesc] = useState("");
 
-  const [threadPosts, setThreadPosts] = useState([]);
-
-  const [myThreadsPost, setMyThreadsPost] = useState([]);
+  const [showThreadPosts, setShowThreadPosts] = useState([]);
 
   const showCurThreads = (currentThread) => {
     // console.log("hello there");
     // console.log(currentThread.split(","));
-    setCureThreadID(currentThread.split(",")[0]);
+    setCurThreadID(currentThread.split(",")[1]);
     setCurThreadName(currentThread.split(",")[2]);
     setCurThreadDesc(currentThread.split(",")[3]);
 
@@ -30,16 +30,17 @@ const MyThreads = () => {
       {}
     ).then((response) => {
       console.log(response.data);
-      setThreadPosts(response.data);
+      setShowThreadPosts(response.data.reverse());
     });
-
-    document.getElementById("mythreads").style.display = "flex";
-    document.getElementById("allMyThreadsPost").style.display = "none";
   };
 
-  const showAllPostsThreads = () => {
-    document.getElementById("mythreads").style.display = "none";
-    document.getElementById("allMyThreadsPost").style.display = "flex";
+  const showAllThreadsPost = () => {
+    Axios.get(`http://localhost:3001/mythreadsPost/${userID}`, {
+      userID: userID,
+    }).then((response) => {
+      // console.log(response.data);
+      setShowThreadPosts(response.data.reverse());
+    });
   };
 
   const unfollowThread = (threadID) => {
@@ -66,7 +67,7 @@ const MyThreads = () => {
       userID: userID,
     }).then((response) => {
       // console.log(response.data);
-      setMyThreadsPost(response.data);
+      setShowThreadPosts(response.data.reverse());
     });
   }, []);
 
@@ -78,7 +79,7 @@ const MyThreads = () => {
       </div>
 
       <div className="joinedThreadsCont">
-        <button className="joinedThreads" onClick={showAllPostsThreads}>
+        <button className="joinedThreads" onClick={showAllThreadsPost}>
           Show All
         </button>
         {myThreads.map((thread) => (
@@ -98,177 +99,127 @@ const MyThreads = () => {
         ))}
       </div>
 
-      {myThreads.length > 0 ? (
+      {isLoggedIn ? (
         <>
-          <div className="subthreadsCont" id="mythreads">
-            <div className="eachThreadTheme">
-              <div className="threadBannerTitleOut">
-                <div className="threadBannerTitleIn">
-                  <h3>/{curThreadName}</h3>
-                </div>
-              </div>
-              <div className="threadBannerOut">
-                <div className="threadBannerIn">
-                  <p>{curThreadDesc}</p>
-                </div>
-              </div>
-              {/* <Link to={`/subthread/${curThreadID}`}>
-                <div className="threadBannerOut">
-                  <div className="threadBannerIn">
-                    <p>{curThreadDesc}</p>
+          {showThreadPosts.length > 0 ? (
+            <div className="myThreadsPostPage">
+              {showThreadPosts.map((post) =>
+                parseInt(post.userID) === currentUser.userID ? (
+                  <div className="postAllCont">
+                    <div className="generalPost">
+                      <div className="userPostTitleCont">
+                        <div className="userPostTitleBorder">
+                          <div className="userPostTitleBody">
+                            <h4>{post.title.slice(0, 60)}</h4>
+                          </div>
+                        </div>
+                      </div>
+
+                      <Link to={`/post/${post.postID}`}>
+                        <div className="userPostBorder">
+                          <div className="userPostBody">
+                            <p>{post.postBody}</p>
+                          </div>
+                        </div>
+                      </Link>
+
+                      <div className="userPostDateTimeCont">
+                        <div className="userPostDateTimeBorder">
+                          <div className="userPostDateTimeBody">
+                            <p>Posted on {post.dateTime}</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="userIconAll">
+                        <div className="userIconCont">
+                          <div className="userIconOut">
+                            <div className="userIconBody">
+                              <FavoriteBorderOutlinedIcon /> <p>num</p>
+                            </div>
+                          </div>
+                          <div className="userIconOut">
+                            <div className="userIconBody">
+                              <ChatBubbleOutlineOutlinedIcon /> <p>num</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="profileAllCont">
+                      <div className="profileIconOut">
+                        <div className="profileIconBody"></div>
+                      </div>
+                      <div className="userProfileUsername">
+                        <p>{post.username}</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </Link> */}
+                ) : (
+                  <div key={post.postID} className="postAllCont">
+                    <div className="profileAllCont">
+                      <div className="profileIconOut">
+                        <div className="profileIconBody"></div>
+                      </div>
+                      <div className="profileUsername">
+                        <p>{post.username}</p>
+                      </div>
+                    </div>
+
+                    <div className="generalPost">
+                      <div className="postTitleCont">
+                        <div className="postTitleBorder">
+                          <div className="postTitleBody">
+                            <h4>{post.title.slice(0, 60)}</h4>
+                          </div>
+                        </div>
+                      </div>
+
+                      <Link to={`/post/${post.postID}`}>
+                        <div className="generalPostBorder">
+                          <div className="generalPostBody">
+                            <p>{post.postBody}</p>
+                          </div>
+                        </div>
+                      </Link>
+
+                      <div className="postDateTimeCont">
+                        <div className="postDateTimeBorder">
+                          <div className="postDateTimeBody">
+                            <p>Posted on {post.dateTime}</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="iconCont">
+                        <div className="iconOut">
+                          <div className="iconBody">
+                            <FavoriteBorderOutlinedIcon /> <p>num</p>
+                          </div>
+                        </div>
+                        <div className="iconOut">
+                          <div className="iconBody">
+                            <ChatBubbleOutlineOutlinedIcon /> <p>num</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              )}
             </div>
-
-            {/* <div className="subthreadInfoCont">
-              <div className="userIconCont">
-                <div className="userIcon" />
-              </div>
-              <div className="subthreadInfo">
-                <h3>/{curThreadName}</h3>
-                <p>{curThreadDesc}</p>
-              </div>
-              <div className="followBtnCont">
-                <button
-                  value={curThreadID}
-                  onClick={(e) => unfollowThread(e.target.value)}
-                >
-                  Unfollow
-                </button>
-              </div>
-            </div> */}
-          </div>
-
-          <div>
-            {threadPosts.map((post) => (
-              <div key={post.userID} className="comments">
-                <div className="testShapeTwo">
-                  <div className="testShapes"></div>
-                </div>
-                <div>
-                  <div className="addInfoOut">
-                    <div className="addInfoIn">
-                      <h4>Title: {post.title}</h4>
-                    </div>
-                  </div>
-
-                  {/* <div className="addInfoThreeOut">
-                    <div className="addInfoThreeIn">
-                      <h4>subthread: {post.subthreadID}</h4>
-                    </div>
-                  </div> */}
-
-                  <Link to={`/post/${post.postID}`} key={post.postID}>
-                    <div className="testShapeOne">
-                      <div className="testShape">
-                        <p>{post.postBody}</p>
-                      </div>
-                    </div>
-                  </Link>
-
-                  <div className="addInfoTwoOut">
-                    <div className="addInfoTwoIn">
-                      <p>Posted: {post.dateTime}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              // <Link to={`/post/${post.postID}`}>
-              //   <div key={post.postID} className="posts">
-              //     <div className="userIconCont">
-              //       <div className="userIcon" />
-              //     </div>
-              //     <div className="mainPostCont">
-              //       <div className="postBodyCont">
-              //         <div className="postBody">
-              //           <h4>
-              //             Username: {post.username}, UserID: {post.userID},
-              //             postID: {post.postID}
-              //           </h4>
-              //           <h2>{post.title}</h2>
-              //           <p>{post.postBody}</p>
-              //         </div>
-              //       </div>
-              //     </div>
-              //   </div>
-              // </Link>
-            ))}
-          </div>
-
-          <div id="allMyThreadsPost">
-            {myThreadsPost.map((threadPost) => (
-              <div key={threadPost.userID} className="comments">
-                <div className="testShapeTwo">
-                  <div className="testShapes"></div>
-                </div>
-                <div>
-                  <div className="addInfoOut">
-                    <div className="addInfoIn">
-                      <h4>Title: {threadPost.title}</h4>
-                    </div>
-                  </div>
-
-                  <div className="addInfoThreeOut">
-                    <div className="addInfoThreeIn">
-                      <h4>subthread: {threadPost.subthreadID}</h4>
-                    </div>
-                  </div>
-
-                  <Link
-                    to={`/post/${threadPost.postID}`}
-                    key={threadPost.postID}
-                  >
-                    <div className="testShapeOne">
-                      <div className="testShape">
-                        <p>{threadPost.postBody}</p>
-                      </div>
-                    </div>
-                  </Link>
-
-                  <div className="addInfoTwoOut">
-                    <div className="addInfoTwoIn">
-                      <p>Posted: {threadPost.dateTime}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              // <Link to={`/post/${threadPost.postID}`}>
-              //   <div key={threadPost.postID}>
-              //     <div className="posts">
-              //       <div className="userIconCont">
-              //         <div className="userIcon" />
-              //       </div>
-
-              //       <div className="mainPostCont">
-              //         <div className="postBodyCont">
-              //           <div className="postBody">
-              //             <h4>
-              //               Username: {threadPost.username}, UserID:{" "}
-              //               {threadPost.userID}, postID: {threadPost.postID}
-              //             </h4>
-              //             <h2>{threadPost.title}</h2>
-              //             <p>{threadPost.postBody}</p>
-              //           </div>
-              //         </div>
-              //       </div>
-              //     </div>
-              //   </div>
-              // </Link>
-            ))}
-          </div>
+          ) : (
+            <div className="notification">
+              <p>
+                You haven't joined any threads. Check out the threads page join
+                any threads you find interesting!!
+              </p>
+            </div>
+          )}
         </>
       ) : (
-        <>
-          <div className="notification">
-            <p>
-              You haven't joined any threads. Check out the threads page join
-              any threads you find interesting!!
-            </p>
-          </div>
-        </>
+        <></>
       )}
     </div>
   );
