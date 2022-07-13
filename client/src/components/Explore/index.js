@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 
-const Explore = () => {
+const Explore = ({ currentUser, isLoggedIn }) => {
   const [allPosts, setAllPosts] = useState([]);
   const [showedPosts, setShowedPosts] = useState([]);
   const [search, setSearch] = useState("");
@@ -54,28 +56,194 @@ const Explore = () => {
         <button onClick={() => setShowedPosts(allPosts)}>reset</button>
       </div>
 
-      <div className="postsCont">
-        {showedPosts.map((post) => (
-          // <Link to={`/post/${post.postID}`} key={post.postID}>
-          //   <div key={post.postID} className="posts">
-          //     <div className="userIconCont">
-          //       <div className="userIcon" />
-          //     </div>
+      {isLoggedIn ? (
+        <div className="showPostPageCont">
+          <div className="showPostPage">
+            {showedPosts.map((post) =>
+              parseInt(post.userID) === currentUser.userID ? (
+                <div className="postAllCont">
+                  <div className="generalPost">
+                    <div className="userPostTitleCont">
+                      <div className="userPostTitleBorder">
+                        <div className="userPostTitleBody">
+                          <h4>{post.title.slice(0, 60)}</h4>
+                        </div>
+                      </div>
+                    </div>
 
-          //     <div className="mainPostCont">
-          //       <div className="postBodyCont">
-          //         <div className="postBody">
-          //           <h4>
-          //             Username: {post.username}, UserID: {post.userID}, postID:{" "}
-          //             {post.postID}
-          //           </h4>
-          //           <h2>{post.title}</h2>
-          //           <p>{post.postBody}</p>
-          //         </div>
-          //       </div>
-          //     </div>
-          //   </div>
-          // </Link>
+                    <div className="userPostBorder">
+                      <div className="userPostBody">
+                        <p>{post.postBody}</p>
+                      </div>
+                    </div>
+
+                    <div className="userPostDateTimeCont">
+                      <div className="userPostDateTimeBorder">
+                        <div className="userPostDateTimeBody">
+                          <p>Posted on {post.dateTime}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="userIconAll">
+                      <div className="userIconCont">
+                        <div className="userIconOut">
+                          <div className="userIconBody">
+                            <FavoriteBorderOutlinedIcon /> <p>num</p>
+                          </div>
+                        </div>
+                        <div className="userIconOut">
+                          <div className="userIconBody">
+                            <ChatBubbleOutlineOutlinedIcon /> <p>num</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="profileAllCont">
+                    <div className="profileIconOut">
+                      <div className="profileIconBody"></div>
+                    </div>
+                    <div className="userProfileUsername">
+                      <p>{post.username}</p>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="postAllCont">
+                  <div className="profileAllCont">
+                    <div className="profileIconOut">
+                      <div className="profileIconBody"></div>
+                    </div>
+                    <div className="profileUsername">
+                      <p>{post.username}</p>
+                    </div>
+                  </div>
+
+                  <div className="generalPost">
+                    <div className="postTitleCont">
+                      <div className="postTitleBorder">
+                        <div className="postTitleBody">
+                          <h4>{post.title.slice(0, 60)}</h4>
+                        </div>
+                      </div>
+                    </div>
+
+                    <Link to={`/post/${post.postID}`}>
+                      <div className="generalPostBorder">
+                        <div className="generalPostBody">
+                          <p>{post.postBody}</p>
+                        </div>
+                      </div>
+                    </Link>
+
+                    <div className="postDateTimeCont">
+                      <div className="postDateTimeBorder">
+                        <div className="postDateTimeBody">
+                          <p>Posted on {post.dateTime}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="iconCont">
+                      <div className="iconOut">
+                        <div className="iconBody">
+                          <FavoriteBorderOutlinedIcon /> <p>num</p>
+                        </div>
+                      </div>
+                      <div className="iconOut">
+                        <div className="iconBody">
+                          <ChatBubbleOutlineOutlinedIcon /> <p>num</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )
+            )}
+          </div>
+        </div>
+      ) : (
+        <div className="showPostPageCont">
+          <div className="showPostPage">
+            {allPosts.map((post) => (
+              <div className="postAllCont">
+                <div className="profileAllCont">
+                  <div className="profileIconOut">
+                    <div className="profileIconBody"></div>
+                  </div>
+                  <div className="profileUsername">
+                    <p>{post.username}</p>
+                  </div>
+                </div>
+
+                <div className="generalPost">
+                  <div className="postTitleCont">
+                    <div className="postTitleBorder">
+                      <div className="postTitleBody">
+                        <h4>{post.title.slice(0, 60)}</h4>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Link to={`/post/${post.postID}`}>
+                    <div className="generalPostBorder">
+                      <div className="generalPostBody">
+                        <p>{post.postBody}</p>
+                      </div>
+                    </div>
+                  </Link>
+
+                  <div className="postDateTimeCont">
+                    <div className="postDateTimeBorder">
+                      <div className="postDateTimeBody">
+                        <p>Posted on {post.dateTime}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="iconCont">
+                    <div className="iconOut">
+                      <div className="iconBody">
+                        <FavoriteBorderOutlinedIcon /> <p>num</p>
+                      </div>
+                    </div>
+                    <div className="iconOut">
+                      <div className="iconBody">
+                        <ChatBubbleOutlineOutlinedIcon /> <p>num</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* <div className="postsCont">
+        {showedPosts.map((post) => (
+          <Link to={`/post/${post.postID}`} key={post.postID}>
+            <div key={post.postID} className="posts">
+              <div className="userIconCont">
+                <div className="userIcon" />
+              </div>
+
+              <div className="mainPostCont">
+                <div className="postBodyCont">
+                  <div className="postBody">
+                    <h4>
+                      Username: {post.username}, UserID: {post.userID}, postID:{" "}
+                      {post.postID}
+                    </h4>
+                    <h2>{post.title}</h2>
+                    <p>{post.postBody}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Link>
           <>
             <div key={post.userID} className="comments">
               <div className="testShapeTwo">
@@ -111,7 +279,7 @@ const Explore = () => {
             </div>
           </>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

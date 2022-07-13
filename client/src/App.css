@@ -3,7 +3,6 @@
   color: black;
   text-decoration: none;
 }
-
 .appCont {
   display: flex;
   flex-direction: row;
@@ -30,62 +29,209 @@
   font-size: 35px;
 }
 
-/* THIS IS FOR POSTS AND COMMENTS */
-.postsCont {
+/* THIS SECTION IS FOR POSTS STYLE BOTH USERS AND OTHERS */
+/* GENERAL DESIGN OF POST */
+.postAllCont {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 10px 0px 10px 0px;
+}
+.profileAllCont {
   display: flex;
   flex-direction: column;
-}
-.postsConts {
-  display: flex;
-}
-.posts {
-  display: flex;
-  justify-content: space-evenly;
   align-items: center;
-  flex-direction: row;
-  border-bottom: solid;
-  border-width: thin;
-  border-color: lightgray;
-  padding: 20px;
 }
-.comments {
+.profileIconOut {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 125px;
+  width: 125px;
+  background: black;
+  padding: 5px;
+  clip-path: polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%);
+}
+.profileIconBody {
+  width: 95%;
+  height: 95%;
+  overflow-wrap: break-word;
+  background: white;
+  clip-path: polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%);
+}
+.profileUsername {
+  border-style: solid;
+  border-radius: 50px;
+  padding: 5px 20px 5px 20px;
+  background: white;
+  position: absolute;
+  transform: rotate(-45deg);
+  margin: 85px 0px 0px 70px;
+}
+.generalPost {
+  margin: 55px 0px 25px 0px;
+}
+.postTitleCont {
+  display: flex;
+}
+.postTitleBorder {
+  background: black;
+  padding: 5px;
+  clip-path: polygon(5% 5%, 94% 3%, 98% 25%, 94% 90%, 5% 97%, 1% 60%);
+  position: absolute;
+  z-index: 1;
+  margin-top: -30px;
+}
+.postTitleBody {
+  background: white;
+  clip-path: polygon(5% 5%, 94% 3%, 98% 25%, 94% 90%, 5% 97%, 1% 60%);
+}
+.postTitleBody h4 {
+  padding: 15px 35px 15px 25px;
+}
+.postDateTimeCont {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
-  flex-direction: row;
-  padding: 50px 15px 35px 0px;
 }
-.posts:hover {
-  background: lightgray;
+.postDateTimeBorder {
+  background: black;
+  padding: 5px;
+  clip-path: polygon(5% 5%, 94% 3%, 98% 25%, 94% 90%, 5% 97%, 1% 60%);
+  position: absolute;
+  z-index: 1;
+  margin-top: -1.5%;
 }
-.userIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 85px;
-  height: 85px;
-  background-color: lightsteelblue;
-  border-radius: 50px;
+.postDateTimeBody {
+  background: white;
+  clip-path: polygon(5% 5%, 94% 3%, 98% 25%, 94% 90%, 5% 97%, 1% 60%);
 }
-.mainPostCont,
-.commentCont {
-  width: 100%;
-  margin-left: 15px;
+.postDateTimeBody p {
+  padding: 10px 25px 10px 25px;
 }
-.postBodyCont {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+.generalPostBorder {
+  width: 710px;
+  background: black;
+  padding: 10px;
+  clip-path: polygon(5% 5%, 99% 0%, 95% 98%, 0% 95%);
 }
-.postBody {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+.generalPostBody {
+  background: white;
+  clip-path: polygon(5% 5%, 99% 0%, 95% 98%, 0% 95%);
 }
-.postBody h4,
-.postBody h2,
-.postBody p {
+.generalPostBody p {
+  padding: 30px 30px 30px 45px;
   overflow-wrap: anywhere;
+}
+.iconCont {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  z-index: 1;
+  margin: -25px 0px 0px 25px;
+}
+.iconOut {
+  background: black;
+  padding: 4px;
+  margin: 0px 25px 0px 0px;
+  clip-path: polygon(15% 0%, 0% 25%, 1% 97%, 85% 100%, 99% 75%, 98% 1%);
+}
+.iconBody {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  padding: 10px;
+  height: 10px;
+  clip-path: polygon(20% 0%, 0% 25%, 1% 97%, 80% 100%, 99% 75%, 98% 1%);
+}
+.iconBody p {
+  padding: 0px 0px 0px 0px;
+}
+/* USER STYLE POST */
+.userPostTitleCont {
+  display: flex;
+  justify-content: flex-end;
+}
+.userPostTitleBorder {
+  background: black;
+  padding: 5px;
+  clip-path: polygon(5% 5%, 94% 3%, 98% 25%, 94% 90%, 5% 97%, 1% 60%);
+  position: absolute;
+  z-index: 1;
+  margin: -35px -10px 0px 0px;
+}
+.userPostTitleBody {
+  background: white;
+  clip-path: polygon(5% 5%, 94% 3%, 98% 25%, 94% 90%, 5% 97%, 1% 60%);
+}
+.userPostTitleBody h4 {
+  padding: 15px 35px 15px 25px;
+}
+.userPostBorder {
+  width: 710px;
+  background: black;
+  padding: 10px;
+  clip-path: polygon(0% 0%, 96% 8%, 100% 92%, 7% 100%);
+}
+.userPostBody {
+  background: white;
+  padding: 10px;
+  clip-path: polygon(0% 1%, 97% 3%, 100% 96%, 6% 100%);
+}
+.userPostBody p {
+  padding: 15px 15px 20px 40px;
+  overflow-wrap: anywhere;
+}
+.userPostDateTimeCont {
+  display: flex;
+}
+.userPostDateTimeBorder {
+  background: black;
+  padding: 5px;
+  clip-path: polygon(5% 5%, 94% 3%, 98% 25%, 94% 90%, 5% 97%, 1% 60%);
+  z-index: 1;
+  position: absolute;
+  margin: -1.5% 0px 0px 0.5%;
+}
+.userPostDateTimeBody {
+  background: white;
+  clip-path: polygon(5% 5%, 94% 3%, 98% 25%, 94% 90%, 5% 97%, 1% 60%);
+}
+.userPostDateTimeBody p {
+  padding: 10px 25px 10px 25px;
+}
+.userIconAll {
+  display: flex;
+  justify-content: flex-end;
+}
+.userIconCont {
+  display: flex;
+  position: absolute;
+  z-index: 1;
+  margin: -1.4% 1.25% 0px 0px;
+}
+.userIconOut {
+  background: black;
+  padding: 4px;
+  margin: 0px 0px 0px 10px;
+  clip-path: polygon(15% 0%, 0% 25%, 1% 97%, 85% 100%, 99% 75%, 98% 1%);
+}
+.userIconBody {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 5px 4px 5px;
+  background: white;
+  clip-path: polygon(20% 0%, 0% 25%, 1% 97%, 80% 100%, 99% 75%, 98% 1%);
+}
+.userProfileUsername {
+  border-style: solid;
+  border-radius: 50px;
+  padding: 5px 20px 5px 20px;
+  background: white;
+  position: absolute;
+  transform: rotate(45deg);
+  margin: 80px 0px 0px -70px;
 }
 
 /* THIS IS THE NAVBAR */
@@ -126,40 +272,18 @@
   background: lightgray;
 }
 
-/* THIS IS THE HOME PAGE */
-.homePage {
+/* ----------------------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------- */
+
+/* THIS IS THE MAIN/HOME PAGE */
+.showPostPageCont {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
 }
-.postFormCont {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-}
-#postFormCont {
-  display: none;
-}
-.postForm {
+.showPostPage {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-left: 15px;
-}
-.postForm input,
-.postForm textarea {
-  padding: 10px;
-  margin-bottom: 15px;
-}
-.postForm button {
-  padding: 10px;
-  font-size: 15px;
-}
-.postFormBtnCont {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
 }
 
 /* THIS IS THE RANDOM NEWS */
@@ -652,44 +776,6 @@
 }
 .unBookmarkBtn button:hover {
   background: lightgray;
-}
-
-.testShapeOne {
-  display: flex;
-  align-items: center;
-
-  background: black;
-  padding: 10px;
-  clip-path: polygon(0% 0%, 95% 5%, 100% 100%, 5% 100%);
-}
-.testShape {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 750px;
-  padding: 25px 10px 24px 10px;
-
-  overflow-wrap: break-word;
-  background: white;
-  clip-path: polygon(0% 0%, 95% 5%, 100% 100%, 5% 100%);
-}
-.testShape p {
-  font-size: 16px;
-  width: 85%;
-}
-
-.testShapeTwo {
-  background: black;
-  padding: 10px;
-  clip-path: polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%);
-}
-.testShapes {
-  height: 100px;
-  width: 100px;
-
-  overflow-wrap: break-word;
-  background: white;
-  clip-path: polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%);
 }
 
 /* THIS IS TEST DESIGN FOR THREADS */

@@ -104,7 +104,10 @@ function App() {
               element={
                 <>
                   <div className="mainPage">
-                    <Explore />
+                    <Explore
+                      currentUser={currentUser}
+                      isLoggedIn={isLoggedIn}
+                    />
                   </div>
                 </>
               }
