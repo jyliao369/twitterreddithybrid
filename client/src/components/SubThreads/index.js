@@ -133,39 +133,30 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
         <></>
       )}
 
-      {/* <div>
-        {threadList.map((thread) => (
-          <div key={thread.subthreadID} className="subthreadsCont">
-            <Link to={`/subthread/${thread.subthreadID}`}>
-              <div className="subthreadInfoCont">
-                <div className="userIconCont">
-                  <div className="userIcon" />
-                </div>
-                <div className="subthreadInfo">
-                  <h3>/{thread.threadName}</h3>
-                  <p>{thread.threadDesc}</p>
-                </div>
-              </div>
-            </Link>
-          </div>
-        ))}
-      </div> */}
-
-      <div className="threadThemeCont">
+      <div className="allThreadsCont">
         {threadList.map((thread) => (
           <div className="threadBannerCont">
-            <div className="threadBannerTitleOut">
-              <div className="threadBannerTitleIn">
+            <div className="threadTitleBorder">
+              <div className="threadTitleBody">
                 <h3>/{thread.threadName}</h3>
               </div>
             </div>
+
             <Link to={`/subthread/${thread.subthreadID}`}>
-              <div className="threadBannerOut">
-                <div className="threadBannerIn">
+              <div className="threadBorder">
+                <div className="threadBody">
                   <p>{thread.threadDesc}</p>
                 </div>
               </div>
             </Link>
+
+            <div className="threadDateTimeCont">
+              <div className="threadDateTimeBorder">
+                <div className="threadDateTimeBody">
+                  <p>Posted on {thread.dateTime}</p>
+                </div>
+              </div>
+            </div>
           </div>
         ))}
       </div>
