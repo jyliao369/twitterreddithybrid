@@ -153,7 +153,7 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
 
       <div className="threadThemeCont">
         {threadList.map((thread) => (
-          <div className="eachThreadTheme">
+          <div className="threadBannerCont">
             <div className="threadBannerTitleOut">
               <div className="threadBannerTitleIn">
                 <h3>/{thread.threadName}</h3>

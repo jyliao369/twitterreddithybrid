@@ -26,23 +26,9 @@ const Profile = ({ currentUser, isLoggedIn }) => {
   };
 
   const showUsersPost = () => {
-    document.getElementById(`usersComments`).style.display = "none";
-    document.getElementById(`usersPosts`).style.display = "flex";
-    document.getElementById(`usersThreads`).style.display = "none";
-  };
-
-  const showUsersThread = () => {
-    console.log("My threads");
-    Axios.get(`http://localhost:3001/threads/${currentUser.userID}`, {}).then(
-      (response) => {
-        console.log(response);
-        setUsersThread(response.data);
-      }
-    );
-
-    document.getElementById(`usersComments`).style.display = "none";
-    document.getElementById(`usersPosts`).style.display = "none";
-    document.getElementById(`usersThreads`).style.display = "flex";
+    document.getElementById(`allUsersComments`).style.display = "none";
+    document.getElementById(`allUsersPosts`).style.display = "flex";
+    document.getElementById(`allUsersThreads`).style.display = "none";
   };
 
   const showUsersComment = () => {
@@ -54,9 +40,23 @@ const Profile = ({ currentUser, isLoggedIn }) => {
       setUsersComment(response.data.reverse());
     });
 
-    document.getElementById(`usersComments`).style.display = "flex";
-    document.getElementById(`usersPosts`).style.display = "none";
-    document.getElementById(`usersThreads`).style.display = "none";
+    document.getElementById(`allUsersPosts`).style.display = "none";
+    document.getElementById(`allUsersThreads`).style.display = "none";
+    document.getElementById(`allUsersComments`).style.display = "flex";
+  };
+
+  const showUsersThread = () => {
+    console.log("My threads");
+    Axios.get(`http://localhost:3001/threads/${currentUser.userID}`, {}).then(
+      (response) => {
+        console.log(response);
+        setUsersThread(response.data);
+      }
+    );
+
+    document.getElementById(`allUsersComments`).style.display = "none";
+    document.getElementById(`allUsersPosts`).style.display = "none";
+    document.getElementById(`allUsersThreads`).style.display = "flex";
   };
 
   useEffect(() => {
@@ -96,7 +96,7 @@ const Profile = ({ currentUser, isLoggedIn }) => {
       </div>
 
       {usersPosts.length > 0 ? (
-        <div className="usersPosts" id="usersPosts">
+        <div className="allUsersPosts" id="allUsersPosts">
           {usersPosts.map((post) => (
             <div className="postAllCont">
               <div className="generalPost">
@@ -153,7 +153,7 @@ const Profile = ({ currentUser, isLoggedIn }) => {
         </div>
       ) : (
         <>
-          <div className="usersPosts" id="usersPosts">
+          <div className="allUsersPosts" id="allUsersPosts">
             <div className="notification">
               <p>
                 You have no posts. Have something you want to share? Check out
@@ -165,41 +165,43 @@ const Profile = ({ currentUser, isLoggedIn }) => {
       )}
 
       {usersComment.length > 0 ? (
-        <>
-          <div className="usersPosts" id="usersComments">
-            {usersComment.map((comment) => (
-              <div key={comment.commentID} className="userPost">
-                <Link to={`/post/${comment.postID}`}>
-                  <div className="userCommentCont">
-                    <div className="userIconCont">
-                      <div className="userIcon" />
-                    </div>
-                    <div className="userPostMain">
-                      <p>{comment.commentBody}</p>
-                    </div>
-                  </div>
-                </Link>
-                {/* <div className="editBtn">
-                  <button
-                    value={comment.postID}
-                    onClick={(e) => updatePost(e.target.value)}
-                  >
-                    Update
-                  </button>
-                  <button
-                    value={comment.postID}
-                    onClick={(e) => deletePost(e.target.value)}
-                  >
-                    Delete
-                  </button>
-                </div> */}
+        <div className="allUsersComments" id="allUsersComments">
+          {usersComment.map((comment) => (
+            <div key={comment.commentID} className="commentCont">
+              <div className="profileAllCont">
+                <div className="profileIconOut">
+                  <div className="profileIconBody"></div>
+                </div>
+                <div className="profileUsername">
+                  <p>{comment.username}</p>
+                </div>
               </div>
-            ))}
-          </div>
-        </>
+              <div className="commentThemeOut">
+                <div className="commentThemeBody">
+                  <p>{comment.commentBody}</p>
+                </div>
+              </div>
+            </div>
+
+            //   <div className="editBtn">
+            //     <button
+            //       value={comment.postID}
+            //       onClick={(e) => updatePost(e.target.value)}
+            //     >
+            //       Update
+            //     </button>
+            //     <button
+            //       value={comment.postID}
+            //       onClick={(e) => deletePost(e.target.value)}
+            //     >
+            //       Delete
+            //     </button>
+            //   </div>
+          ))}
+        </div>
       ) : (
         <>
-          <div className="usersPosts" id="usersComments">
+          <div className="allUsersComments" id="allUsersComments">
             <div className="notification">
               <p>
                 You have no comments. Share your thoughts and ideas on what
@@ -211,44 +213,42 @@ const Profile = ({ currentUser, isLoggedIn }) => {
       )}
 
       {usersThread.length > 0 ? (
-        <>
-          <div className="usersThread" id="usersThreads">
-            {usersThread.map((thread) => (
-              <div className="eachThreadTheme">
-                <div className="threadBannerTitleOut">
-                  <div className="threadBannerTitleIn">
-                    <h3>/{thread.threadName}</h3>
+        <div className="allUsersThreads" id="allUsersThreads">
+          {usersThread.map((thread) => (
+            <div className="threadBannerCont">
+              <div className="threadBannerTitleOut">
+                <div className="threadBannerTitleIn">
+                  <h3>/{thread.threadName}</h3>
+                </div>
+              </div>
+              <Link to={`/subthread/${thread.subthreadID}`}>
+                <div className="threadBannerOut">
+                  <div className="threadBannerIn">
+                    <p>{thread.threadDesc}</p>
                   </div>
                 </div>
-                <Link to={`/subthread/${thread.subthreadID}`}>
-                  <div className="threadBannerOut">
-                    <div className="threadBannerIn">
-                      <p>{thread.threadDesc}</p>
-                    </div>
-                  </div>
-                </Link>
-              </div>
+              </Link>
+            </div>
 
-              // {isLoggedIn ? (
-              //       <button
-              //         value={[
-              //           thread.subthreadID,
-              //           thread.threadName,
-              //           thread.threadDesc,
-              //         ]}
-              //         onClick={(e) => joinThread(e.target.value)}
-              //       >
-              //         Join
-              //       </button>
-              //     ) : (
-              //       <></>
-              //     )}
-            ))}
-          </div>
-        </>
+            // {isLoggedIn ? (
+            //       <button
+            //         value={[
+            //           thread.subthreadID,
+            //           thread.threadName,
+            //           thread.threadDesc,
+            //         ]}
+            //         onClick={(e) => joinThread(e.target.value)}
+            //       >
+            //         Join
+            //       </button>
+            //     ) : (
+            //       <></>
+            //     )}
+          ))}
+        </div>
       ) : (
         <>
-          <div className="usersThreads" id="usersThreads">
+          <div className="allUsersThreads" id="allUsersThreads">
             <div className="notification">
               <p>
                 You have no threads. Create a thread and find like-minded

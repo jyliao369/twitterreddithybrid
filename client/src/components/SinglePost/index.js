@@ -131,17 +131,17 @@ const SinglePost = ({ currentUser, isLoggedIn }) => {
       {comments.length > 0 ? (
         <>
           {comments.map((comment) => (
-            <div key={comment.commentID} className="comments">
-              <div className="userIconCont">
-                <div className="userIcon" />
+            <div key={comment.commentID} className="commentCont">
+              <div className="profileAllCont">
+                <div className="profileIconOut">
+                  <div className="profileIconBody"></div>
+                </div>
+                <div className="profileUsername">
+                  <p>{comment.username}</p>
+                </div>
               </div>
-              <div className="commentCont">
-                <div className="commentBody">
-                  <h3>
-                    Comment OP {comment.username} Comment OP ID {comment.userID}
-                  </h3>
-                  <h4>{comment.commentID}</h4>
-
+              <div className="commentThemeOut">
+                <div className="commentThemeBody">
                   <p>{comment.commentBody}</p>
                 </div>
               </div>
@@ -155,20 +155,6 @@ const SinglePost = ({ currentUser, isLoggedIn }) => {
           </div>
         </>
       )}
-
-      {comments.map((comment) => (
-        <div key={comment.commentID} className="comments">
-          <div className="commentThemeOut">
-            <div className="commentThemeIn">
-              <p>{comment.commentBody}</p>
-            </div>
-          </div>
-
-          <div className="testShapeTwo">
-            <div className="testShapes"></div>
-          </div>
-        </div>
-      ))}
     </div>
   );
 };
