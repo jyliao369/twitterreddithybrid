@@ -86,59 +86,91 @@ const Register = ({
 
   return (
     <div className="logRegCont">
-      <div className="regFormCont">
-        <h1>Register</h1>
+      <div className="regFormBorder">
+        <div className="regFormBody">
+          <h1>Register</h1>
 
-        <div className="status">
-          <p>{regStatus}</p>
-        </div>
-
-        <div className="regForm">
-          <div className="regFormOne">
-            <input
-              placeholder="Username"
-              onChange={(e) => setUsernameReg(e.target.value)}
-              value={usernameReg}
-            />
-            <input
-              placeholder="Last Name"
-              onChange={(e) => setLastNameReg(e.target.value)}
-              value={lastNameReg}
-            />
-            <input
-              placeholder="First Name"
-              onChange={(e) => setFirstNameReg(e.target.value)}
-              value={firstNameReg}
-            />
+          <div className="status">
+            <p>{regStatus}</p>
           </div>
-          <div className="regFormOne">
-            <input
-              placeholder="Email"
-              onChange={(e) => setEmailReg(e.target.value)}
-              value={emailReg}
-            />
-            <input
-              placeholder="Password"
-              type={"password"}
-              onChange={(e) => setPassReg(e.target.value)}
-              value={passReg}
-            />
-            <input
-              placeholder="Re-Type Password"
-              type={"password"}
-              onChange={(e) => setRetypePassReg(e.target.value)}
-              value={retypePassReg}
-            />
+
+          <div className="inputCont">
+            <div className="regFormCont">
+              <div className="regForm">
+                <div className="inputOut">
+                  <div className="inputBody">
+                    <input
+                      placeholder="Username"
+                      onChange={(e) => setUsernameReg(e.target.value)}
+                      value={usernameReg}
+                    />
+                  </div>
+                </div>
+                <div className="inputOut">
+                  <div className="inputBody">
+                    <input
+                      placeholder="Last Name"
+                      onChange={(e) => setLastNameReg(e.target.value)}
+                      value={lastNameReg}
+                    />
+                  </div>
+                </div>
+                <div className="inputOut">
+                  <div className="inputBody">
+                    <input
+                      placeholder="First Name"
+                      onChange={(e) => setFirstNameReg(e.target.value)}
+                      value={firstNameReg}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="regForm">
+                <div className="inputOut">
+                  <div className="inputBody">
+                    <input
+                      placeholder="Email"
+                      onChange={(e) => setEmailReg(e.target.value)}
+                      value={emailReg}
+                    />
+                  </div>
+                </div>
+                <div className="inputOut">
+                  <div className="inputBody">
+                    <input
+                      placeholder="Password"
+                      type={"password"}
+                      onChange={(e) => setPassReg(e.target.value)}
+                      value={passReg}
+                    />
+                  </div>
+                </div>
+                <div className="inputOut">
+                  <div className="inputBody">
+                    <input
+                      placeholder="Re-Type Password"
+                      type={"password"}
+                      onChange={(e) => setRetypePassReg(e.target.value)}
+                      value={retypePassReg}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={register}
+              style={{ cursor: "pointer" }}
+              to="/profile"
+            >
+              Register
+            </button>
+
+            <h4>Have an Account?</h4>
+            <Link to={"/login"}>Log in here</Link>
           </div>
         </div>
-        <button onClick={register} style={{ cursor: "pointer" }} to="/profile">
-          Register
-        </button>
-
-        <br />
-
-        <h4>Have an Account?</h4>
-        <Link to={"/login"}>Log in here</Link>
       </div>
     </div>
   );

@@ -205,18 +205,18 @@ const Navbar = ({ setCurrentUser, currentUser, setIsLoggedIn, isLoggedIn }) => {
       </div>
 
       {isLoggedIn ? (
-        <div className="userIconCont">
+        <div className="logInOut">
           <Link to="/" onClick={logout}>
-            <div className="userIcon">
-              <LoginOutlinedIcon sx={{ fontSize: "40px" }} />
+            <div className="logInOutIcon">
+              <LoginOutlinedIcon sx={{ fontSize: "35px" }} />
             </div>
           </Link>
         </div>
       ) : (
-        <div className="userIconCont">
+        <div className="logInOut">
           <Link to="/login">
-            <div className="userIcon">
-              <LoginIcon sx={{ fontSize: "40px" }} />
+            <div className="logInOutIcon">
+              <LoginIcon sx={{ fontSize: "35px" }} />
             </div>
           </Link>
         </div>

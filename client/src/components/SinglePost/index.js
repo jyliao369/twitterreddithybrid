@@ -129,7 +129,7 @@ const SinglePost = ({ currentUser, isLoggedIn }) => {
       )}
 
       {comments.length > 0 ? (
-        <>
+        <div className="allPostComments">
           {comments.map((comment) => (
             <div key={comment.commentID} className="commentCont">
               <div className="profileAllCont">
@@ -147,7 +147,7 @@ const SinglePost = ({ currentUser, isLoggedIn }) => {
               </div>
             </div>
           ))}
-        </>
+        </div>
       ) : (
         <>
           <div className="notification">

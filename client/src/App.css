@@ -281,7 +281,7 @@
 .navbarBtns {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   width: 50%;
 }
 .navbarChoices {
@@ -300,6 +300,16 @@
 }
 .navbarChoices:hover {
   background: lightgray;
+}
+.logInOut {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-style: solid;
+  border-radius: 50px;
+  padding: 15px;
 }
 
 /* THIS IS THE MAIN/HOME PAGE */
@@ -373,53 +383,65 @@
 .logRegCont {
   display: flex;
   justify-content: center;
+  margin: 10% 0px 0px 0px;
 }
-.loginFormCont,
-.regFormCont {
+.loginFormBorder {
+  padding: 10px;
+  background: black;
+  clip-path: polygon(0% 10%, 15% 0%, 100% 0%, 100% 90%, 85% 100%, 0% 100%);
+}
+.loginFormBody {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 450px;
-  border-style: solid;
-  border-width: thin;
-  border-radius: 5px;
-  padding: 20px;
-  margin-top: 100px;
+  width: 400px;
+  height: 385px;
+  padding: 40px;
+  background: white;
+  clip-path: polygon(4% 14%, 14% 3%, 100% 0%, 96% 87%, 85% 97%, 0% 100%);
 }
-.loginFormCont h1,
-.regFormCont h1 {
-  margin-bottom: 20px;
-}
-.status {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-}
-.loginForm {
+.inputCont {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.loginForm input,
-.regForm input {
+.inputOut {
   padding: 10px;
-  margin: 20px;
+  margin: 0px 10px 10px 10px;
+  background: black;
+  clip-path: polygon(7% 5%, 105% 5%, 95% 93%, -6% 98%);
 }
-.loginForm button,
-.regForm button {
-  padding: 10px;
+.inputBody {
+  background: white;
+  clip-path: polygon(5% 0%, 105% 0%, 95% 100%, -5% 100%);
+}
+.inputBody input {
+  padding: 15px 15px 15px 15px;
   font-size: 15px;
-  margin-bottom: 20px;
+  border: none;
+  outline: none;
 }
-.regForm {
-  display: flex;
-  flex-direction: row;
+.inputCont button {
+  margin: 15px 0px 15px 0px;
 }
-.regFormOne {
+.regFormBorder {
+  padding: 8px;
+  background: black;
+  clip-path: polygon(0% 10%, 15% 0%, 100% 0%, 100% 90%, 85% 100%, 0% 100%);
+}
+.regFormBody {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 450px;
+  padding: 45px;
+  background: white;
+  clip-path: polygon(4% 14%, 14% 3%, 100% 0%, 96% 87%, 85% 97%, 0% 100%);
+}
+.regFormCont {
+  display: flex;
 }
 
 /* THIS IS FOR A SINGLE POST PAGE */
@@ -459,6 +481,10 @@
 .replyPost button {
   padding: 10px;
   margin-left: 15px;
+}
+.allPostComments {
+  display: flex;
+  justify-content: center;
 }
 
 /* THIS IS FOR PROFILE PAGE */
@@ -511,12 +537,18 @@
 .categoriesCont div:hover {
   background-color: lightgray;
 }
-#allUsersPosts,
-#allUsersComments,
-#allUsersThreads {
+.allUsersPosts,
+.allUsersComments,
+.allUsersThreads {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+#allUsersComments {
+  display: none;
+}
+#allUsersThreads {
+  display: none;
 }
 
 /* THIS IS FOR EXPLORE PAGE */

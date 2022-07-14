@@ -41,33 +41,43 @@ const Login = ({ setCurrentUser, currentUser, setIsLoggedIn, isLoggedIn }) => {
 
   return (
     <div className="logRegCont">
-      <div className="loginFormCont">
-        <h1>Log In</h1>
+      <div className="loginFormBorder">
+        <div className="loginFormBody">
+          <h1>Log In</h1>
 
-        <div className="status">
-          <p>{loginStatus}</p>
-        </div>
+          <div className="status">
+            <p>{loginStatus}</p>
+          </div>
 
-        <div className="loginForm">
-          <input
-            placeholder="Email"
-            value={emailLogin}
-            onChange={(e) => setEmailLogin(e.target.value)}
-          />
-          <input
-            placeholder="Password"
-            type={"password"}
-            value={passLogin}
-            onChange={(e) => setPassLogin(e.target.value)}
-          />
-          <button onClick={login} style={{ cursor: "pointer" }} to="/profile">
-            Log In
-          </button>
+          <div className="inputCont">
+            <div className="inputOut">
+              <div className="inputBody">
+                <input
+                  placeholder="Email"
+                  value={emailLogin}
+                  onChange={(e) => setEmailLogin(e.target.value)}
+                />
+              </div>
+            </div>
 
-          <br />
+            <div className="inputOut">
+              <div className="inputBody">
+                <input
+                  placeholder="Password"
+                  type={"password"}
+                  value={passLogin}
+                  onChange={(e) => setPassLogin(e.target.value)}
+                />
+              </div>
+            </div>
 
-          <h4>No Account?</h4>
-          <Link to={"/register"}>Register here</Link>
+            <button onClick={login} style={{ cursor: "pointer" }} to="/profile">
+              Log In
+            </button>
+
+            <h4>No Account?</h4>
+            <Link to={"/register"}>Register here</Link>
+          </div>
         </div>
       </div>
     </div>
