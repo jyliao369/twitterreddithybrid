@@ -11,6 +11,8 @@ const Profile = ({ currentUser, isLoggedIn }) => {
   const [usersThread, setUsersThread] = useState([]);
   const [usersComment, setUsersComment] = useState([]);
 
+  const [isLoading, setIsLoading] = useState(true);
+
   const navToUpdate = useNavigate();
 
   const deletePost = (postID) => {
@@ -26,9 +28,9 @@ const Profile = ({ currentUser, isLoggedIn }) => {
   };
 
   const showUsersPost = () => {
-    document.getElementById(`allUsersComments`).style.display = "none";
-    document.getElementById(`allUsersPosts`).style.display = "flex";
-    document.getElementById(`allUsersThreads`).style.display = "none";
+    document.getElementById("allUsersPosts").style.display = "flex";
+    document.getElementById("allUsersComments").style.display = "none";
+    document.getElementById("allUsersThreads").style.display = "none";
   };
 
   const showUsersComment = () => {
@@ -40,23 +42,23 @@ const Profile = ({ currentUser, isLoggedIn }) => {
       setUsersComment(response.data.reverse());
     });
 
-    document.getElementById(`allUsersPosts`).style.display = "none";
-    document.getElementById(`allUsersThreads`).style.display = "none";
-    document.getElementById(`allUsersComments`).style.display = "flex";
+    document.getElementById("allUsersPosts").style.display = "none";
+    document.getElementById("allUsersComments").style.display = "flex";
+    document.getElementById("allUsersThreads").style.display = "none";
   };
 
   const showUsersThread = () => {
-    console.log("My threads");
     Axios.get(`http://localhost:3001/threads/${currentUser.userID}`, {}).then(
       (response) => {
         console.log(response);
         setUsersThread(response.data);
+        setIsLoading(false);
       }
     );
 
-    document.getElementById(`allUsersComments`).style.display = "none";
-    document.getElementById(`allUsersPosts`).style.display = "none";
-    document.getElementById(`allUsersThreads`).style.display = "flex";
+    document.getElementById("allUsersPosts").style.display = "none";
+    document.getElementById("allUsersComments").style.display = "none";
+    document.getElementById("allUsersThreads").style.display = "flex";
   };
 
   useEffect(() => {
@@ -98,7 +100,7 @@ const Profile = ({ currentUser, isLoggedIn }) => {
       {usersPosts.length > 0 ? (
         <div className="allUsersPosts" id="allUsersPosts">
           {usersPosts.map((post) => (
-            <div className="postAllCont">
+            <div key={post.postID} className="postAllCont">
               <div className="generalPost">
                 <div className="userPostTitleCont">
                   <div className="userPostTitleBorder">
@@ -152,16 +154,14 @@ const Profile = ({ currentUser, isLoggedIn }) => {
           ))}
         </div>
       ) : (
-        <>
-          <div className="allUsersPosts" id="allUsersPosts">
-            <div className="notification">
-              <p>
-                You have no posts. Have something you want to share? Check out
-                the different threads and share your thoughts.
-              </p>
-            </div>
+        <div className="allUsersPosts" id="allUsersPosts">
+          <div className="notification">
+            <p>
+              You have no posts. Have something you want to share? Check out the
+              different threads and share your thoughts.
+            </p>
           </div>
-        </>
+        </div>
       )}
 
       {usersComment.length > 0 ? (
@@ -200,34 +200,41 @@ const Profile = ({ currentUser, isLoggedIn }) => {
           ))}
         </div>
       ) : (
-        <>
-          <div className="allUsersComments" id="allUsersComments">
-            <div className="notification">
-              <p>
-                You have no comments. Share your thoughts and ideas on what
-                other people have said.
-              </p>
-            </div>
+        <div className="allUsersComments" id="allUsersComments">
+          <div className="notification">
+            <p>
+              You have no comments. Share your thoughts and ideas on what other
+              people have said.
+            </p>
           </div>
-        </>
+        </div>
       )}
 
       {usersThread.length > 0 ? (
         <div className="allUsersThreads" id="allUsersThreads">
           {usersThread.map((thread) => (
-            <div className="threadBannerCont">
-              <div className="threadBannerTitleOut">
-                <div className="threadBannerTitleIn">
+            <div key={thread.subthreadID} className="threadBannerCont">
+              <div className="threadTitleBorder">
+                <div className="threadTitleBody">
                   <h3>/{thread.threadName}</h3>
                 </div>
               </div>
+
               <Link to={`/subthread/${thread.subthreadID}`}>
-                <div className="threadBannerOut">
-                  <div className="threadBannerIn">
+                <div className="threadBorder">
+                  <div className="threadBody">
                     <p>{thread.threadDesc}</p>
                   </div>
                 </div>
               </Link>
+
+              <div className="threadDateTimeCont">
+                <div className="threadDateTimeBorder">
+                  <div className="threadDateTimeBody">
+                    <p>Posted on {thread.dateTime}</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             // {isLoggedIn ? (
@@ -247,17 +254,15 @@ const Profile = ({ currentUser, isLoggedIn }) => {
           ))}
         </div>
       ) : (
-        <>
-          <div className="allUsersThreads" id="allUsersThreads">
-            <div className="notification">
-              <p>
-                You have no threads. Create a thread and find like-minded
-                individuals. Check out the threads section first before you
-                create a new thread as there may be one already created.
-              </p>
-            </div>
+        <div className="allUsersThreads" id="allUsersThreads">
+          <div className="notification">
+            <p>
+              You have no threads. Create a thread and find like-minded
+              individuals. Check out the threads section first before you create
+              a new thread as there may be one already created.
+            </p>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

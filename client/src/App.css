@@ -615,15 +615,23 @@
 .categoriesCont div:hover {
   background-color: lightgray;
 }
-.allUsersPosts,
-.allUsersComments,
-.allUsersThreads {
+.allUsersPosts {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.allUsersComments {
+  display: none;
   flex-direction: column;
   align-items: center;
 }
 #allUsersComments {
   display: none;
+}
+.allUsersThreads {
+  display: none;
+  flex-direction: column;
+  align-items: center;
 }
 #allUsersThreads {
   display: none;
