@@ -32,6 +32,10 @@ const Explore = ({ currentUser, isLoggedIn }) => {
     setSearch("");
   };
 
+  const resetPosts = () => {
+    setShowedPosts(allPosts);
+  };
+
   useEffect(() => {
     Axios.get("http://localhost:3001/getAllPosts", {}).then((response) => {
       setAllPosts(response.data);
@@ -46,14 +50,45 @@ const Explore = ({ currentUser, isLoggedIn }) => {
         <div>Explore</div>
       </div>
 
-      <div className="searchPage">
-        <input
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search"
-        />
-        <button onClick={searchPosts}>search</button>
-        <button onClick={() => setShowedPosts(allPosts)}>reset</button>
+      <div className="postSearchInputCont">
+        <div className="postSearchInputBorder">
+          <div className="postSearchInputBody">
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search"
+            />
+          </div>
+        </div>
+
+        <div className="searchBtnAllCont">
+          <div className="searchBtnCont">
+            <div className="threadSearchBtnBorder">
+              {search !== "" ? (
+                <div
+                  className="threadSearchBtnBody"
+                  style={{ cursor: "pointer" }}
+                  onClick={searchPosts}
+                >
+                  Search
+                </div>
+              ) : (
+                <div className="threadSearchBtnBody" disabled={true}>
+                  Search
+                </div>
+              )}
+            </div>
+            <div className="threadSearchBtnBorder">
+              <div
+                className="threadSearchBtnBody"
+                style={{ cursor: "pointer" }}
+                onClick={resetPosts}
+              >
+                Reset
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {isLoggedIn ? (
@@ -168,7 +203,7 @@ const Explore = ({ currentUser, isLoggedIn }) => {
       ) : (
         <div className="showPostPageCont">
           <div className="showPostPage">
-            {allPosts.map((post) => (
+            {showedPosts.map((post) => (
               <div key={post.postID} className="postAllCont">
                 <div className="profileAllCont">
                   <div className="profileIconOut">

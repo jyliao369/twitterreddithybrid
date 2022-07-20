@@ -8,26 +8,21 @@ import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBullet
 const SubThread = ({ currentUser, isLoggedIn }) => {
   const [threadName, setThreadName] = useState("");
   const [threadDesc, setThreadDesc] = useState("");
-  const [status, setStatus] = useState("");
 
   const [threadList, setThreadList] = useState([]);
 
   const [searchThread, setSearchThread] = useState("");
 
   const openThreadForm = () => {
-    console.log("opening threadform");
     if (
-      document.getElementById("createThread").style.display === "" ||
-      document.getElementById("createThread").style.display === "none"
+      document.getElementById("createThreadFormCont").style.display === "" ||
+      document.getElementById("createThreadFormCont").style.display === "none"
     ) {
-      console.log(true);
-      document.getElementById("createThread").style.display = "flex";
-      document.getElementById("createThreadBtn").style.display = "none";
+      document.getElementById("createThreadFormCont").style.display = "flex";
     } else if (
-      document.getElementById("createThread").style.display === "flex"
+      document.getElementById("createThreadFormCont").style.display === "flex"
     ) {
-      document.getElementById("createThread").style.display = "none";
-      document.getElementById("createThreadBtn").style.display = "flex";
+      document.getElementById("createThreadFormCont").style.display = "none";
     }
   };
 
@@ -53,32 +48,49 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
       threadName: threadName,
       threadDesc: threadDesc,
       dateTime: todayDates + " " + todayTime,
+    }).then(() => {
+      Axios.get("http://localhost:3001/allThread", {}).then((response) => {
+        console.log(response);
+        setThreadList(response.data.reverse());
+      });
+
+      setThreadName("");
+      setThreadDesc("");
+      document.getElementById("createThreadFormCont").style.display = "none";
     });
   };
 
-  // const joinThread = (thread) => {
-  //   Axios.post(`http://localhost:3001/jointhread`, {
-  //     userID: currentUser.userID,
-  //     subthreadID: thread.split(",")[0],
-  //     threadName: thread.split(",")[1],
-  //     threadDesc: thread.split(",")[2],
-  //   }).then((response) => console.log(response));
-  // };
-
   const search = () => {
-    console.log(searchThread);
-    console.log(threadList);
+    let filteredThreads = [];
     // console.log(string.includes(word));
+
     for (let a = 0; a < threadList.length; a++) {
       console.log(threadList[a].threadName);
+      console.log(threadList[a].threadName.includes(searchThread));
+      if (threadList[a].threadName.includes(searchThread)) {
+        filteredThreads.push(threadList[a]);
+      } else if (threadList[a].threadDesc.includes(searchThread)) {
+        filteredThreads.push(threadList[a]);
+      }
     }
+
+    console.log(filteredThreads);
+    setThreadList(filteredThreads);
+  };
+
+  const resetSearch = () => {
+    console.log("hello");
+    Axios.get("http://localhost:3001/allThread", {}).then((response) => {
+      console.log(response);
+      setThreadList(response.data.reverse());
+    });
   };
 
   useEffect(() => {
     Axios.get("http://localhost:3001/allThread", {}).then((response) => {
       setThreadList(response.data.reverse());
     });
-  }, [threadList]);
+  }, []);
 
   return (
     <div>
@@ -89,43 +101,102 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
         <div>All Threads</div>
       </div>
 
-      <div className="searchPage">
-        <input
-          value={searchThread}
-          onChange={(e) => setSearchThread(e.target.value)}
-          placeholder="Search"
-        />
-        <div style={{ cursor: "pointer" }} onClick={search}>
-          Search
+      <div className="threadSearchPage">
+        <div className="threadSearchInputCont">
+          <div className="threadSearchInputBorder">
+            <div className="threadSearchInputBody">
+              <input
+                value={searchThread}
+                onChange={(e) => setSearchThread(e.target.value)}
+                placeholder="Search"
+              />
+            </div>
+          </div>
+
+          <div className="threadSearchAllBtnCont">
+            <div className="threadSearchAllBtn">
+              {searchThread !== "" ? (
+                <div
+                  className="threadSearchBtnBorder"
+                  style={{ cursor: "pointer" }}
+                  onClick={search}
+                >
+                  <div className="threadSearchBtnBody">
+                    <p>Search</p>
+                  </div>
+                </div>
+              ) : (
+                <div className="threadSearchBtnBorder">
+                  <div className="threadSearchBtnBody">
+                    <p>Search</p>
+                  </div>
+                </div>
+              )}
+
+              <div
+                className="threadSearchBtnBorder"
+                style={{ cursor: "pointer" }}
+              >
+                <div className="threadSearchBtnBody" onClick={resetSearch}>
+                  <p>Reset</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div style={{ cursor: "pointer" }}>Reset</div>
+
+        {isLoggedIn ? (
+          <div
+            className="createThreadBtnBorder"
+            style={{ cursor: "pointer" }}
+            onClick={openThreadForm}
+          >
+            <div className="createThreadBtnBody">
+              <p>+Thread</p>
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
 
       {isLoggedIn ? (
-        <div className="createThreadCont">
-          <div
-            className="createThreadBtn"
-            id="createThreadBtn"
-            onClick={openThreadForm}
-          >
-            <h2>Create a Thread</h2>
-          </div>
-          <div className="createThread" id="createThread">
-            <input
-              value={threadName}
-              onChange={(e) => setThreadName(e.target.value)}
-              placeholder="Name of Sub-Thread"
-            />
-            <textarea
-              value={threadDesc}
-              onChange={(e) => setThreadDesc(e.target.value)}
-              rows={"5"}
-              placeholder="Description of Thread"
-            />
-            <div className="createBtnCont">
-              <div onClick={createThread}>Create Thread</div>
-              <>{status}</>
-              <div onClick={openThreadForm}>Cancel</div>
+        <div className="createThreadFormCont" id="createThreadFormCont">
+          <div className="createThreadForm">
+            <div className="createThreadTitleBorder">
+              <div className="createThreadTitleBody">
+                <input
+                  value={threadName}
+                  onChange={(e) => setThreadName(e.target.value)}
+                  placeholder="Name of Sub-Thread"
+                />
+              </div>
+            </div>
+            <div className="createThreadDescBorder">
+              <div className="createThreadDescBody">
+                <textarea
+                  value={threadDesc}
+                  onChange={(e) => setThreadDesc(e.target.value)}
+                  rows={"5"}
+                  placeholder="Description of Thread"
+                />
+              </div>
+            </div>
+
+            <div className="createThreadBtnAllCont">
+              <div className="createThreadBtnAll">
+                {threadName !== "" && threadDesc !== "" ? (
+                  <div onClick={createThread} style={{ cursor: "pointer" }}>
+                    Create Thread
+                  </div>
+                ) : (
+                  <div disabled={false}>Create</div>
+                )}
+
+                <div onClick={openThreadForm} style={{ cursor: "pointer" }}>
+                  Cancel
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -135,7 +206,7 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
 
       <div className="allThreadsCont">
         {threadList.map((thread) => (
-          <div className="threadBannerCont">
+          <div key={thread.subthreadID} className="threadBannerCont">
             <div className="threadTitleBorder">
               <div className="threadTitleBody">
                 <h3>/{thread.threadName}</h3>

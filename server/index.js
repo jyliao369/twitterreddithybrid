@@ -85,7 +85,6 @@ app.post("/login", (req, res) => {
   const password = req.body.password;
 
   db.query("SELECT * FROM user_table WHERE email = ?", email, (err, result) => {
-    console.log(result.length > 0);
     if (result.length <= 0) {
       res.send({ message: "There is no account associated with this email." });
     }
@@ -180,9 +179,7 @@ app.put("/updatePost/:postID", (req, res) => {
   const updateTitle = req.body.title;
   const updatePostBody = req.body.postBody;
   const updateID = req.params.postID;
-  //   console.log(
-  //     `UPDATE posts_table SET title = ${updateTitle}, postBody = ${updatePostBody}, WHERE postID = ${updateID}`
-  //   );
+
   db.query(
     `UPDATE posts_table SET title = "${updateTitle}", postBody = "${updatePostBody}" WHERE postID = ${updateID}`,
     (err, result) => {
@@ -205,20 +202,6 @@ app.post("/addPost", (req, res) => {
   const postBody = req.body.postBody;
   const subthreadID = req.body.subthreadID;
   const dateTime = req.body.dateTime;
-
-  console.log(
-    userID +
-      " " +
-      username +
-      " " +
-      title +
-      " " +
-      postBody +
-      " " +
-      subthreadID +
-      " " +
-      dateTime
-  );
 
   db.query(
     "INSERT INTO posts_table (userID, username, title, postBody, subthreadID, dateTime) VALUES (?,?,?,?,?,?)",
@@ -290,9 +273,7 @@ app.put("/updatePost/:postID", (req, res) => {
   const updateTitle = req.body.title;
   const updatePostBody = req.body.postBody;
   const updateID = req.params.postID;
-  //   console.log(
-  //     `UPDATE posts_table SET title = ${updateTitle}, postBody = ${updatePostBody}, WHERE postID = ${updateID}`
-  //   );
+
   db.query(
     `UPDATE posts_table SET title = "${updateTitle}", postBody = "${updatePostBody}" WHERE postID = ${updateID}`,
     (err, result) => {
@@ -309,7 +290,6 @@ app.put("/updatePost/:postID", (req, res) => {
 // THAT GO WITH IT
 app.get("/post/:postID", (req, res) => {
   const postID = req.params.postID;
-  // console.log(postID);
 
   db.query(
     `SELECT posts_table.postID, posts_table.userID, posts_table.username, posts_table.title, posts_table.postBody, comments_table.commentID, comments_table.postID, comments_table.userID, comments_table.username, comments_table.commentBody, comments_table.dateTime
@@ -353,7 +333,6 @@ app.post("/addComment", (req, res) => {
 
 app.get("/getComments/:userID", (req, res) => {
   const userID = req.params.userID;
-  console.log(userID);
 
   db.query(
     `SELECT * FROM comments_table WHERE userID = ${userID}`,
@@ -363,7 +342,6 @@ app.get("/getComments/:userID", (req, res) => {
         console.log(err);
       } else {
         res.send(result);
-        console.log(result);
       }
     }
   );
@@ -387,6 +365,23 @@ app.post("/addThread", (req, res) => {
       } else {
         res.send(result);
         console.log(result);
+      }
+    }
+  );
+});
+
+// THIS DELETES THE THREAD
+app.delete("/deleteThread/:subthreadID", (req, res) => {
+  const subthreadID = req.params.subthreadID;
+
+  db.query(
+    `DELETE FROM subthreads_table WHERE subthreadID=${subthreadID}`,
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Thread Deleted");
       }
     }
   );
@@ -424,7 +419,6 @@ app.get("/allThread", (req, res) => {
 // THIS WILL GRAB THREADS CREATED BY USER BASED ON USERID
 app.get(`/threads/:userID`, (req, res) => {
   const userID = req.params.userID;
-  console.log(userID);
 
   db.query(
     `SELECT * FROM subthreads_table WHERE userID = ${userID}`,
@@ -434,7 +428,6 @@ app.get(`/threads/:userID`, (req, res) => {
         console.log(err);
       } else {
         res.send(result);
-        console.log(result);
       }
     }
   );
@@ -501,7 +494,6 @@ app.get("/mythreads/:userID", (req, res) => {
 // THIS UNFOLLOWS SPECIFIC TRHEADS BASED ON ID
 app.delete("/unfollow/:mythreadsID", (req, res) => {
   const mythreadsID = req.params.mythreadsID;
-  console.log(mythreadsID);
 
   db.query(
     `DELETE FROM mythreads_table WHERE mythreadsID = ${mythreadsID}`,

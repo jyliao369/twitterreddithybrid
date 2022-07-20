@@ -138,7 +138,7 @@ const ShowPost = ({ currentUser, isLoggedIn }) => {
         <div className="showPostPageCont">
           <div className="showPostPage">
             {allPosts.map((post) => (
-              <div className="postAllCont">
+              <div key={post.postID} className="postAllCont">
                 <div className="profileAllCont">
                   <div className="profileIconOut">
                     <div className="profileIconBody"></div>
@@ -191,31 +191,6 @@ const ShowPost = ({ currentUser, isLoggedIn }) => {
           </div>
         </div>
       )}
-
-      {/* <div className="postsCont">
-        {allPosts.map((post) => (
-          <Link to={`/post/${post.postID}`} key={post.postID}>
-            <div className="posts">
-              <div className="userIconCont">
-                <div className="userIcon" />
-              </div>
-
-              <div className="mainPostCont">
-                <div className="postBodyCont">
-                  <div className="postBody">
-                    <h4>
-                      Username: {post.username}, UserID: {post.userID}, postID:{" "}
-                      {post.postID}
-                    </h4>
-                    <h2>{post.title}</h2>
-                    <p>{post.postBody}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div> */}
     </div>
   );
 };

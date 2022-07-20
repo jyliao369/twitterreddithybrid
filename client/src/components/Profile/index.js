@@ -5,13 +5,13 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
+import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
 const Profile = ({ currentUser, isLoggedIn }) => {
   const [usersPosts, setUsersPosts] = useState([]);
   const [usersThread, setUsersThread] = useState([]);
   const [usersComment, setUsersComment] = useState([]);
-
-  const [isLoading, setIsLoading] = useState(true);
 
   const navToUpdate = useNavigate();
 
@@ -27,6 +27,14 @@ const Profile = ({ currentUser, isLoggedIn }) => {
     navToUpdate(`/updatePost/${postID}`);
   };
 
+  const deleteThread = (subthreadID) => {
+    Axios.delete(`http://localhost:3001/deleteThread/${subthreadID}`, {}).then(
+      (response) => {
+        console.log(response);
+      }
+    );
+  };
+
   const showUsersPost = () => {
     document.getElementById("allUsersPosts").style.display = "flex";
     document.getElementById("allUsersComments").style.display = "none";
@@ -34,13 +42,13 @@ const Profile = ({ currentUser, isLoggedIn }) => {
   };
 
   const showUsersComment = () => {
-    Axios.get(
-      `http://localhost:3001/getComments/${currentUser.userID}`,
-      {}
-    ).then((response) => {
-      console.log(response.data);
-      setUsersComment(response.data.reverse());
-    });
+    // Axios.get(
+    //   `http://localhost:3001/getComments/${currentUser.userID}`,
+    //   {}
+    // ).then((response) => {
+    //   console.log(response.data);
+    //   setUsersComment(response.data.reverse());
+    // });
 
     document.getElementById("allUsersPosts").style.display = "none";
     document.getElementById("allUsersComments").style.display = "flex";
@@ -48,13 +56,12 @@ const Profile = ({ currentUser, isLoggedIn }) => {
   };
 
   const showUsersThread = () => {
-    Axios.get(`http://localhost:3001/threads/${currentUser.userID}`, {}).then(
-      (response) => {
-        console.log(response);
-        setUsersThread(response.data);
-        setIsLoading(false);
-      }
-    );
+    // Axios.get(`http://localhost:3001/threads/${currentUser.userID}`, {}).then(
+    //   (response) => {
+    //     console.log(response);
+    //     setUsersThread(response.data.reverse());
+    //   }
+    // );
 
     document.getElementById("allUsersPosts").style.display = "none";
     document.getElementById("allUsersComments").style.display = "none";
@@ -64,15 +71,34 @@ const Profile = ({ currentUser, isLoggedIn }) => {
   useEffect(() => {
     Axios.get("http://localhost:3001/login", {}).then((response) => {
       if (response.data.loggedIn === true) {
+        // POSTS
         Axios.get(
           `http://localhost:3001/getAllPosts/${response.data.user[0].userID}`,
           {}
         ).then((response) => {
           setUsersPosts(response.data.reverse());
         });
+
+        // COMMENTS
+        Axios.get(
+          `http://localhost:3001/getComments/${response.data.user[0].userID}`,
+          {}
+        ).then((response) => {
+          console.log(response.data);
+          setUsersComment(response.data.reverse());
+        });
+
+        // THREADS
+        Axios.get(
+          `http://localhost:3001/threads/${response.data.user[0].userID}`,
+          {}
+        ).then((response) => {
+          console.log(response);
+          setUsersThread(response.data.reverse());
+        });
       }
     });
-  }, []);
+  }, [usersPosts, usersComment, usersThread]);
 
   if (!isLoggedIn) {
     <Navigate to={"/login"} />;
@@ -176,6 +202,7 @@ const Profile = ({ currentUser, isLoggedIn }) => {
                   <p>{comment.username}</p>
                 </div>
               </div>
+
               <div className="commentThemeOut">
                 <div className="commentThemeBody">
                   <p>{comment.commentBody}</p>
@@ -235,22 +262,24 @@ const Profile = ({ currentUser, isLoggedIn }) => {
                   </div>
                 </div>
               </div>
-            </div>
 
-            // {isLoggedIn ? (
-            //       <button
-            //         value={[
-            //           thread.subthreadID,
-            //           thread.threadName,
-            //           thread.threadDesc,
-            //         ]}
-            //         onClick={(e) => joinThread(e.target.value)}
-            //       >
-            //         Join
-            //       </button>
-            //     ) : (
-            //       <></>
-            //     )}
+              <div className="threadEditBtnCont">
+                <button
+                  className="threadEditBtn"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => deleteThread(thread.subthreadID)}
+                >
+                  <DeleteForeverOutlinedIcon style={{ fontSize: "30px" }} />
+                </button>
+                <div
+                  className="threadEditBtn"
+                  value={thread.subthreadID}
+                  style={{ cursor: "pointer" }}
+                >
+                  <EditOutlinedIcon style={{ fontSize: "30px" }} />
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       ) : (

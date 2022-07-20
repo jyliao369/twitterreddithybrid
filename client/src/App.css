@@ -571,7 +571,6 @@
   background-color: lightgray;
 }
 .accountBanner {
-  height: 400px;
   border-bottom: solid;
   border-width: thin;
   border-color: lightgray;
@@ -636,28 +635,57 @@
 #allUsersThreads {
   display: none;
 }
+.threadEditBtnCont {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  margin: -25px 0px 0px 50px;
+}
+.threadEditBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  border-width: thick;
+  background: white;
+  padding: 2.5px;
+  margin: 0px 10px 0px 0px;
+}
 
 /* THIS IS FOR EXPLORE PAGE */
-.searchPage {
+.postSearchInputCont {
   display: flex;
-  align-items: center;
-  border-bottom: solid;
-  border-width: thin;
-  border-color: lightgray;
-  padding: 20px;
+  flex-direction: column;
+  padding: 20px 25px 20px 25px;
 }
-.searchPage input {
-  width: 100%;
-  padding: 15px;
-  border-radius: 25px;
-  margin-right: 20px;
-}
-.searchPage div {
-  border-style: solid;
-  border-width: thin;
-  border-color: lightgray;
+.postSearchInputBorder {
+  background: black;
   padding: 10px;
-  margin: 0px 0px 0px 15px;
+  clip-path: polygon(0% 8%, 97% 1%, 100% 95%, 3% 99%);
+}
+.postSearchInputBody {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: white;
+  clip-path: polygon(0% 5%, 97% 5%, 100% 95%, 3% 89%);
+}
+.postSearchInputBody input {
+  padding: 20px 35px 25px 35px;
+  font-size: 17px;
+}
+.searchBtnAllCont {
+  display: flex;
+  justify-content: flex-end;
+}
+.searchBtnCont {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  margin: -1.5% 2% 0px 0px;
+}
+.threadSearchBtnBody {
+  padding: 5px 10px 5px 10px;
 }
 
 /* THIS IS THE SETTINGS */
@@ -671,9 +699,6 @@
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
-  /* border-bottom: solid;
-  border-width: thin;
-  border-color: lightgray; */
 }
 .userUpdate,
 .passUpdate {
@@ -700,99 +725,160 @@
 }
 
 /* ALLTHREADS PAGE */
-.createThreadCont {
+.threadSearchPage {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
   border-bottom: solid;
   border-width: thin;
   border-color: lightgray;
+  padding: 25px 15px 35px 15px;
 }
-.createThreadBtn {
-  border-style: solid;
-  border-width: thin;
-  border-color: black;
-  border-radius: 30px;
-  padding: 10px 30px 10px 30px;
-  margin: 20px;
-  cursor: pointer;
-}
-#createThreadBtn {
-  display: flex;
-}
-.createThreadBtn:hover {
-  background: lightgray;
-}
-.createThread {
+.threadSearchInputCont {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+.threadSearchAllBtnCont {
+  display: flex;
+  justify-content: flex-end;
+}
+.threadSearchAllBtn {
+  display: flex;
+  position: absolute;
+  margin: -1.8% 2% 0px 0px;
+}
+.threadSearchInputBorder {
+  background: black;
+  padding: 10px;
+  clip-path: polygon(0% 8%, 97% 1%, 100% 95%, 3% 99%);
+  margin: 0px 10px 0px 10px;
+}
+.threadSearchInputBody {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: white;
+  clip-path: polygon(0% 5%, 97% 5%, 100% 95%, 3% 89%);
+}
+.threadSearchInputBody input {
+  padding: 20px 30px 30px 35px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+.threadSearchBtnBorder {
+  background: black;
+  padding: 6px;
+  margin: 0px 10px 0px 10px;
+  clip-path: polygon(0% 4%, 76% 3%, 97% 20%, 98% 100%, 24% 100%, 6% 85%);
+}
+.threadSearchBtnBody {
+  background: white;
+  clip-path: polygon(0% 0%, 78% 5%, 95% 23%, 99% 100%, 24% 100%, 6% 85%);
+}
+.threadSearchBtnBody p {
+  padding: 6px 30px 6px 30px;
+}
+.createThreadBtnBorder {
+  background: black;
+  padding: 6px;
+  margin: 0px 10px 0px 10px;
+  clip-path: polygon(5% 5%, 94% 3%, 98% 25%, 94% 90%, 5% 97%, 1% 60%);
+}
+.createThreadBtnBody {
+  background: white;
+  clip-path: polygon(5% 5%, 94% 3%, 98% 25%, 94% 90%, 5% 97%, 1% 60%);
+}
+.createThreadBtnBody p {
+  padding: 15px 30px 20px 30px;
+}
+.createThreadFormCont {
+  display: flex;
+  justify-content: center;
   border-bottom: solid;
   border-width: thin;
   border-color: lightgray;
-  padding: 20px;
-  box-sizing: border-box;
+  padding: 35px 0px 30px 0px;
 }
-#createThread {
+#createThreadFormCont {
   display: none;
 }
-.createThread input,
-.createThread textarea {
+.createThreadForm {
+  width: 80%;
+}
+.createThreadTitleBorder {
+  position: absolute;
+  z-index: 1;
+  padding: 5px;
+  margin: -15px 0px 0px 0px;
+  background: black;
+  clip-path: polygon(
+    10% 100%,
+    0% 66%,
+    0% 33%,
+    10% 0%,
+    90% 0%,
+    100% 35%,
+    100% 66%,
+    90% 100%
+  );
+}
+.createThreadTitleBody {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px 5px 10px;
+  background: white;
+  clip-path: polygon(
+    10% 100%,
+    0% 66%,
+    0% 33%,
+    10% 0%,
+    90% 0%,
+    100% 35%,
+    100% 66%,
+    90% 100%
+  );
+}
+.createThreadTitleBody input {
+  padding: 6px 10px 6px 10px;
+  border: none;
+  outline: none;
+}
+.createThreadDescBorder {
+  background: black;
   padding: 10px;
-  margin-bottom: 15px;
+  clip-path: polygon(3% 100%, 2% 5%, 99% 0%, 97% 90%);
 }
-.createBtnCont {
+.createThreadDescBody {
   display: flex;
-  justify-content: space-between;
-  flex-direction: row;
+  background: white;
+  clip-path: polygon(3% 100%, 2% 5%, 99% 0%, 97% 90%);
 }
-.createBtnCont div {
+.createThreadDescBody textarea {
+  width: 100%;
+  padding: 35px 40px 30px 40px;
+  border: none;
+  outline: none;
+}
+.createThreadBtnAllCont {
+  display: flex;
+  justify-content: flex-end;
+}
+.createThreadBtnAll {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  margin: -1.9% 2% 0px 0px;
+}
+.createThreadBtnAll div {
   border-style: solid;
-  border-width: thin;
-  border-color: black;
-  border-radius: 20px;
-  padding: 5px 25px 5px 25px;
-  font-size: 20px;
-  cursor: pointer;
-}
-.createBtnCont div:hover {
-  background: lightgray;
-}
-.threadCont {
-  display: flex;
-  flex-direction: row;
-  border-bottom: solid;
-  border-width: thin;
-  border-color: lightgray;
-  padding: 20px;
-}
-.threadCont div {
-  border-style: solid;
-  border-width: thin;
-  border-color: lightgray;
-  border-radius: 20px;
-  padding: 3px 15px 5px 15px;
-  margin-right: 10px;
-  font-size: 17px;
-}
-.subthreadsCont {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 20px;
-}
-.subthreadInfoCont {
-  display: flex;
-}
-.subthreadInfo {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  margin: 0px 15px 0px 15px;
-}
-.editBtn {
-  display: flex;
-  flex-direction: column;
+  border-width: thick;
+  background: white;
+  padding: 5px 10px 5px 10px;
+  margin: 0px 0px 0px 25px;
 }
 
 /* THIS IS FOR SPECIFIC THREAD PAGES */
@@ -813,11 +899,44 @@
 .accountIconCont p {
   font-size: 25px;
 }
-.threadDesc {
-  width: 75%;
-  position: relative;
-  margin-left: 40px;
-  margin-top: 40px;
+.threadDescCont {
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+  margin: 140px 0px 0px 190px;
+  position: absolute;
+}
+.threadDescBorder {
+  background: black;
+  padding: 10px;
+  margin: 0px 0px 0px 25px;
+  clip-path: polygon(0% 7%, 100% 2%, 97% 96%, 3% 98%);
+}
+.threadDescBody {
+  background: white;
+  clip-path: polygon(0% 6%, 100% 0%, 98% 95%, 2% 100%);
+}
+.threadDescBody p {
+  padding: 30px 30px 35px 30px;
+}
+.allBtnCont {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.allBtn {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  margin: -4% 5% 0px 0px;
+}
+.allBtn div {
+  background: white;
+  border-style: solid;
+  border-width: thick;
+  border-color: black;
+  padding: 5px 10px 5px 10px;
+  margin: 0px 0px 0px 15px;
 }
 .formCont {
   display: flex;
@@ -826,6 +945,71 @@
   border-bottom: solid;
   border-width: thin;
   border-color: lightgray;
+}
+.postFormAllCont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+  width: 100%;
+  padding: 45px 0px 40px 0px;
+}
+#postFormAllCont {
+  display: none;
+}
+.postFormCont {
+  display: flex;
+  flex-direction: column;
+}
+.postTitleFormBorder {
+  background: black;
+  padding: 5px;
+  clip-path: polygon(5% 5%, 94% 3%, 98% 25%, 94% 90%, 5% 97%, 1% 60%);
+  position: absolute;
+  z-index: 1;
+  margin-top: -1%;
+}
+.postTitleFormBody {
+  background: white;
+  clip-path: polygon(5% 5%, 94% 3%, 98% 25%, 94% 90%, 5% 97%, 1% 60%);
+}
+.postTitleFormBody input {
+  min-width: 100px;
+  padding: 10px 20px 10px 20px;
+  border: none;
+  outline: none;
+}
+.postFormBorder {
+  width: 710px;
+  background: black;
+  padding: 10px;
+  clip-path: polygon(5% 5%, 99% 0%, 95% 98%, 0% 95%);
+}
+.postFormBody {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  clip-path: polygon(5% 5%, 99% 0%, 95% 98%, 0% 95%);
+}
+.postFormBody textarea {
+  padding: 25px 40px 20px 45px;
+}
+.postFormAllBtnCont {
+  display: flex;
+  justify-content: flex-end;
+}
+.postFormBtnCont {
+  position: absolute;
+  margin: -1.5% 3% 0px 0px;
+}
+.postFormBtnCont button {
+  background: white;
+  border-style: solid;
+  border-width: medium;
+  margin: 0px 0px 0px 20px;
+  padding: 10px 15px 10px 15px;
 }
 
 /* THIS IS FOR THE USERS JOINED THREADS PAGE */
