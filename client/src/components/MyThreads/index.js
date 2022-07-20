@@ -105,7 +105,7 @@ const MyThreads = ({ currentUser, isLoggedIn }) => {
             <div className="myThreadsPostPage">
               {showThreadPosts.map((post) =>
                 parseInt(post.userID) === currentUser.userID ? (
-                  <div className="postAllCont">
+                  <div key={post.postID} className="postAllCont">
                     <div className="generalPost">
                       <div className="userPostTitleCont">
                         <div className="userPostTitleBorder">

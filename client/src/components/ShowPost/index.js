@@ -29,7 +29,7 @@ const ShowPost = ({ currentUser, isLoggedIn }) => {
           <div className="showPostPage">
             {allPosts.map((post) =>
               parseInt(post.userID) === currentUser.userID ? (
-                <div className="postAllCont">
+                <div key={post.postID} className="postAllCont">
                   <div className="generalPost">
                     <div className="userPostTitleCont">
                       <div className="userPostTitleBorder">

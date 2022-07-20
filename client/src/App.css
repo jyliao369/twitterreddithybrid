@@ -693,26 +693,26 @@
   border-bottom: solid;
   border-width: thin;
   border-color: lightgray;
+  padding: 20px 25px 20px 25px;
 }
-.updateForm {
+.updateFormBorder {
+  background: black;
+  padding: 10px;
+  clip-path: polygon(1% 2%, 99% 1%, 95% 98%, 4% 98%);
+}
+.updateFormBody {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  width: 100%;
+  background: white;
+  padding: 30px 0px 30px 0px;
+  clip-path: polygon(2% 4%, 98% 2%, 95% 97%, 4% 97%);
 }
 .userUpdate,
 .passUpdate {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-}
-.userUpdate input,
-.passUpdate input {
-  width: 250px;
-  padding: 10px;
-  margin-bottom: 15px;
-  font-size: 15px;
 }
 .userUpdate h3,
 .passUpdate h3 {
@@ -722,6 +722,21 @@
   display: flex;
   justify-content: flex-end;
   padding: 20px;
+}
+.updateInputBorder {
+  background: black;
+  padding: 6px;
+  margin: 0px 0px 15px 0px;
+  clip-path: polygon(5% 0%, 105% 0%, 95% 100%, -5% 100%);
+}
+.updateInputBody {
+  background: white;
+  clip-path: polygon(5% 0%, 105% 0%, 95% 100%, -5% 100%);
+}
+.updateInputBody input {
+  outline: none;
+  border: none;
+  padding: 8px 15px 8px 15px;
 }
 
 /* ALLTHREADS PAGE */
