@@ -42,27 +42,12 @@ const Profile = ({ currentUser, isLoggedIn }) => {
   };
 
   const showUsersComment = () => {
-    // Axios.get(
-    //   `http://localhost:3001/getComments/${currentUser.userID}`,
-    //   {}
-    // ).then((response) => {
-    //   console.log(response.data);
-    //   setUsersComment(response.data.reverse());
-    // });
-
     document.getElementById("allUsersPosts").style.display = "none";
     document.getElementById("allUsersComments").style.display = "flex";
     document.getElementById("allUsersThreads").style.display = "none";
   };
 
   const showUsersThread = () => {
-    // Axios.get(`http://localhost:3001/threads/${currentUser.userID}`, {}).then(
-    //   (response) => {
-    //     console.log(response);
-    //     setUsersThread(response.data.reverse());
-    //   }
-    // );
-
     document.getElementById("allUsersPosts").style.display = "none";
     document.getElementById("allUsersComments").style.display = "none";
     document.getElementById("allUsersThreads").style.display = "flex";

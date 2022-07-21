@@ -36,7 +36,7 @@
   align-items: center;
   justify-content: space-evenly;
   width: 100%;
-  margin: 10px 0px 10px 0px;
+  margin: 20px 0px 30px 0px;
 }
 .profileAllCont {
   display: flex;
@@ -180,7 +180,7 @@
   clip-path: polygon(0% 1%, 97% 3%, 100% 96%, 6% 100%);
 }
 .userPostBody p {
-  padding: 15px 15px 20px 40px;
+  padding: 20px 15px 25px 40px;
   overflow-wrap: anywhere;
 }
 .userPostDateTimeCont {
@@ -251,15 +251,34 @@
   width: 600px;
   background: black;
   padding: 10px;
-  clip-path: polygon(25% 0%, 0% 18%, 6% 96%, 75% 100%, 96% 80%, 100% 0%);
+  clip-path: polygon(8% 1%, 0% 20%, 5% 97%, 92% 95%, 98% 76%, 95% 4%);
 }
 .commentThemeBody {
   background: white;
-  clip-path: polygon(25% 0%, 0% 18%, 5% 96%, 75% 100%, 97% 80%, 100% 0%);
+  clip-path: polygon(8% 1%, 1% 20%, 4% 103%, 92% 96%, 97% 76%, 96% 1%);
 }
 .commentThemeBody p {
   padding: 30px 30px 30px 40px;
   overflow-wrap: anywhere;
+}
+.commentDateTimeCont {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.commentDateTimeBorder {
+  background: black;
+  padding: 5px;
+  clip-path: polygon(5% 5%, 94% 3%, 98% 25%, 94% 90%, 5% 97%, 1% 60%);
+  position: absolute;
+  margin: 0px 2% -1% 0px;
+}
+.commentDateTimeBody {
+  background: white;
+  clip-path: polygon(5% 5%, 94% 3%, 98% 25%, 94% 90%, 5% 97%, 1% 60%);
+}
+.commentDateTimeBody p {
+  padding: 8px 45px 8px 35px;
 }
 
 /* THIS IS THE GENERAL STYLE OF THREADS */
@@ -537,31 +556,59 @@
   width: 100%;
   margin-left: 15px;
 }
-.replyPost {
+.commentPostFormCont {
   display: flex;
+  justify-content: space-evenly;
   flex-direction: row;
   align-items: center;
+  padding: 20px 0px 35px 0px;
   border-bottom: solid;
+  border-top: solid;
   border-width: thin;
   border-color: lightgray;
-  padding: 20px;
 }
-.replyCont {
+#commentPostFormCont {
+  display: none;
+}
+.commentPostFormAllCont {
   display: flex;
-  width: 100%;
-  margin-left: 15px;
+  flex-direction: column;
+  width: 70%;
 }
-.replyPost textarea {
-  width: 100%;
+.commentPostFormBorder {
+  background: black;
   padding: 10px;
-  font-size: 15px;
+  clip-path: polygon(8% 1%, 0% 20%, 5% 97%, 92% 95%, 98% 76%, 95% 4%);
 }
-.replyPost button {
-  padding: 10px;
-  margin-left: 15px;
+.commentPostFormBody {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  clip-path: polygon(8% 1%, 0% 20%, 5% 97%, 92% 95%, 98% 76%, 95% 4%);
+}
+.commentPostFormBody textarea {
+  padding: 15px 55px 30px 55px;
+  border: none;
+  outline: none;
+}
+.addCommentBtnCont {
+  display: flex;
+  justify-content: flex-end;
+}
+.addCommentBtn {
+  position: absolute;
+  margin: -1.5% 2.5% 0px 0px;
+}
+.addCommentBtn button {
+  border-style: solid;
+  border-width: medium;
+  background: white;
+  padding: 10px 15px 10px 15px;
+  margin: 0px 0px 0px 15px;
 }
 .allPostComments {
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
@@ -650,6 +697,27 @@
   background: white;
   padding: 2.5px;
   margin: 0px 10px 0px 0px;
+}
+.bookmarkAllBtnCont {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  z-index: 1;
+  margin: -0.8% 0% 0px 2%;
+}
+.bookmarkBtnCont {
+  display: flex;
+  flex-direction: row;
+  margin: 0px 0px 0px 0px;
+}
+.bookmarkBtn {
+  margin: 0px 20px 0px 0px;
+}
+.bookmarkBtn button {
+  border-style: solid;
+  border-width: medium;
+  padding: 10px;
+  background: white;
 }
 
 /* THIS IS FOR EXPLORE PAGE */

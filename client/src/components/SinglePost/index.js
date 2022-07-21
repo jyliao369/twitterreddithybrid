@@ -2,13 +2,15 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
+import { Link } from "react-router-dom";
+
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 
 const SinglePost = ({ currentUser, isLoggedIn }) => {
   const { postID } = useParams();
 
   const [postOP, setPostOP] = useState("");
-  const [postOPID, setPostOPID] = useState("");
-  const [postEmail, setPostEmail] = useState("");
   const [postTitle, setPostTitle] = useState("");
   const [postBody, setPostBody] = useState("");
   const [postSubthreadID, setPostSubthreadID] = useState(0);
@@ -47,6 +49,16 @@ const SinglePost = ({ currentUser, isLoggedIn }) => {
     setComment("");
   };
 
+  const openCommentForm = () => {
+    if (
+      document.getElementById("commentPostFormCont").style.display !== "flex"
+    ) {
+      document.getElementById("commentPostFormCont").style.display = "flex";
+    } else {
+      document.getElementById("commentPostFormCont").style.display = "none";
+    }
+  };
+
   const bookkmarkPost = () => {
     Axios.post("http://localhost:3001/bookmark", {
       userID: currentUser.userID,
@@ -70,8 +82,6 @@ const SinglePost = ({ currentUser, isLoggedIn }) => {
     Axios.get(`http://localhost:3001/posts/${postID}`, {}).then((response) => {
       // console.log(response);
       setPostOP(response.data[0].username);
-      setPostOPID(response.data[0].userID);
-      setPostEmail(response.data[0].email);
       setPostBody(response.data[0].postBody);
       setPostTitle(response.data[0].title);
       setPostSubthreadID(response.data[0].subthreadID);
@@ -81,48 +91,111 @@ const SinglePost = ({ currentUser, isLoggedIn }) => {
 
   return (
     <div className="postCont">
-      <div className="post">
-        <div className="postUserInfoCont">
-          <div className="userIconCont">
-            <div className="userIcon" />
-          </div>
-          <div className="postUserInfo">
-            <h3>Username: {postOP}</h3>
-            <h4>UserID: {postOPID}</h4>
-            <h4>Email: {postEmail}</h4>
+      <div className="postAllCont">
+        <div className="generalPost">
+          <div className="userPostTitleCont">
+            <div className="userPostTitleBorder">
+              <div className="userPostTitleBody">
+                <h4>{postTitle.slice(0, 60)}</h4>
+              </div>
+            </div>
           </div>
 
           {isLoggedIn ? (
-            <div className="bookmarkBtn">
-              <button onClick={bookkmarkPost}>Bookmark</button>
+            <div className="bookmarkAllBtnCont">
+              <div className="bookmarkBtnCont">
+                <div className="bookmarkBtn">
+                  <button onClick={bookkmarkPost}>Bookmark</button>
+                </div>
+                <div className="bookmarkBtn">
+                  <button
+                    onClick={openCommentForm}
+                    style={{ cursor: "pointer" }}
+                  >
+                    Comment
+                  </button>
+                </div>
+              </div>
             </div>
           ) : (
             <></>
           )}
+
+          <div className="userPostBorder">
+            <div className="userPostBody">
+              <p>{postBody}</p>
+            </div>
+          </div>
+
+          <div className="userPostDateTimeCont">
+            <div className="userPostDateTimeBorder">
+              <div className="userPostDateTimeBody">
+                <p>Posted on {postDateTime}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="userIconAll">
+            <div className="userIconCont">
+              <div className="userIconOut">
+                <div className="userIconBody">
+                  <FavoriteBorderOutlinedIcon /> <p>num</p>
+                </div>
+              </div>
+              <div className="userIconOut">
+                <div className="userIconBody">
+                  <ChatBubbleOutlineOutlinedIcon /> <p>num</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="postMainCont">
-          <div className="postBody">
-            <h2>{postTitle}</h2>
-            <p>{postBody}</p>
+        <div className="profileAllCont">
+          <div className="profileIconOut">
+            <div className="profileIconBody"></div>
+          </div>
+          <div className="userProfileUsername">
+            <p>{postOP}</p>
           </div>
         </div>
       </div>
 
       {currentUser.userID ? (
-        <div className="replyPost">
-          <div className="userIconCont">
-            <div className="userIcon" />
+        <div className="commentPostFormCont" id="commentPostFormCont">
+          <div className="profileAllCont">
+            <div className="profileIconOut">
+              <div className="profileIconBody"></div>
+            </div>
+            <div className="profileUsername">
+              <p>{currentUser.username}</p>
+            </div>
           </div>
-          <div className="replyCont">
-            <textarea
-              placeholder="Any comments?"
-              rows={4.5}
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-            />
+          <div className="commentPostFormAllCont">
+            <div className="commentPostFormBorder">
+              <div className="commentPostFormBody">
+                <textarea
+                  placeholder="Any comments?"
+                  rows={4.5}
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="addCommentBtnCont">
+              <div className="addCommentBtn">
+                {comment !== "" ? (
+                  <button onClick={postComment}>Comment</button>
+                ) : (
+                  <>
+                    <button disabled={true}>Comment</button>
+                  </>
+                )}
+
+                <button onClick={openCommentForm}>Cancel</button>
+              </div>
+            </div>
           </div>
-          <button onClick={postComment}>Comment</button>
         </div>
       ) : (
         <></>
@@ -140,9 +213,19 @@ const SinglePost = ({ currentUser, isLoggedIn }) => {
                   <p>{comment.username}</p>
                 </div>
               </div>
-              <div className="commentThemeOut">
-                <div className="commentThemeBody">
-                  <p>{comment.commentBody}</p>
+
+              <div>
+                <div className="commentThemeOut">
+                  <div className="commentThemeBody">
+                    <p>{comment.commentBody}</p>
+                  </div>
+                </div>
+                <div className="commentDateTimeCont">
+                  <div className="commentDateTimeBorder">
+                    <div className="commentDateTimeBody">
+                      <p>{comment.dateTime}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
