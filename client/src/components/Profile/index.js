@@ -188,11 +188,15 @@ const Profile = ({ currentUser, isLoggedIn }) => {
         </div>
       ) : (
         <div className="allUsersPosts" id="allUsersPosts">
-          <div className="notification">
-            <p>
-              You have no posts. Have something you want to share? Check out the
-              different threads and share your thoughts.
-            </p>
+          <div className="notificationCont">
+            <div className="notificationBorder">
+              <div className="notificationBody">
+                <p>
+                  You have no posts. Have something you want to share? Check out
+                  the different threads and share your thoughts.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -241,11 +245,15 @@ const Profile = ({ currentUser, isLoggedIn }) => {
         </div>
       ) : (
         <div className="allUsersComments" id="allUsersComments">
-          <div className="notification">
-            <p>
-              You have no comments. Share your thoughts and ideas on what other
-              people have said.
-            </p>
+          <div className="notificationCont">
+            <div className="notificationBorder">
+              <div className="notificationBody">
+                <p>
+                  You have no comments. Share your thoughts and ideas on what
+                  other people have said.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -297,12 +305,16 @@ const Profile = ({ currentUser, isLoggedIn }) => {
         </div>
       ) : (
         <div className="allUsersThreads" id="allUsersThreads">
-          <div className="notification">
-            <p>
-              You have no threads. Create a thread and find like-minded
-              individuals. Check out the threads section first before you create
-              a new thread as there may be one already created.
-            </p>
+          <div className="notificationCont">
+            <div className="notificationBorder">
+              <div className="notificationBody">
+                <p>
+                  You have no threads. Create a thread and find like-minded
+                  individuals. Check out the threads section first before you
+                  create a new thread as there may be one already created.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       )}

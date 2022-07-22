@@ -10,6 +10,7 @@ import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutline
 const SubthreadPage = ({ currentUser, isLoggedIn }) => {
   const { subthreadID } = useParams();
 
+  const [threadID, setThreadID] = useState(0);
   const [threadTitle, setThreadTitle] = useState("");
   const [threadDesc, setThreadDesc] = useState("");
 
@@ -62,19 +63,20 @@ const SubthreadPage = ({ currentUser, isLoggedIn }) => {
     setPostBody("");
   };
 
-  // const joinThread = (thread) => {
-  //   Axios.post(`http://localhost:3001/jointhread`, {
-  //     userID: currentUser.userID,
-  //     subthreadID: thread.split(",")[0],
-  //     threadName: thread.split(",")[1],
-  //     threadDesc: thread.split(",")[2],
-  //   }).then((response) => console.log(response));
-  // };
+  const joinThread = (thread) => {
+    Axios.post(`http://localhost:3001/jointhread`, {
+      userID: currentUser.userID,
+      subthreadID: thread.split(",")[0],
+      threadName: thread.split(",")[1],
+      threadDesc: thread.split(",")[2],
+    }).then((response) => console.log(response));
+  };
 
   useEffect(() => {
     Axios.get(`http://localhost:3001/getSubthread/${subthreadID}`, {}).then(
       (response) => {
         // console.log(response.data);
+        setThreadID(response.data[0].subthreadID);
         setThreadTitle(response.data[0].threadName);
         setThreadDesc(response.data[0].threadDesc);
       }
@@ -113,7 +115,13 @@ const SubthreadPage = ({ currentUser, isLoggedIn }) => {
             <div className="allBtnCont">
               <div className="allBtn">
                 <div>
-                  <h3>+Bookmark</h3>
+                  <button
+                    value={[threadID, threadTitle, threadDesc]}
+                    style={{ cursor: "pointer" }}
+                    onClick={(e) => joinThread(e.target.value)}
+                  >
+                    +Join
+                  </button>
                 </div>
                 <div style={{ cursor: "pointer" }} onClick={openPostForm}>
                   <h3>+Post</h3>
@@ -287,11 +295,13 @@ const SubthreadPage = ({ currentUser, isLoggedIn }) => {
           )}
         </>
       ) : (
-        <>
-          <div className="notification">
-            <p>There are no posts here. Be the first and say soemthing.</p>
+        <div className="notificationCont">
+          <div className="notificationBorder">
+            <div className="notificationBody">
+              <p>There are no posts here. Be the first and say soemthing.</p>
+            </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

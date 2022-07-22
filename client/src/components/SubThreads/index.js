@@ -90,7 +90,7 @@ const SubThread = ({ currentUser, isLoggedIn }) => {
     Axios.get("http://localhost:3001/allThread", {}).then((response) => {
       setThreadList(response.data.reverse());
     });
-  }, []);
+  }, [threadList]);
 
   return (
     <div>

@@ -28,7 +28,7 @@ const Bookmark = () => {
     Axios.get(`http://localhost:3001/getBookmarks/${userID}`, {}).then(
       (response) => {
         // console.log(response.data);
-        setUserBookmarks(response.data);
+        setUserBookmarks(response.data.reverse());
       }
     );
   }, [userBookmarks]);
@@ -97,14 +97,16 @@ const Bookmark = () => {
           </div>
         </>
       ) : (
-        <>
-          <div className="notification">
-            <p>
-              You have no bookmarked posts. Check out any related threads and
-              save posts for later.
-            </p>
+        <div className="notificationCont">
+          <div className="notificationBorder">
+            <div className="notificationBody">
+              <p>
+                You have no bookmarked posts. Check out any related threads and
+                save posts for later.
+              </p>
+            </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

@@ -105,7 +105,9 @@ const SinglePost = ({ currentUser, isLoggedIn }) => {
             <div className="bookmarkAllBtnCont">
               <div className="bookmarkBtnCont">
                 <div className="bookmarkBtn">
-                  <button onClick={bookkmarkPost}>Bookmark</button>
+                  <button onClick={bookkmarkPost} style={{ cursor: "pointer" }}>
+                    Bookmark
+                  </button>
                 </div>
                 <div className="bookmarkBtn">
                   <button
@@ -232,11 +234,13 @@ const SinglePost = ({ currentUser, isLoggedIn }) => {
           ))}
         </div>
       ) : (
-        <>
-          <div className="notification">
-            <p>Nobody has said anything. Why don't you say something?</p>
+        <div className="notificationCont">
+          <div className="notificationBorder">
+            <div className="notificationBody">
+              <p>Nobody has said anything. Why don't you say something?</p>
+            </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

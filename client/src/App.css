@@ -359,6 +359,45 @@
   padding: 10px 25px 10px 25px;
 }
 
+/* THIS IS THE GENERAL SHAPE OF NOTIFICATION */
+.notificationCont {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 25px 0px 25px 0px;
+}
+.notificationBorder {
+  max-width: 725px;
+  background: black;
+  padding: 6px;
+  clip-path: polygon(
+    25% 5%,
+    97% 2%,
+    95% 76%,
+    98% 100%,
+    75% 97%,
+    2% 97%,
+    5% 28%,
+    2% 0%
+  );
+}
+.notificationBody {
+  background: white;
+  clip-path: polygon(
+    25% 5%,
+    97% 2%,
+    95% 85%,
+    97% 100%,
+    74% 97%,
+    2% 97%,
+    5% 17%,
+    3% 0%
+  );
+}
+.notificationBody p {
+  padding: 17px 55px 17px 55px;
+}
+
 /* ----------------------------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------- */
 /* THIS IS THE NAVBAR */
@@ -703,7 +742,7 @@
   flex-direction: row;
   position: absolute;
   z-index: 1;
-  margin: -0.8% 0% 0px 2%;
+  margin: -0.8% 0% 0px 0%;
 }
 .bookmarkBtnCont {
   display: flex;

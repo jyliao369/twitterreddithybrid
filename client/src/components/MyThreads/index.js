@@ -210,11 +210,15 @@ const MyThreads = ({ currentUser, isLoggedIn }) => {
               )}
             </div>
           ) : (
-            <div className="notification">
-              <p>
-                You haven't joined any threads. Check out the threads page join
-                any threads you find interesting!!
-              </p>
+            <div className="notificationCont">
+              <div className="notificationBorder">
+                <div className="notificationBody">
+                  <p>
+                    You haven't joined any threads. Check out the threads page
+                    join any threads you find interesting!!
+                  </p>
+                </div>
+              </div>
             </div>
           )}
         </>
