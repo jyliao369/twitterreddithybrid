@@ -244,11 +244,11 @@
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  width: 90%;
+  width: 100%;
   margin: 25px 0px 15px 0px;
 }
 .commentThemeOut {
-  width: 600px;
+  width: 675px;
   background: black;
   padding: 10px;
   clip-path: polygon(8% 1%, 0% 20%, 5% 97%, 92% 95%, 98% 76%, 95% 4%);
@@ -258,7 +258,7 @@
   clip-path: polygon(8% 1%, 1% 20%, 4% 103%, 92% 96%, 97% 76%, 96% 1%);
 }
 .commentThemeBody p {
-  padding: 30px 30px 30px 40px;
+  padding: 30px 30px 35px 40px;
   overflow-wrap: anywhere;
 }
 .commentDateTimeCont {
@@ -271,7 +271,7 @@
   padding: 5px;
   clip-path: polygon(5% 5%, 94% 3%, 98% 25%, 94% 90%, 5% 97%, 1% 60%);
   position: absolute;
-  margin: 0px 2% -1% 0px;
+  margin: 0px 2% -0.8% 0px;
 }
 .commentDateTimeBody {
   background: white;
@@ -718,6 +718,40 @@
   border-width: medium;
   padding: 10px;
   background: white;
+}
+.postEditBtnCont {
+  display: flex;
+}
+.postEditBtn {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  z-index: 1;
+  margin: -0.7% 0% 0% 1%;
+}
+.postEditBtn button {
+  border-style: solid;
+  border-width: medium;
+  background: white;
+  padding: 7px 10px 7px 10px;
+  margin: 0px 0px 0px 20px;
+}
+.editBtnCont {
+  display: flex;
+  justify-content: flex-end;
+}
+.editBtn {
+  display: flex;
+  position: absolute;
+  z-index: 1;
+  margin: -0.6% 2% 0px 0px;
+}
+.editBtn button {
+  border-style: solid;
+  border-width: medium;
+  background: white;
+  padding: 7px 10px 7px 10px;
+  margin: 0px 0px 0px 20px;
 }
 
 /* THIS IS FOR EXPLORE PAGE */

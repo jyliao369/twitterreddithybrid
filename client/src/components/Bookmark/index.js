@@ -44,7 +44,7 @@ const Bookmark = () => {
         <>
           <div>
             {userBookmarks.map((post) => (
-              <div key={post.postID} className="postAllCont">
+              <div key={post.bookmarkID} className="postAllCont">
                 <div className="profileAllCont">
                   <div className="profileIconOut">
                     <div className="profileIconBody"></div>

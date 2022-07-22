@@ -27,6 +27,15 @@ const Profile = ({ currentUser, isLoggedIn }) => {
     navToUpdate(`/updatePost/${postID}`);
   };
 
+  const deleteComment = (commentID) => {
+    console.log(commentID);
+    Axios.delete(`http://localhost:3001/deleteComment/${commentID}`, {}).then(
+      (response) => {
+        console.log(response);
+      }
+    );
+  };
+
   const deleteThread = (subthreadID) => {
     Axios.delete(`http://localhost:3001/deleteThread/${subthreadID}`, {}).then(
       (response) => {
@@ -69,7 +78,7 @@ const Profile = ({ currentUser, isLoggedIn }) => {
           `http://localhost:3001/getComments/${response.data.user[0].userID}`,
           {}
         ).then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           setUsersComment(response.data.reverse());
         });
 
@@ -78,7 +87,7 @@ const Profile = ({ currentUser, isLoggedIn }) => {
           `http://localhost:3001/threads/${response.data.user[0].userID}`,
           {}
         ).then((response) => {
-          console.log(response);
+          // console.log(response);
           setUsersThread(response.data.reverse());
         });
       }
@@ -118,6 +127,19 @@ const Profile = ({ currentUser, isLoggedIn }) => {
                     <div className="userPostTitleBody">
                       <h4>{post.title.slice(0, 60)}</h4>
                     </div>
+                  </div>
+                </div>
+
+                <div className="postEditBtnCont">
+                  <div className="postEditBtn">
+                    <button style={{ cursor: "pointer" }}>Update</button>
+                    <button
+                      value={post.postID}
+                      onClick={(e) => deletePost(e.target.value)}
+                      style={{ cursor: "pointer" }}
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
 
@@ -188,27 +210,33 @@ const Profile = ({ currentUser, isLoggedIn }) => {
                 </div>
               </div>
 
-              <div className="commentThemeOut">
-                <div className="commentThemeBody">
-                  <p>{comment.commentBody}</p>
+              <div>
+                <div className="editBtnCont">
+                  <div className="editBtn">
+                    <button style={{ cursor: "pointer" }}>Update</button>
+                    <button
+                      value={comment.commentID}
+                      onClick={(e) => deleteComment(e.target.value)}
+                      style={{ cursor: "pointer" }}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+                <div className="commentThemeOut">
+                  <div className="commentThemeBody">
+                    <p>{comment.commentBody}</p>
+                  </div>
+                </div>
+                <div className="commentDateTimeCont">
+                  <div className="commentDateTimeBorder">
+                    <div className="commentDateTimeBody">
+                      <p>{comment.dateTime}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-
-            //   <div className="editBtn">
-            //     <button
-            //       value={comment.postID}
-            //       onClick={(e) => updatePost(e.target.value)}
-            //     >
-            //       Update
-            //     </button>
-            //     <button
-            //       value={comment.postID}
-            //       onClick={(e) => deletePost(e.target.value)}
-            //     >
-            //       Delete
-            //     </button>
-            //   </div>
           ))}
         </div>
       ) : (

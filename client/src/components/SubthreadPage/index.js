@@ -44,16 +44,19 @@ const SubthreadPage = ({ currentUser, isLoggedIn }) => {
     }).then((response) => {
       console.log(response);
     });
+
+    document.getElementById("postFormAllCont").style.display = "none";
+
+    setPostTitle("");
+    setPostBody("");
   };
 
   const openPostForm = () => {
     document.getElementById("postFormAllCont").style.display = "flex";
-    document.getElementById("createThreadBtn").style.display = "none";
   };
 
   const closePostForm = () => {
     document.getElementById("postFormAllCont").style.display = "none";
-    document.getElementById("createThreadBtn").style.display = "flex";
 
     setPostTitle("");
     setPostBody("");
@@ -69,12 +72,13 @@ const SubthreadPage = ({ currentUser, isLoggedIn }) => {
   // };
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/allThread", {}).then((response) => {
-      //   console.log("hello there");
-      //   console.log(response.data[subthreadID - 1]);
-      setThreadTitle("/" + response.data[subthreadID - 1].threadName);
-      setThreadDesc(response.data[subthreadID - 1].threadDesc);
-    });
+    Axios.get(`http://localhost:3001/getSubthread/${subthreadID}`, {}).then(
+      (response) => {
+        // console.log(response.data);
+        setThreadTitle(response.data[0].threadName);
+        setThreadDesc(response.data[0].threadDesc);
+      }
+    );
 
     Axios.get(`http://localhost:3001/subthread/${subthreadID}`, {}).then(
       (response) => {
@@ -96,7 +100,7 @@ const SubthreadPage = ({ currentUser, isLoggedIn }) => {
         <div className="threadPage">
           <div className="accountIconCont">
             <div className="accountIcon" />
-            <p>{threadTitle}</p>
+            <p>/{threadTitle}</p>
           </div>
 
           <div className="threadDescCont">

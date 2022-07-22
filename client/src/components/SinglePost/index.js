@@ -44,9 +44,9 @@ const SinglePost = ({ currentUser, isLoggedIn }) => {
       dateTime: todayDates + " " + todayTime,
     }).then((response) => {
       console.log(response);
+      setComment("");
+      document.getElementById("commentPostFormCont").style.display = "none";
     });
-
-    setComment("");
   };
 
   const openCommentForm = () => {

@@ -347,6 +347,21 @@ app.get("/getComments/:userID", (req, res) => {
   );
 });
 
+app.delete("/deleteComment/:commentID", (req, res) => {
+  const commentID = req.params.commentID;
+  db.query(
+    `DELETE FROM comments_table WHERE commentID = ${commentID}`,
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Comment Deleted");
+      }
+    }
+  );
+});
+
 // THIS IS FOR THE SUB-THREAD SECTION
 // THIS CREATES THREAD
 app.post("/addThread", (req, res) => {
@@ -450,6 +465,24 @@ app.get("/subthread/:subthreadID", (req, res) => {
       } else {
         res.send(result);
         // console.log(result);
+      }
+    }
+  );
+});
+
+// THIS GRABS THE A SPECIFIC THREAD BASED ON THREADID
+app.get("/getSubthread/:subthreadID", (req, res) => {
+  const subthreadID = req.params.subthreadID;
+  // console.log(subthreadID);
+
+  db.query(
+    `SELECT * FROM subthreads_table WHERE subthreadID = ${subthreadID}`,
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
       }
     }
   );
