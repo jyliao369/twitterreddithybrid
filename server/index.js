@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
@@ -11,6 +12,10 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
 require("dotenv").config();
+
+const PORT = process.env.PORT || 3000;
+
+app.use(express.static(path.join(__dirname + "public")));
 
 app.use(express.json());
 app.use(
@@ -621,6 +626,10 @@ app.delete("/deleteBookmark/:bookmarkID", (req, res) => {
     }
   );
 });
+
+// app.listen(process.env.PORT || PORT, () => {
+//   console.log(`Server is running on port ${PORT}`);
+// });
 
 app.listen(3001, () => {
   console.log("Server is running smoothly");

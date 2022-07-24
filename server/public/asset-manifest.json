@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/twitterreddithybrid/static/css/main.b1daa3db.css",
+    "main.js": "/twitterreddithybrid/static/js/main.749e5cee.js",
+    "index.html": "/twitterreddithybrid/index.html",
+    "main.b1daa3db.css.map": "/twitterreddithybrid/static/css/main.b1daa3db.css.map",
+    "main.749e5cee.js.map": "/twitterreddithybrid/static/js/main.749e5cee.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b1daa3db.css",
+    "static/js/main.749e5cee.js"
+  ]
+}

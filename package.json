@@ -13,7 +13,7 @@
     "react-scripts": "^5.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server/server.js",
     "build": "react-scripts build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "predeploy": "npm run build",
