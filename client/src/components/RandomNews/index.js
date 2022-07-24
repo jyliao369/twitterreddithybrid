@@ -75,39 +75,35 @@ const RandomNews = () => {
 
       <div className="newsCont">
         {showNews.map((post) => (
-          <Link to={`/post/${post.postID}`} key={post.postID}>
-            <div className="news">
-              <h3>{post.title}</h3>
-              <br />
-              <p>{post.postBody}</p>
-              <br />
-              <p>Posted By: {post.username}</p>
+          <div className="randomNewsCont">
+            <div className="randomNewsTitleCont">
+              <div className="randomNewsTitleBorder">
+                <div className="randomNewsTitleBody">
+                  <h4>{post.title.slice(0, 30)}...</h4>
+                </div>
+              </div>
             </div>
-          </Link>
+
+            <Link to={`/post/${post.postID}`} key={post.postID}>
+              <div className="randomNewsBorder">
+                <div className="randomNewsBody">
+                  <p>{post.postBody}</p>
+                </div>
+              </div>
+            </Link>
+
+            <div className="randomNewsUserCont">
+              <div className="randomNewsUserBorder">
+                <div className="randomNewsUserBody">
+                  <p>Posted By: {post.username}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         ))}
       </div>
 
       <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-
-      {/* <div>
-        <div className="testShapeOne">
-          <div className="testShape">
-            <p>
-              textfdsfhskdhfshdkfhsdjkhfksdhfkshdlkfhsdhfkjsdhflkshdkfhsdlkfhksdhfkjsdhflkshdlkfh
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <br />
-      <br />
-      <br />
-      <br /> */}
     </div>
   );
 };

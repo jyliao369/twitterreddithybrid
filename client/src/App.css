@@ -398,6 +398,62 @@
   padding: 17px 55px 17px 55px;
 }
 
+/* THIS IS FOR RANDOM NEWS  */
+.randomNewsCont {
+  margin: 25px 0px 40px 0px;
+}
+.randomNewsTitleCont {
+  display: flex;
+}
+.randomNewsTitleBorder {
+  background: black;
+  padding: 5px;
+  clip-path: polygon(5% 5%, 94% 3%, 98% 25%, 94% 90%, 5% 97%, 1% 60%);
+  position: absolute;
+  z-index: 1;
+  margin: -4% 0% 0% 5%;
+}
+.randomNewsTitleBody {
+  background: white;
+  clip-path: polygon(5% 5%, 94% 3%, 98% 25%, 94% 90%, 5% 97%, 1% 60%);
+}
+.randomNewsTitleBody h4 {
+  padding: 7px 15px 7px 15px;
+}
+.randomNewsBorder {
+  background: black;
+  padding: 5px;
+  clip-path: polygon(1% 0%, 99% 1%, 98% 97%, 2% 100%);
+  border-radius: 35px;
+}
+.randomNewsBody {
+  background: white;
+  clip-path: polygon(1% 0%, 99% 1%, 98% 97%, 2% 100%);
+  border-radius: 35px;
+}
+.randomNewsBody p {
+  padding: 30px 20px 35px 25px;
+  overflow-wrap: anywhere;
+}
+.randomNewsUserCont {
+  display: flex;
+  justify-content: flex-end;
+}
+.randomNewsUserBorder {
+  background: black;
+  padding: 5px;
+  clip-path: polygon(5% 5%, 94% 3%, 98% 25%, 94% 90%, 5% 97%, 1% 60%);
+  position: absolute;
+  margin: -5% 5% 0% 0%;
+}
+.randomNewsUserBody {
+  background: white;
+  clip-path: polygon(5% 5%, 94% 3%, 98% 25%, 94% 90%, 5% 97%, 1% 60%);
+}
+.randomNewsUserBody p {
+  padding: 8px 15px 8px 15px;
+}
+
 /* ----------------------------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------- */
 /* THIS IS THE NAVBAR */
